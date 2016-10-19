@@ -4,18 +4,18 @@ import animaux.AbstractAnimal;
 import animaux.AbstractAnimal.AnimalType;
 
 public class Aquarium extends AbstractEnclos{
-	private final int profondeur;
+	private final float profondeur;
 	private Proprete niveauEau;
 	private Proprete salinite;
 
-	public Aquarium(String nomEnclos, float superficie, int nbMaxAnimaux, final int profondeur) {
+	public Aquarium(String nomEnclos, float superficie, int nbMaxAnimaux, float profondeur) {
 		super(nomEnclos, superficie, nbMaxAnimaux);
 		this.profondeur = profondeur;
 		niveauEau = new Proprete("niveau de l'eau");
 		salinite = new Proprete("salinite");
 	}
 	
-	public final int getProfondeur(){
+	public final float getProfondeur(){
 		return profondeur;
 	}
 

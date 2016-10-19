@@ -1,5 +1,5 @@
 package animaux;
 
-public interface Vagabondant {
+public interface Vagabondant extends IAnimal{
 	public String Vagabonder();
 }

@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import animaux.AbstractAnimal;
 import enclos.AbstractEnclos;
+import enclos.Aquarium;
 import zoo.Zoo;
 
 public class ZooGame {
@@ -20,8 +21,11 @@ public class ZooGame {
 	
 	private final static String ENCLOSURE_DISPLAY = "i";
 	private final static String ENCLOSURE_ANIMALS = "a";
-	private final static String ENCLOSURE_SELECT = "s";
 	private final static String ENCLOSURE_NEW = "n";
+	
+	private final static String AQUARIUM = "a";
+	private final static String VOLIERE = "v";
+	private final static String ENCLOS_STANDARD = "e";
 	
 	private final Zoo zoo;
 	private final BufferedReader input;
@@ -101,13 +105,25 @@ public class ZooGame {
 	
 	private boolean newEnclosureHandler(final String input) {
 		switch(input) {
+			case AQUARIUM:
+				newAquarium();
+				return true;
+			case VOLIERE:
+				newVoliere();
+				return true;
+			case ENCLOS_STANDARD:
+				newEnclosStandard();
+				return true;
 		
 		}
 		return false;
 	}
 	
 	private void displayNewEncolsure() {
-		
+		System.out.println("Choisi le type d'enclos à créer :");
+		System.out.println("Aquarium : " + AQUARIUM);
+		System.out.println("Volière : " + VOLIERE);
+		System.out.println("Enclos standard : " + ENCLOS_STANDARD);
 	}
 	
 	private void newEnclosure() {
@@ -124,6 +140,86 @@ public class ZooGame {
 			}
 			
 		}
+	}
+	
+	private void newAquarium(){
+		System.out.println("Choisi le nom de ton aquarium");
+		String aquariumName = null;
+		try {
+			aquariumName = input.readLine();
+		} 
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println("Quelle est la superficie en m² de ton aquarium ?");
+		String superficieAquariumInput = null;
+		float superficieAquarium;
+		
+		while (true) {
+			try {
+				superficieAquariumInput = input.readLine();
+				
+				superficieAquarium = Float.parseFloat(superficieAquariumInput);
+				break;
+			} 
+			catch (IOException e) {
+				e.printStackTrace();
+			}
+			catch (NumberFormatException e) {
+				System.out.println("Tu dois indiquer la superficie en chiffre.");
+			}
+		}
+		
+		System.out.println("Quel est le nombre maximum d'animaux que peut acceuillir cet aquarium ?");
+		String nbAnimauxInput = null;
+		int nbAnimaux;
+		
+		while (true) {
+			try {
+				nbAnimauxInput = input.readLine();
+				
+				nbAnimaux = Integer.parseInt(nbAnimauxInput);
+				break;
+			} 
+			catch (IOException e) {
+				e.printStackTrace();
+			}
+			catch (NumberFormatException e) {
+				System.out.println("Tu dois indiquer le nombre d'animaux en chiffres.");
+			}
+		}
+		
+		System.out.println("Quelle est la profondeur en m de ton aquarium ?");
+		String profondeurInput = null;
+		float profondeur;
+		
+		while (true) {
+			try {
+				profondeurInput = input.readLine();
+				
+				profondeur = Float.parseFloat(profondeurInput);
+				break;
+			} 
+			catch (IOException e) {
+				e.printStackTrace();
+			}
+			catch (NumberFormatException e) {
+				System.out.println("Tu dois indiquer la profondeur en chiffres.");
+			}
+		}
+		
+		Aquarium aquarium = new Aquarium(aquariumName, superficieAquarium, nbAnimaux, profondeur);
+		
+		zoo.ajouterEnclos(aquarium);
+	}
+	
+	private void newVoliere(){
+		//TODO
+	}
+	
+	private void newEnclosStandard(){
+		//TODO
 	}
 	
 	private boolean selectEnclosure(final String input, boolean isReturn) {
@@ -149,7 +245,7 @@ public class ZooGame {
 			System.out.println(enclos);
 		}
 		System.out.println("Retour : " + RETURN);
-		System.out.println("Nouvel enclo: " + ENCLOSURE_NEW);
+		System.out.println("Nouvel enclos : " + ENCLOSURE_NEW);
 	}
 	
 	private void enclosureHandler() {

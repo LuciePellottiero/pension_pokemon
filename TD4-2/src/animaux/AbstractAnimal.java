@@ -2,7 +2,7 @@ package animaux;
 
 import java.util.Collection;
 
-public abstract class AbstractAnimal {
+public abstract class AbstractAnimal implements IAnimal{
 	
 	public static enum Sexe {
 		MALE("\u2642"),
@@ -93,10 +93,12 @@ public abstract class AbstractAnimal {
 		this.sante = maxSante;
 	}
 	
+	@Override
 	public String getRace() {
 		return this.race;
 	}
 	
+	@Override
 	public String manger(){
 		if (!dort){
 			if (this.faim <= 0) {
@@ -108,11 +110,13 @@ public abstract class AbstractAnimal {
 		return this.nom + " dort et ne peux pas manger";
 	}
 	
+	@Override
 	public String emettreSon(){
 		return this.cri;
 		
 	}
 	
+	@Override
 	public String etreSoigne(final int soin){
 		this.sante += soin;
 		
@@ -123,92 +127,114 @@ public abstract class AbstractAnimal {
 		return this.nom + " a ete soigne.";
 	}
 	
+	@Override
 	public String sendormir(final int temps) {
 		this.sommeil -= temps;
 		this.dort = true;
 		return this.nom + " s'endort.";
 	}
 	
+	@Override
 	public String seReveiller(){
 		this.dort = false;
 		return this.nom + " s'est reveille.";
 	}
 
+	@Override
 	public Collection<AnimalType> getTypes() {
 		return this.types;
 	}
 	
-	protected void setTypes(final Collection<AnimalType> types) {
+	@Override
+	public void setTypes(final Collection<AnimalType> types) {
 		this.types = types;
 	}
 	
+	@Override
 	public String getNom() {
 		return nom;
 	}
 
+	@Override
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
 
+	@Override
 	public Sexe getSexe() {
 		return sexe;
 	}
 
+	@Override
 	public float getPoids() {
 		return poids;
 	}
 
+	@Override
 	public void setPoids(float poids) {
 		this.poids = poids;
 	}
 
+	@Override
 	public float getTaille() {
 		return taille;
 	}
 
+	@Override
 	public void setTaille(float taille) {
 		this.taille = taille;
 	}
 
+	@Override
 	public int getAge() {
 		return age;
 	}
 
+	@Override
 	public String viellir() {
 		++this.age;
-		return this.nom + " a veillis";
+		return this.nom + " a veilli";
 	}
 
+	@Override
 	public int getFaim() {
 		return faim;
 	}
 
+	@Override
 	public boolean isDodo() {
 		return dort;
 	}
 	
+	@Override
 	public int getSommeil() {
 		return this.sommeil;
 	}
 	
+	@Override
 	public int getSeuilSommeil() {
 		return this.seuilSommeil;
 	}
 	
+	@Override
 	public int getSeuilFaim() {
 		return this.seuilFaim;
 	}
 	
+	@Override
 	public int getSante() {
 		return sante;
 	}
 
+	@Override
 	public void setSante(int sante) {
 		this.sante = sante;
 	}
 	
+	@Override
 	public abstract float getBebePoids();
 	
+	@Override
 	public abstract float getBebeTaille();
 
 	@Override

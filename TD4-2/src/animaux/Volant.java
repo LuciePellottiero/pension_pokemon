@@ -1,5 +1,5 @@
 package animaux;
 
-public interface Volant {
+public interface Volant extends IAnimal{
 	public String Voler();
 }
