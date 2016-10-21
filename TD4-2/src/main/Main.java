@@ -4,18 +4,17 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import animaux.AbstractAnimal;
-import animaux.AbstractAnimal.Sexe;
-import animaux.Baleine;
-import animaux.Mammifere;
-import animaux.Pingouin;
-import animaux.Tigre;
-import employe.Employe;
 import enclos.AbstractEnclos;
 import enclos.Aquarium;
 import enclos.EnclosStandard;
 import enclos.Voliere;
-import zoo.Zoo;
+import joueur.Joueur;
+import pension.Pension;
+import pokemon.AbstractPokemon;
+import pokemon.Bulbizarre;
+import pokemon.Raichu;
+import pokemon.Reptincel;
+import pokemon.AbstractPokemon.Sexe;
 
 public abstract class Main {
 	
@@ -29,7 +28,7 @@ public abstract class Main {
 	private static void intialisation() {
 		bReader = new BufferedReader(new InputStreamReader(System.in));
 		
-		System.out.println("Bienvenue dans Zoo!" + System.lineSeparator()); 
+		System.out.println("Bienvenue à la pension Pokemon !" + System.lineSeparator()); 
 	}
 	
 	private static void fin() {
@@ -79,7 +78,7 @@ public abstract class Main {
 		}
 		
 		System.out.println("Enfin ton sexe : \"h\" pour homme et \"f\" pour femme.");
-		AbstractAnimal.Sexe employeSexe;
+		AbstractPokemon.Sexe employeSexe;
 		String employeSexeInput;
 		while (true) {
 			try {
@@ -100,20 +99,20 @@ public abstract class Main {
 			System.out.println("Tu dois indiquer \"h\" pour homme et \"f\" pour femme");
 		}
 		
-		Employe employe = new Employe(employeName, employeSexe, employeAge);
+		Joueur employe = new Joueur(employeName, employeSexe, employeAge);
 		
-		System.out.println("Dernière chose, écrit le nom de ton zoo.");
-		String zooName = null;
+		System.out.println("Dernière chose, écrit le nom de ta pension.");
+		String pensionName = null;
 		try {
-			zooName = bReader.readLine();
+			pensionName = bReader.readLine();
 		} 
 		catch (IOException e) {
 			e.printStackTrace();
 		}
 		
-		Zoo zoo = new Zoo(zooName, employe, NB_MAX_ENCLOS);
+		Pension pension = new Pension(pensionName, employe, NB_MAX_ENCLOS);
 		
-		ZooGame game = new ZooGame(zoo, bReader);
+		PensionGame game = new PensionGame(pension, bReader);
 		game.play();
 	}
 	

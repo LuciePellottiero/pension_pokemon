@@ -1,31 +1,31 @@
 package enclos;
 
-import animaux.AbstractAnimal;
+import pokemon.AbstractPokemon;
 
 public class EnclosStandard extends AbstractEnclos{
 
-	public EnclosStandard(String nomEnclos, float superficie, int nbMaxAnimaux) {
-		super(nomEnclos, superficie, nbMaxAnimaux);
+	public EnclosStandard(String nomEnclos, float superficie, int nbMaxPokemon) {
+		super(nomEnclos, superficie, nbMaxPokemon);
 	}
 
 	@Override
-	public boolean ajouterAnimal(AbstractAnimal animal) {
-		if (this.getNbAnimaux() > 0) {
+	public boolean ajouterPokemon(AbstractPokemon pokemon) {
+		if (this.getNbPokemon() > 0) {
 			
-			String raceCourante = this.getAnimaux().iterator().next().getRace();
-			if (!raceCourante.equals(animal.getRace())) {
+			String raceCourante = this.getPokemon().iterator().next().getRace();
+			if (!raceCourante.equals(pokemon.getRace())) {
 				throw new IllegalArgumentException("Le race d'animaux de cet enclos est " + raceCourante);
 			}
 			else {
-				return this.getAnimaux().add(animal);
+				return this.getPokemon().add(pokemon);
 			}
 		}
-		return this.getAnimaux().add(animal);
+		return this.getPokemon().add(pokemon);
 	}
 
 	@Override
 	public String entretenir() {
-		if (!this.getAnimaux().isEmpty()) {
+		if (!this.getPokemon().isEmpty()) {
 			return "L'entretient ne peut se faire que si l'enclos est vide";
 		}
 		
@@ -36,7 +36,7 @@ public class EnclosStandard extends AbstractEnclos{
 	public String toString() {
 		 
 		String res = this.getNomEnclos() + " : " + this.getSuperficie() + "m², " + 
-				this.getNbAnimaux() + "/" + this.getNbMaxAnimaux() + " animaux, " + 
+				this.getNbPokemon() + "/" + this.getNbMaxPokemon() + " animaux, " + 
 				this.getProprete().getNom() + " : " + this.getProprete().getEtatStr() + System.lineSeparator();
 		
 		return res;

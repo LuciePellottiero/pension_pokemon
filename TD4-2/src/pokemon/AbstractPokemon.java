@@ -1,8 +1,8 @@
-package animaux;
+package pokemon;
 
 import java.util.Collection;
 
-public abstract class AbstractAnimal {
+public abstract class AbstractPokemon {
 	
 	public static enum Sexe {
 		MALE("\u2642"),
@@ -15,15 +15,16 @@ public abstract class AbstractAnimal {
 		}
 	}
 	
-	public static enum AnimalType {
-		VOLANT,
-		MARIN,
-		VAGABONDANT,
-		NORMAL;
+	public static enum PokemonType {
+		EAU,
+		ELECTRIQUE,
+		FEU,
+		PLANTE,
+		VOL;
 	}
 	
 	private final String race;
-	private Collection<AnimalType> types;
+	private Collection<PokemonType> types;
 	private String nom;
 	protected final Sexe sexe;
 	private float poids;
@@ -34,21 +35,21 @@ public abstract class AbstractAnimal {
 	private final int seuilSommeil;
 	private int sommeil;
 	private boolean dort;
-	private int sante;
-	private final int maxSante;
+	private int pv;
+	private final int maxPv;
 	private final String cri;
 	private final int tempsGestation;
 	
-	protected AbstractAnimal(
+	protected AbstractPokemon(
 					final String race,
-					final Collection<AnimalType> types,
+					final Collection<PokemonType> types,
 					final String nom, 
 					final Sexe sexe, 
 					final int poids,
 					final int taille,
 					final int age,
 					final String cri, 
-					final int maxSante, 
+					final int maxPv, 
 					final int seuilSommeil, 
 					final int seuilFaim,
 					final int tempsGestation) {
@@ -61,36 +62,36 @@ public abstract class AbstractAnimal {
 		this.taille = taille;
 		this.age = age;
 		this.cri = cri;
-		this.maxSante = maxSante;
+		this.maxPv = maxPv;
 		this.seuilSommeil = seuilSommeil;
 		this.seuilFaim = seuilFaim;
 		this.tempsGestation = tempsGestation;
 		
 		this.faim = 0;
 		this.dort = false;
-		this.sante = maxSante;
+		this.pv = maxPv;
 	}
 	
-	public AbstractAnimal(
+	public AbstractPokemon(
 			final String nom,
 			final Sexe sexe,
-			final AbstractAnimal animal) {
-		this.race = animal.getRace();
-		this.types = animal.getTypes();
+			final AbstractPokemon pokemon) {
+		this.race = pokemon.getRace();
+		this.types = pokemon.getTypes();
 		this.nom = nom;
 		this.sexe = sexe;
-		this.poids = animal.getBebePoids();
-		this.taille = animal.getBebeTaille();
+		this.poids = pokemon.getEvoPoids();
+		this.taille = pokemon.getEvoTaille();
 		this.age = 0;
-		this.cri = animal.cri;
-		this.maxSante = animal.maxSante;
-		this.seuilSommeil = animal.seuilSommeil;
-		this.seuilFaim = animal.seuilFaim;
-		this.tempsGestation = animal.tempsGestation;
+		this.cri = pokemon.cri;
+		this.maxPv = pokemon.maxPv;
+		this.seuilSommeil = pokemon.seuilSommeil;
+		this.seuilFaim = pokemon.seuilFaim;
+		this.tempsGestation = pokemon.tempsGestation;
 		
 		this.faim = 0;
 		this.dort = false;
-		this.sante = maxSante;
+		this.pv = maxPv;
 	}
 	
 	public String getRace() {
@@ -114,10 +115,10 @@ public abstract class AbstractAnimal {
 	}
 	
 	public String etreSoigne(final int soin){
-		this.sante += soin;
+		this.pv += soin;
 		
-		if (this.sante > this.maxSante) {
-			this.sante = this.maxSante;
+		if (this.pv > this.maxPv) {
+			this.pv = this.maxPv;
 		}
 		
 		return this.nom + " a ete soigne.";
@@ -134,11 +135,11 @@ public abstract class AbstractAnimal {
 		return this.nom + " s'est reveille.";
 	}
 
-	public Collection<AnimalType> getTypes() {
+	public Collection<PokemonType> getTypes() {
 		return this.types;
 	}
 	
-	protected void setTypes(final Collection<AnimalType> types) {
+	protected void setTypes(final Collection<PokemonType> types) {
 		this.types = types;
 	}
 	
@@ -200,21 +201,21 @@ public abstract class AbstractAnimal {
 	}
 	
 	public int getSante() {
-		return sante;
+		return pv;
 	}
 
 	public void setSante(int sante) {
-		this.sante = sante;
+		this.pv = sante;
 	}
 	
-	public abstract float getBebePoids();
+	public abstract float getEvoPoids();
 	
-	public abstract float getBebeTaille();
+	public abstract float getEvoTaille();
 
 	@Override
 	public String toString() {
 		return race + " " + nom + " : " + sexe + ", " + poids + "Kg, " + taille + "m, " + age
-				+ " ans, " + sante + "/" + maxSante + " PV, faim = " + faim + ", " + (dort ? "dort" : "reveille") + 
+				+ " ans, " + pv + "/" + maxPv + " PV, faim = " + faim + ", " + (dort ? "dort" : "reveille") + 
 				", cri = " + cri;
 	}
 }

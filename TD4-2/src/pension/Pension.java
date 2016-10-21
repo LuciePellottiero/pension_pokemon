@@ -1,20 +1,20 @@
-package zoo;
+package pension;
 
 import java.util.Collection;
 import java.util.LinkedList;
 
-import animaux.AbstractAnimal;
-import employe.Employe;
 import enclos.AbstractEnclos;
+import joueur.Joueur;
+import pokemon.AbstractPokemon;
 
-public class Zoo {
+public class Pension {
 
 	private final String nom;
-	private final Employe employe;
+	private final Joueur employe;
 	private final int nbMaxEnclos;
 	private Collection<AbstractEnclos> enclos;
 	
-	public Zoo(final String nom, final Employe employe, final int nbMaxEnclos) {
+	public Pension(final String nom, final Joueur employe, final int nbMaxEnclos) {
 		this.nom = nom;
 		this.nbMaxEnclos = nbMaxEnclos;
 		this.employe = employe;
@@ -22,12 +22,12 @@ public class Zoo {
 		enclos = new LinkedList<AbstractEnclos>();
 	}
 	
-	public String getAnimauxStr() {
+	public String getPokemonStr() {
 		String str = "";
 		
 		for(AbstractEnclos enclos : enclos) {
-			for (AbstractAnimal animal : enclos.getAnimaux()) {
-				str += animal.toString() + System.lineSeparator();
+			for (AbstractPokemon pokemon : enclos.getPokemon()) {
+				str += pokemon.toString() + System.lineSeparator();
 			}
 		}
 		
@@ -46,7 +46,7 @@ public class Zoo {
 		return this.enclos.add(enclos);
 	}
 	
-	public Employe getEmploye() {
+	public Joueur getEmploye() {
 		return this.employe;
 	}
 	

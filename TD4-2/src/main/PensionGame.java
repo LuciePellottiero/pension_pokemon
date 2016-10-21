@@ -3,11 +3,11 @@ package main;
 import java.io.BufferedReader;
 import java.io.IOException;
 
-import animaux.AbstractAnimal;
 import enclos.AbstractEnclos;
-import zoo.Zoo;
+import pension.Pension;
+import pokemon.AbstractPokemon;
 
-public class ZooGame {
+public class PensionGame {
 	
 	private final static int NB_ACTION_PER_TURN = 6;
 	
@@ -15,23 +15,23 @@ public class ZooGame {
 	
 	private final static String RETURN = "r";
 	
-	private final static String ANIMALS_DISPLAY_ALL = "al";
+	private final static String POKEMONS_DISPLAY_ALL = "al";
 	private final static String ENCLOSURE = "e";
 	
 	private final static String ENCLOSURE_DISPLAY = "i";
-	private final static String ENCLOSURE_ANIMALS = "a";
+	private final static String ENCLOSURE_POKEMONS = "a";
 	private final static String ENCLOSURE_SELECT = "s";
 	private final static String ENCLOSURE_NEW = "n";
 	
-	private final Zoo zoo;
+	private final Pension pension;
 	private final BufferedReader input;
 	private boolean gameOver = false;
 	private int nbAction;
 	
 	private AbstractEnclos selectedEnclos;
 	
-	public ZooGame(final Zoo zoo, final BufferedReader input) {
-		this.zoo = zoo;
+	public PensionGame(final Pension pension, final BufferedReader input) {
+		this.pension = pension;
 		this.input = input;
 	}
 	
@@ -57,7 +57,7 @@ public class ZooGame {
 		System.out.println("Actions possibles : ");
 		System.out.println("Menu : " + MENU);
 		System.out.println("Enclos : " + ENCLOSURE);
-		System.out.println("Afficher tous les annimaux : " + ANIMALS_DISPLAY_ALL);
+		System.out.println("Afficher tous les annimaux : " + POKEMONS_DISPLAY_ALL);
 	}
 	
 	private void menusHandler() {
@@ -80,7 +80,7 @@ public class ZooGame {
 		System.out.println("Menu enclos : ");
 		System.out.println("Retour : " + RETURN);
 		System.out.println("Infos : " + ENCLOSURE_DISPLAY);
-		System.out.println("Animaux : " + ENCLOSURE_ANIMALS);
+		System.out.println("Animaux : " + ENCLOSURE_POKEMONS);
 	}
 	
 	private boolean enclosureAction(final String input) {
@@ -90,9 +90,9 @@ public class ZooGame {
 			case ENCLOSURE_DISPLAY:
 				System.out.println(this.selectedEnclos);
 				return false;
-			case ENCLOSURE_ANIMALS:
-				for (AbstractAnimal animal : this.selectedEnclos.getAnimaux()) {
-					System.out.println(animal);
+			case ENCLOSURE_POKEMONS:
+				for (AbstractPokemon pokemon : this.selectedEnclos.getPokemon()) {
+					System.out.println(pokemon);
 				}
 				return false;
 		}
@@ -135,7 +135,7 @@ public class ZooGame {
 			newEnclosure();
 			return true;
 		}
-		for (AbstractEnclos enclos : zoo.getEnclos()) {
+		for (AbstractEnclos enclos : pension.getEnclos()) {
 			if (enclos.getNomEnclos().equals(input)) {
 				this.selectedEnclos = enclos;
 				return true;
@@ -145,7 +145,7 @@ public class ZooGame {
 	}
 	
 	private void displayAllEnclosures() {
-		for (AbstractEnclos enclos : zoo.getEnclos()) {
+		for (AbstractEnclos enclos : pension.getEnclos()) {
 			System.out.println(enclos);
 		}
 		System.out.println("Retour : " + RETURN);
@@ -189,8 +189,8 @@ public class ZooGame {
 			case ENCLOSURE:
 				enclosureHandler();
 				break;
-			case ANIMALS_DISPLAY_ALL:
-				System.out.println(zoo.getAnimauxStr());
+			case POKEMONS_DISPLAY_ALL:
+				System.out.println(pension.getPokemonStr());
 				break;
 		}
 	}

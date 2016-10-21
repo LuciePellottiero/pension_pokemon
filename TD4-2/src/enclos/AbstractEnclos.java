@@ -3,22 +3,22 @@ package enclos;
 import java.util.Collection;
 import java.util.LinkedList;
 
-import animaux.AbstractAnimal;
+import pokemon.AbstractPokemon;
 
 public abstract class AbstractEnclos {
 	
 	private String nomEnclos;
 	private final float superficie;
-	private final int nbMaxAnimaux;
-	private Collection<AbstractAnimal> animaux;
+	private final int nbMaxPokemon;
+	private Collection<AbstractPokemon> pokemon;
 	private Proprete proprete;
 	
-	protected AbstractEnclos(final String nomEnclos, final float superficie, final int nbMaxAnimaux) {
+	protected AbstractEnclos(final String nomEnclos, final float superficie, final int nbMaxPokemon) {
 		this.nomEnclos = nomEnclos;
 		this.superficie = superficie;
-		this.nbMaxAnimaux = nbMaxAnimaux;
+		this.nbMaxPokemon = nbMaxPokemon;
 	
-		this.animaux = new LinkedList<AbstractAnimal>();
+		this.pokemon = new LinkedList<AbstractPokemon>();
 		this.proprete = new Proprete("cage");
 	}
 
@@ -30,26 +30,26 @@ public abstract class AbstractEnclos {
 		return superficie;
 	}
 
-	public int getNbMaxAnimaux() {
-		return nbMaxAnimaux;
+	public int getNbMaxPokemon() {
+		return nbMaxPokemon;
 	}
 
-	public Collection<AbstractAnimal> getAnimaux() {
-		return animaux;
+	public Collection<AbstractPokemon> getPokemon() {
+		return pokemon;
 	}
 
-	public int getNbAnimaux() {
-		return animaux.size();
+	public int getNbPokemon() {
+		return pokemon.size();
 	}
 
 	public Proprete getProprete() {
 		return proprete;
 	}
 	
-	public abstract boolean ajouterAnimal(final AbstractAnimal animal);
+	public abstract boolean ajouterPokemon(final AbstractPokemon pokemon);
 	
-	public boolean enleverAnimal(final AbstractAnimal animal) {
-		return animaux.remove(animal);
+	public boolean enleverPokemon(final AbstractPokemon animal) {
+		return pokemon.remove(animal);
 	}
 	
 	public abstract String entretenir();

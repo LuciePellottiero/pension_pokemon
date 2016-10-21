@@ -1,15 +1,15 @@
 package enclos;
 
-import animaux.AbstractAnimal;
-import animaux.AbstractAnimal.AnimalType;
+import pokemon.AbstractPokemon;
+import pokemon.AbstractPokemon.PokemonType;
 
 public class Aquarium extends AbstractEnclos{
 	private final int profondeur;
 	private Proprete niveauEau;
 	private Proprete salinite;
 
-	public Aquarium(String nomEnclos, float superficie, int nbMaxAnimaux, final int profondeur) {
-		super(nomEnclos, superficie, nbMaxAnimaux);
+	public Aquarium(String nomEnclos, float superficie, int nbMaxPokemon, final int profondeur) {
+		super(nomEnclos, superficie, nbMaxPokemon);
 		this.profondeur = profondeur;
 		niveauEau = new Proprete("niveau de l'eau");
 		salinite = new Proprete("salinite");
@@ -20,25 +20,25 @@ public class Aquarium extends AbstractEnclos{
 	}
 
 	@Override
-	public boolean ajouterAnimal(AbstractAnimal animal) {
-		if (!animal.getTypes().contains(AnimalType.MARIN)) {
+	public boolean ajouterPokemon(AbstractPokemon pokemon) {
+		if (!pokemon.getTypes().contains(PokemonType.EAU)) {
 			throw new IllegalArgumentException("Un aquarium ne peut que contenir des animaux marins");
 		}
-		if (this.getNbAnimaux() > 0) {
+		if (this.getNbPokemon() > 0) {
 			
-			String raceCourante = this.getAnimaux().iterator().next().getRace();
-			if (!raceCourante.equals(animal.getRace())) {
-				throw new IllegalArgumentException("Le race d'animaux de cet enclos est " + raceCourante);
+			String raceCourante = this.getPokemon().iterator().next().getRace();
+			if (!raceCourante.equals(pokemon.getRace())) {
+				throw new IllegalArgumentException("Le race de Pokemon de cet aquarium est " + raceCourante);
 			}
-			return this.getAnimaux().add(animal);
+			return this.getPokemon().add(pokemon);
 		}
-		return this.getAnimaux().add(animal);
+		return this.getPokemon().add(pokemon);
 	}
 
 	@Override
 	public String entretenir() {
-		if (!this.getAnimaux().isEmpty()) {
-			return "L'entretient ne peut se faire que si l'enclo est vide";
+		if (!this.getPokemon().isEmpty()) {
+			return "L'entretient ne peut se faire que si l'aquarium est vide";
 		}
 		
 		Proprete priorite;
@@ -64,7 +64,7 @@ public class Aquarium extends AbstractEnclos{
 		 
 		String res = this.getNomEnclos() + " : " + this.getSuperficie() + "m², " + 
 				"profondeur: " + this.getProfondeur() + "m, " +
-				this.getNbAnimaux() + "/" + this.getNbMaxAnimaux() + " animaux, " + 
+				this.getNbPokemon() + "/" + this.getNbMaxPokemon() + " pokemon, " + 
 				this.getProprete().getNom() + " : " + this.getProprete().getEtatStr() + ", " + 
 				this.niveauEau.getNom() + " : " + niveauEau.getEtatStr() + System.lineSeparator() + ", " +
 				this.salinite.getNom() + " : " + salinite.getEtatStr() + System.lineSeparator();

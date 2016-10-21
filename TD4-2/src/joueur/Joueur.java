@@ -1,15 +1,15 @@
-package employe;
+package joueur;
 
-import animaux.AbstractAnimal;
-import animaux.AbstractAnimal.Sexe;
 import enclos.AbstractEnclos;
+import pokemon.AbstractPokemon;
+import pokemon.AbstractPokemon.Sexe;
 
-public class Employe {
+public class Joueur {
 	private final String nom;
-	private final AbstractAnimal.Sexe sexe;
+	private final AbstractPokemon.Sexe sexe;
 	private final int age;
 	
-	public Employe(final String nom, final Sexe sexe, final int age) {
+	public Joueur(final String nom, final Sexe sexe, final int age) {
 		this.nom = nom;
 		this.sexe = sexe;
 		this.age = age;
@@ -21,7 +21,7 @@ public class Employe {
 		
 		res += enclos.toString();
 		
-		for (AbstractAnimal animal : enclos.getAnimaux()) {
+		for (AbstractPokemon animal : enclos.getPokemon()) {
 			res += animal + System.lineSeparator();
 		}
 		
@@ -37,21 +37,21 @@ public class Employe {
 	public String nourrir(AbstractEnclos enclos) {
 		String res = this.nom + " nourris  les animaux de " + enclos.getNomEnclos() + System.lineSeparator(); 
 		
-		for (AbstractAnimal animal : enclos.getAnimaux()) {
+		for (AbstractPokemon animal : enclos.getPokemon()) {
 			res += animal.manger();
 		}
 		
 		return res;
 	}
 	
-	public String transferer(AbstractAnimal animal, AbstractEnclos ancienEnclos, AbstractEnclos nouvelEnclos) {
+	public String transferer(AbstractPokemon pokemon, AbstractEnclos ancienEnclos, AbstractEnclos nouvelEnclos) {
 		String res = "";
 		
-		if (!ancienEnclos.getAnimaux().contains(animal)) {
-			throw new IllegalArgumentException("L'ancien enclos ne contient pas " + animal.getNom());
+		if (!ancienEnclos.getPokemon().contains(pokemon)) {
+			throw new IllegalArgumentException("L'ancien enclos ne contient pas " + pokemon.getNom());
 		}
 		try {
-			nouvelEnclos.ajouterAnimal(animal);
+			nouvelEnclos.ajouterPokemon(pokemon);
 		}
 		catch (IllegalArgumentException e) {
 			System.out.println("Erreur lors du transfere vers " + nouvelEnclos.getNomEnclos());
@@ -59,7 +59,7 @@ public class Employe {
 			return "";
 		}
 		
-		if (!ancienEnclos.enleverAnimal(animal)) {
+		if (!ancienEnclos.enleverPokemon(pokemon)) {
 			res += "Erreur lors de du transfère depuis " + ancienEnclos.getNomEnclos();
 		}
 		
