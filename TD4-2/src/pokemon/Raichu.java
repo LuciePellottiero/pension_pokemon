@@ -10,8 +10,8 @@ public class Raichu extends AbstractPokemon implements Electrique{
 	public static final int RAICHU_SEUIL_SOMMEIL = 65;
 	public static final int RAICHU_SEUIL_FAIM = 45;
 	public static final int RAICHU_TEMPS_GESTATION = 29;
-	public static final float RAICHU_EVO_POIDS = 2f;
-	public static final float RAICHU_EVO_TAILLE = 0.02f;
+	public static final float RAICHU_BEBE_POIDS = 2f;
+	public static final float RAICHU_BEBE_TAILLE = 0.02f;
 	
 	public Raichu(String nom, Sexe sexe, int poids, int taille, int age) {
 		super("Raichu", null, nom, sexe, poids, taille, age, RAICHU_CRI, RAICHU_SANTE_MAX, RAICHU_SEUIL_SOMMEIL, RAICHU_SEUIL_FAIM, RAICHU_TEMPS_GESTATION);
@@ -33,13 +33,13 @@ public class Raichu extends AbstractPokemon implements Electrique{
 	}
 
 	@Override
-	public float getEvoPoids() {
-		return RAICHU_EVO_POIDS;
+	public float getBebePoids() {
+		return RAICHU_BEBE_POIDS;
 	}
 
 	@Override
-	public float getEvoTaille() {
-		return RAICHU_EVO_TAILLE;
+	public float getBebeTaille() {
+		return RAICHU_BEBE_TAILLE;
 	}
 
 }

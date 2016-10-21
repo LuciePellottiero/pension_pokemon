@@ -80,8 +80,8 @@ public abstract class AbstractPokemon {
 		this.types = pokemon.getTypes();
 		this.nom = nom;
 		this.sexe = sexe;
-		this.poids = pokemon.getEvoPoids();
-		this.taille = pokemon.getEvoTaille();
+		this.poids = pokemon.getBebePoids();
+		this.taille = pokemon.getBebeTaille();
 		this.age = 0;
 		this.cri = pokemon.cri;
 		this.maxPv = pokemon.maxPv;
@@ -208,9 +208,18 @@ public abstract class AbstractPokemon {
 		this.pv = sante;
 	}
 	
-	public abstract float getEvoPoids();
+	public void MettreBas(){
+		if(sexe == Sexe.FEMELLE){
+			System.out.println(this.getNom() + " met bas.");
+		}
+		else{
+			System.out.println("Ce pokemon est un mâle, il ne peut pas mettre bas, abrutit !");
+		}
+	}
 	
-	public abstract float getEvoTaille();
+	public abstract float getBebePoids();
+	
+	public abstract float getBebeTaille();
 
 	@Override
 	public String toString() {

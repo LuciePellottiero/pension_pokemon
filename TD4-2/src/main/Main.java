@@ -12,8 +12,11 @@ import joueur.Joueur;
 import pension.Pension;
 import pokemon.AbstractPokemon;
 import pokemon.Bulbizarre;
+import pokemon.Pikachu;
+import pokemon.Poichigeon;
 import pokemon.Raichu;
 import pokemon.Reptincel;
+import pokemon.Salameche;
 import pokemon.AbstractPokemon.Sexe;
 
 public abstract class Main {
@@ -146,60 +149,60 @@ public abstract class Main {
 
 	public static void main(String[] args) {
 
-		intialisation();
+		/*intialisation();
 
 		gestionMenu();
 		
-		fin();
+		fin();*/
 		
 		
 
-		/*Employe philipe = new Employe("Philipe", Sexe.MALE, 42);
+		Joueur philipe = new Joueur("Philipe", Sexe.MALE, 42);
 
-		Zoo zoo = new Zoo("Zoo tycoon", philipe, 4);
+		Pension pension = new Pension("Pension tycoon", philipe, 4);
 
 		AbstractEnclos enclosStandard = new EnclosStandard("La cage de Gaspard", 20, 2);		
 		AbstractEnclos aquarium = new Aquarium("L'aquarium de Winry", 200, 1, 8);
 		AbstractEnclos voliere = new Voliere("L'enclo de Klaus", 10, 3, 5);
 
-		zoo.ajouterEnclos(enclosStandard);
-		zoo.ajouterEnclos(voliere);
-		zoo.ajouterEnclos(aquarium);
+		pension.ajouterEnclos(enclosStandard);
+		pension.ajouterEnclos(voliere);
+		pension.ajouterEnclos(aquarium);
 
-		AbstractAnimal pingouin = new Pingouin("Klaus", Sexe.MALE, 18, 1, 9);
+		AbstractPokemon poichigeon = new Poichigeon("GlouGlou", Sexe.MALE, 18, 1, 9);
 
-		System.out.println(pingouin.emettreSon());
-		System.out.println(pingouin.manger());
-		System.out.println(pingouin);
+		System.out.println(poichigeon.emettreSon());
+		System.out.println(poichigeon.manger());
+		System.out.println(poichigeon);
 
-		voliere.ajouterAnimal(pingouin);
+		voliere.ajouterPokemon(poichigeon);
 
 		System.out.println(voliere);
 
 		System.out.println(philipe.nourrir(voliere));
 
-		AbstractAnimal baleine = new Baleine("Winry", Sexe.FEMELLE, 6000, 20, 20);
+		/*AbstractPokemon pikachu = new Pikachu("Pikachu", Sexe.FEMELLE, 6000, 20, 20);
 
-		System.out.println(baleine.emettreSon());
-		System.out.println(baleine.manger());
-		System.out.println(baleine.sendormir(1));
-		System.out.println(baleine);
+		System.out.println(pikachu.emettreSon());
+		System.out.println(pikachu.manger());
+		System.out.println(pikachu.sendormir(1));
+		System.out.println(pikachu);
 
-		aquarium.ajouterAnimal(baleine);
+		aquarium.ajouterPokemon(pikachu);
 		System.out.println(aquarium);
 
-		((Mammifere) baleine).MettreBas();
+		(pikachu).MettreBas();
 
-		AbstractAnimal tigre = new Tigre("Gaspard", Sexe.MALE, 20, 1, 5);
-		System.out.println(tigre);
+		AbstractPokemon salameche = new Salameche("Gaspard", Sexe.MALE, 20, 1, 5);
+		System.out.println(salameche);
 
-		enclosStandard.ajouterAnimal(tigre);
+		enclosStandard.ajouterPokemon(salameche);
 
-		((Mammifere) tigre).MettreBas();
+		(salameche).MettreBas();*/
 
 		System.out.println(enclosStandard);
 
-		System.out.println(zoo.getAnimauxStr());*/
+		System.out.println(pension.getPokemonStr());
 	}
 
 }

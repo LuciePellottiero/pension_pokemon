@@ -12,8 +12,8 @@ public class Salameche extends AbstractPokemon{
 	public static final int SALAMECHE_SEUIL_SOMMEIL = 60;
 	public static final int SALAMECHE_SEUIL_FAIM = 150;
 	public static final int SALAMECHE_TEMPS_GESTATION = 49;
-	public static final float SALAMECHE_EVO_POIDS = 10f;
-	public static final float SALAMECHE_EVO_TAILLE = 0.2f;
+	public static final float SALAMECHE_BEBE_POIDS = 10f;
+	public static final float SALAMECHE_BEBE_TAILLE = 0.2f;
 	
 	public Salameche(String nom, Sexe sexe, int poids, int taille, int age) {
 		super("Salameche", null, nom, sexe, poids, taille, age, SALAMECHE_CRI, SALAMECHE_SANTE_MAX, SALAMECHE_SEUIL_SOMMEIL, SALAMECHE_SEUIL_FAIM, SALAMECHE_TEMPS_GESTATION);
@@ -25,12 +25,12 @@ public class Salameche extends AbstractPokemon{
 	}
 
 	@Override
-	public float getEvoPoids() {
-		return SALAMECHE_EVO_POIDS;
+	public float getBebePoids() {
+		return SALAMECHE_BEBE_POIDS;
 	}
 
 	@Override
-	public float getEvoTaille() {
-		return SALAMECHE_EVO_TAILLE;
+	public float getBebeTaille() {
+		return SALAMECHE_BEBE_POIDS;
 	}
 }

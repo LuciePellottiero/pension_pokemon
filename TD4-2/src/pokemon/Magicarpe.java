@@ -12,8 +12,8 @@ public class Magicarpe extends AbstractPokemon implements Normal{
 	public static final int MAGICARPE_SEUIL_SOMMEIL = 70;
 	public static final int MAGICARPE_SEUIL_FAIM = 65;
 	public static final int MAGICARPE_TEMPS_GESTATION = 4;
-	public static final float MAGICARPE_EVO_POIDS = 0.0001f;
-	public static final float MAGICARPE_EVO_TAILLE = 0.0002f;
+	public static final float MAGICARPE_BEBE_POIDS = 0.0001f;
+	public static final float MAGICARPE_BEBE_TAILLE = 0.0002f;
 	
 	public Magicarpe(String nom, Sexe sexe, int poids, int taille, int age) {
 		super("Magicarpe", null, nom, sexe, poids, taille, age, MAGICARPE_CRI, MAGICARPE_SANTE_MAX, MAGICARPE_SEUIL_SOMMEIL, MAGICARPE_SEUIL_FAIM, MAGICARPE_TEMPS_GESTATION);
@@ -30,13 +30,13 @@ public class Magicarpe extends AbstractPokemon implements Normal{
 	}
 	
 	@Override
-	public float getEvoPoids() {
-		return MAGICARPE_EVO_POIDS;
+	public float getBebePoids() {
+		return MAGICARPE_BEBE_POIDS;
 	}
 
 	@Override
-	public float getEvoTaille() {
-		return MAGICARPE_EVO_TAILLE;
+	public float getBebeTaille() {
+		return MAGICARPE_BEBE_TAILLE;
 	}
 
 	@Override
