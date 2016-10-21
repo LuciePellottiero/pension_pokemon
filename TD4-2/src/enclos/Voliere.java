@@ -5,16 +5,16 @@ import animaux.AbstractAnimal.AnimalType;
 
 public class Voliere extends AbstractEnclos{
 	
-	private final int hauteur;
+	private float hauteur;
 	private Proprete etatToit;
 
-	public Voliere(String nomEnclos, float superficie, int nbMaxAnimaux, final int hauteur) {
+	public Voliere(String nomEnclos, float superficie, int nbMaxAnimaux, float hauteur) {
 		super(nomEnclos, superficie, nbMaxAnimaux);
 		this.hauteur = hauteur;
 		etatToit = new Proprete("toit");
 	}
 
-	public final int getHauteur(){
+	public float getHauteur(){
 		return hauteur;
 	}
 	

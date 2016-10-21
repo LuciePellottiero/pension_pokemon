@@ -26,12 +26,14 @@ public abstract class Main {
 	public static final String NOUVELLE_PARTIE = "n";
 	public static final String QUITTER = "q";
 
+	//initialisation
 	private static void intialisation() {
 		bReader = new BufferedReader(new InputStreamReader(System.in));
 		
 		System.out.println("Bienvenue dans Zoo!" + System.lineSeparator()); 
 	}
 	
+	//fin
 	private static void fin() {
 		try {
 			bReader.close();
@@ -41,12 +43,14 @@ public abstract class Main {
 		System.out.println("Merci et a+!");
 	}
 
+	//afficherMenu
 	private static void afficherMenu() {
 		System.out.println("Menu : ");
 		System.out.println("Nouvelle partie : " + NOUVELLE_PARTIE);
 		System.out.println("Quitter : " + QUITTER);
 	}
 	
+	//nouvelle partie (creation du joueur)
 	private static void nouvellePartie() {
 		System.out.println("C'est parti!");
 		
@@ -117,6 +121,7 @@ public abstract class Main {
 		game.play();
 	}
 	
+	//actionMenu
 	private static boolean actionMenu(String input) {
 		switch (input) {
 			case NOUVELLE_PARTIE :
@@ -129,6 +134,7 @@ public abstract class Main {
 		return false;
 	}
 	
+	//gestion menu
 	private static void gestionMenu() {
 		
 		String choix = "";
