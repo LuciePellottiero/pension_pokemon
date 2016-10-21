@@ -1,5 +1,5 @@
-package animaux;
+package pokemon;
 
-public interface Vagabondant {
-	public String Vagabonder();
+public interface Eau {
+	public String PistoletAO();
 }

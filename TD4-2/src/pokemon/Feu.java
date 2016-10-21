@@ -1,6 +1,6 @@
-package animaux;
+package pokemon;
 
-public interface Marin {
+public interface Feu {
 	
-	public String Nager();
+	public String LanceFlemme();
 }

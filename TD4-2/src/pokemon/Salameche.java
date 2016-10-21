@@ -1,36 +1,36 @@
-package animaux;
+package pokemon;
 
 import java.util.Collection;
 import java.util.LinkedList;
 
-import animaux.AbstractAnimal.AnimalType;
+import pokemon.AbstractPokemon.AnimalType;
 
-public class Ours extends Mammifere{
+public class Salameche extends Mammifere{
 
-	public static final String OURS_CRI = "Grohar";
-	public static final int OURS_SANTE_MAX = 90;
-	public static final int OURS_SEUIL_SOMMEIL = 60;
-	public static final int OURS_SEUIL_FAIM = 150;
-	public static final int OURS_TEMPS_GESTATION = 49;
-	public static final float OURS_BEBE_POIDS = 10f;
-	public static final float OURS_BEBE_TAILLE = 0.2f;
+	public static final String SALAMECHE_CRI = "Salameche";
+	public static final int SALAMECHE_SANTE_MAX = 90;
+	public static final int SALAMECHE_SEUIL_SOMMEIL = 60;
+	public static final int SALAMECHE_SEUIL_FAIM = 150;
+	public static final int SALAMECHE_TEMPS_GESTATION = 49;
+	public static final float SALAMECHE_BEBE_POIDS = 10f;
+	public static final float SALAMECHE_BEBE_TAILLE = 0.2f;
 	
-	public Ours(String nom, Sexe sexe, int poids, int taille, int age) {
-		super("Ours", null, nom, sexe, poids, taille, age, OURS_CRI, OURS_SANTE_MAX, OURS_SEUIL_SOMMEIL, OURS_SEUIL_FAIM, OURS_TEMPS_GESTATION);
+	public Salameche(String nom, Sexe sexe, int poids, int taille, int age) {
+		super("Salameche", null, nom, sexe, poids, taille, age, SALAMECHE_CRI, SALAMECHE_SANTE_MAX, SALAMECHE_SEUIL_SOMMEIL, SALAMECHE_SEUIL_FAIM, SALAMECHE_TEMPS_GESTATION);
 		
 		Collection<AnimalType> types = new LinkedList<AnimalType>();
-		types.add(AnimalType.NORMAL);
+		types.add(AnimalType.FEU);
 		
 		this.setTypes(types);
 	}
 
 	@Override
 	public float getBebePoids() {
-		return OURS_BEBE_POIDS;
+		return SALAMECHE_BEBE_POIDS;
 	}
 
 	@Override
 	public float getBebeTaille() {
-		return OURS_BEBE_TAILLE;
+		return SALAMECHE_BEBE_TAILLE;
 	}
 }

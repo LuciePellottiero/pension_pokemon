@@ -1,5 +1,6 @@
-package animaux;
+package pokemon;
 
-public interface Volant {
-	public String Voler();
+public interface Electrique {
+	
+	public String Eclair();
 }

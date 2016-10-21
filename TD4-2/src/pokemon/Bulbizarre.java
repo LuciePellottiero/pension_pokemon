@@ -1,41 +1,42 @@
-package animaux;
+package pokemon;
 
 import java.util.Collection;
 import java.util.LinkedList;
 
-import animaux.AbstractAnimal.AnimalType;
+import pokemon.AbstractPokemon.AnimalType;
 
-public class Baleine extends Mammifere implements Marin{
+public class Bulbizarre extends AbstractPokemon implements Plante{
 	
-	public final static String BALEINE_CRI = "Lalala";
-	public final static int BALEINE_MAX_SANTE = 150;
-	public final static int BALEINE_SEUIL_SOMMEIL = 500;
-	public final static int BALEINE_SEUIL_FAIM = 100;
-	public final static int BALEINE_TEMPS_GESTATION = 365;
-	public final static float BALEINE_BEBE_POIDS = 1000f;
-	public final static float BALEINE_BEBE_TAILLE = 5f;
-	public Baleine(final String nom, Sexe sexe, int poids, int taille, int age) {
-		super("Baleine", null, nom, sexe, poids, taille, age, BALEINE_CRI, BALEINE_MAX_SANTE, BALEINE_SEUIL_SOMMEIL, BALEINE_SEUIL_FAIM, BALEINE_TEMPS_GESTATION);
+	public final static String BULBIZARRE_CRI = "Bulbizarre";
+	public final static int BULBIZARRE_MAX_SANTE = 150;
+	public final static int BULBIZARRE_SEUIL_SOMMEIL = 500;
+	public final static int BULBIZARRE_SEUIL_FAIM = 100;
+	public final static int BULBIZARRE_TEMPS_GESTATION = 365;
+	public final static float BULBIZARRE_BEBE_POIDS = 1000f;
+	public final static float BULBIZARRE_BEBE_TAILLE = 5f;
+	
+	public Bulbizarre(final String nom, Sexe sexe, int poids, int taille, int age) {
+		super("Bulbizarre", null, nom, sexe, poids, taille, age, BULBIZARRE_CRI, BULBIZARRE_MAX_SANTE, BULBIZARRE_SEUIL_SOMMEIL, BULBIZARRE_SEUIL_FAIM, BULBIZARRE_TEMPS_GESTATION);
 		
 		Collection<AnimalType> types = new LinkedList<AnimalType>();
-		types.add(AnimalType.MARIN);
+		types.add(AnimalType.PLANTE);
 		
 		this.setTypes(types);
 	}
 
 	@Override
-	public String Nager() {
+	public String TranchHerbe() {
 		return this.getNom() + " nage calmement";
 	}
 
 	@Override
 	public float getBebePoids() {
-		return BALEINE_BEBE_POIDS;
+		return BULBIZARRE_BEBE_POIDS;
 	}
 
 	@Override
 	public float getBebeTaille() {
-		return BALEINE_BEBE_TAILLE;
+		return BULBIZARRE_BEBE_TAILLE;
 	}
 
 }
