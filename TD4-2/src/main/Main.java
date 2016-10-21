@@ -163,7 +163,7 @@ public abstract class Main {
 
 		AbstractEnclos enclosStandard = new EnclosStandard("La cage de Gaspard", 20, 2);		
 		AbstractEnclos aquarium = new Aquarium("L'aquarium de Winry", 200, 1, 8);
-		AbstractEnclos voliere = new Voliere("L'enclo de Klaus", 10, 3, 5);
+		AbstractEnclos voliere = new Voliere("L'enclo de GlouGlou", 10, 3, 5);
 
 		pension.ajouterEnclos(enclosStandard);
 		pension.ajouterEnclos(voliere);
