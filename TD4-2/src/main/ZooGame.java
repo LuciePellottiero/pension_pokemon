@@ -3,7 +3,8 @@ package main;
 import java.io.BufferedReader;
 import java.io.IOException;
 
-import animaux.AbstractAnimal;
+import IHM.Menu;
+import IHM.MenuAction;
 import enclos.AbstractEnclos;
 import enclos.Aquarium;
 import enclos.EnclosStandard;
@@ -14,93 +15,80 @@ public class ZooGame {
 	
 	private final static int NB_ACTION_PER_TURN = 6;
 	
-	private final static String MENU = "m";
-	
 	private final static String RETURN = "r";
-	
-	private final static String ANIMALS_DISPLAY_ALL = "al";
-	private final static String ENCLOSURE = "e";
 	
 	private final static String ENCLOSURE_DISPLAY = "i";
 	private final static String ENCLOSURE_ANIMALS = "a";
-	private final static String ENCLOSURE_NEW = "n";
-	
+
 	private final static String AQUARIUM = "a";
 	private final static String VOLIERE = "v";
 	private final static String ENCLOS_STANDARD = "e";
 	
 	private final Zoo zoo;
-	private final BufferedReader input;
+	private final BufferedReader reader;
 	private boolean gameOver = false;
 	private int nbAction;
-	
-	private AbstractEnclos selectedEnclos;
+	private static boolean quitter;
 	
 	public ZooGame(final Zoo zoo, final BufferedReader input) {
 		this.zoo = zoo;
-		this.input = input;
+		this.reader = input;
 	}
 	
-	public void displayGameMenu() {
-		System.out.println("Menu : ");
-		System.out.println("Quitter partie : " + Main.QUITTER);
-		System.out.println("Retour : " + RETURN);
-	}
-	
-	private boolean actionMenu(String input) {
-		switch (input) {
-			case Main.QUITTER :
+	private boolean menuQuitter() {
+		Menu menu = new Menu("Menu", reader);
+		menu.addAction(new MenuAction("Quitter", "q") {
+			@Override
+			public boolean action() {
 				gameOver = true;
+				quitter = true;
 				return true;
-			case RETURN:
-				return true;
-		}
-		
-		return false;
-	}
-	
-	
-	private void displayActions() {
-		System.out.println("Actions possibles : ");
-		System.out.println("Menu : " + MENU);
-		System.out.println("Enclos : " + ENCLOSURE);
-		System.out.println("Afficher tous les animaux : " + ANIMALS_DISPLAY_ALL);
-	}
-	
-	private void menusHandler() {
-		
-		String choix = "";
-		while(!actionMenu(choix)) {
-			displayGameMenu();
-			
-			try {
-				choix = input.readLine();
-			} 
-			catch (IOException e) {
-				e.printStackTrace();
 			}
-			
-		}
-	}
-	
-	private void handleInput(final String input) {
-		switch(input) {
-			case MENU:
-				menusHandler();
-				break;
-			case ENCLOSURE:
-				enclosureHandler();
-				break;
-			case ANIMALS_DISPLAY_ALL:
-				System.out.println(zoo.getAnimauxStr());
-				break;
-		}
+		});
+		
+		menu.addAction(new MenuAction("Retour", "r") {
+			@Override
+			public boolean action() {
+				quitter = false;
+				return true;
+			}
+		});
+		
+		menu.menu();
+		return quitter;
+		
 	}
 	
 	public void play() {
 		System.out.println("Have fun");
 		
-		String choix = "";
+		Menu menuPrincipal = new Menu("Actions possibles", reader);
+		
+		menuPrincipal.addAction(new MenuAction("Menu", "m") {
+			
+			@Override
+			public boolean action() {
+				return menuQuitter();
+			}
+		});
+		
+		menuPrincipal.addAction(new MenuAction("Enclos", "e") {
+			
+			@Override
+			public boolean action() {
+				menuEnclosPrinc();
+				return true;
+			}
+		});
+		
+		menuPrincipal.addAction(new MenuAction("Afficher tous les animaux", "a") {
+			
+			@Override
+			public boolean action() {
+				System.out.println(zoo.getAnimauxStr());
+				return false;
+			}
+		});
 		
 		while (!gameOver) {
 			
@@ -108,14 +96,8 @@ public class ZooGame {
 			
 			nbAction = 0;
 			while(!gameOver && nbAction < NB_ACTION_PER_TURN) {
-				try {
-					displayActions();
-					choix = input.readLine();
-					handleInput(choix);
-				} 
-				catch (IOException e) {
-					e.printStackTrace();
-				}
+								
+				menuPrincipal.menu();
 			}
 		}
 	}
@@ -123,29 +105,71 @@ public class ZooGame {
 	/*--------------------------------MENU ENCLOS---------------------------*/
 	
 	private void displayEnclosure() {
+		
 		System.out.println("Menu enclos : ");
 		System.out.println("Retour : " + RETURN);
 		System.out.println("Infos : " + ENCLOSURE_DISPLAY);
 		System.out.println("Animaux : " + ENCLOSURE_ANIMALS);
 	}
 	
-	private boolean enclosureAction(final String input) {
-		switch(input) {
+	private void enclosureAction(final AbstractEnclos selectedEnclo) {
+		
+		/*switch(input) {
 			case RETURN:
 				return true;
 			case ENCLOSURE_DISPLAY:
-				System.out.println(this.selectedEnclos);
+				System.out.println(selectedEnclo);
 				return false;
 			case ENCLOSURE_ANIMALS:
-				for (AbstractAnimal animal : this.selectedEnclos.getAnimaux()) {
+				for (AbstractAnimal animal : selectedEnclo.getAnimaux()) {
 					System.out.println(animal);
 				}
 				return false;
-		}
-		return false;
+		}*/
+		return;
 	}
 	
 	/*------------------------------CREATION D'ENCLOS-------------------------*/
+	
+	private String chooseEnclosureName() {
+		String name = "";
+		
+		while(name.length() < 2) {
+			System.out.println("Entrez nom de l'enclo (au moins deux charactères) : ");
+			
+			try {
+				name = reader.readLine();
+			} 
+			catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+		}
+		
+		return name;
+	}
+	
+	private float chooseNumber(final String question) {
+		float inputFinal;
+		String input;
+		
+		while (true) {
+			System.out.println(question);
+			try {
+				input = reader.readLine();
+				
+				inputFinal = Float.parseFloat(input);
+				break;
+			} 
+			catch (IOException e) {
+				e.printStackTrace();
+			}
+			catch (NumberFormatException e) {
+				continue;
+			}
+		}
+		return inputFinal;
+	}
 	
 	private boolean newEnclosureHandler(final String input) {
 		switch(input) {
@@ -170,164 +194,83 @@ public class ZooGame {
 		System.out.println("Enclos standard : " + ENCLOS_STANDARD);
 	}
 	
-	private void newEnclosure() {
-		String choix = "";
+	private boolean newEnclosure() {
 		
-		while(!newEnclosureHandler(choix)) {
-			displayNewEncolsure();
+		Menu newEnclosure = new Menu("Nouvel enclos", reader);
+		
+		newEnclosure.addAction(new MenuAction("Aquarium", "a") {
 			
-			try {
-				choix = input.readLine();
-			} 
-			catch (IOException e) {
-				e.printStackTrace();
+			@Override
+			public boolean action() {
+				Aquarium newAquarium = newAquarium();
+				enclosureAction(newAquarium);
+				quitter = true;
+				return true;
 			}
+		});
+		
+		newEnclosure.addAction(new MenuAction("Volière", "v") {
 			
-		}
+			@Override
+			public boolean action() {
+				newVoliere();
+				quitter = true;
+				return true;
+			}
+		});
+		
+		newEnclosure.addAction(new MenuAction("Enclos standard", "e") {
+			
+			@Override
+			public boolean action() {
+				newEnclosStandard();
+				quitter = true;
+				return true;
+			}
+		});
+		
+		newEnclosure.addAction(new MenuAction("Retour", "r") {
+			
+			@Override
+			public boolean action() {
+				quitter = false;
+				return true;
+			}
+		});
+		
+		newEnclosure.menu();
+		
+		return quitter;
 	}
 	
 	/*--------------------------------aquarium--------------------------*/
 	
-	private void newAquarium(){
-		System.out.println("Choisi le nom de ton aquarium");
-		String aquariumName = null;
-		try {
-			aquariumName = input.readLine();
-		} 
-		catch (IOException e) {
-			e.printStackTrace();
-		}
+	private Aquarium newAquarium(){
+		String aquariumName = chooseEnclosureName();
 		
-		System.out.println("Quelle est la superficie en m² de ton aquarium ?");
-		String superficieAquariumInput = null;
-		float superficieAquarium;
+		float superficieAquarium = chooseNumber("Quelle est la superficie en m² de ton aquarium ?");
 		
-		while (true) {
-			try {
-				superficieAquariumInput = input.readLine();
-				
-				superficieAquarium = Float.parseFloat(superficieAquariumInput);
-				break;
-			} 
-			catch (IOException e) {
-				e.printStackTrace();
-			}
-			catch (NumberFormatException e) {
-				System.out.println("Tu dois indiquer la superficie en chiffre.");
-			}
-		}
-		
-		System.out.println("Quel est le nombre maximum d'animaux que peut acceuillir cet aquarium ?");
-		String nbAnimauxInput = null;
-		int nbAnimaux;
-		
-		while (true) {
-			try {
-				nbAnimauxInput = input.readLine();
-				
-				nbAnimaux = Integer.parseInt(nbAnimauxInput);
-				break;
-			} 
-			catch (IOException e) {
-				e.printStackTrace();
-			}
-			catch (NumberFormatException e) {
-				System.out.println("Tu dois indiquer le nombre d'animaux en chiffres.");
-			}
-		}
-		
-		System.out.println("Quelle est la profondeur en m de ton aquarium ?");
-		String profondeurInput = null;
-		float profondeur;
-		
-		while (true) {
-			try {
-				profondeurInput = input.readLine();
-				
-				profondeur = Float.parseFloat(profondeurInput);
-				break;
-			} 
-			catch (IOException e) {
-				e.printStackTrace();
-			}
-			catch (NumberFormatException e) {
-				System.out.println("Tu dois indiquer la profondeur en chiffres.");
-			}
-		}
+		int nbAnimaux = (int) chooseNumber("Quel est le nombre maximum d'animaux que peut acceuillir cet aquarium ?");
+
+		float profondeur = chooseNumber("Quelle est la profondeur en m de ton aquarium ?");
 		
 		Aquarium aquarium = new Aquarium(aquariumName, superficieAquarium, nbAnimaux, profondeur);
 		
 		zoo.ajouterEnclos(aquarium);
+		return aquarium;
 	}
 	
 	/*------------------------------------voliere---------------------------------------*/
 	
 	private void newVoliere(){
-		System.out.println("Choisi le nom de ta voliere.");
-		String voliereName = null;
-		try {
-			voliereName = input.readLine();
-		} 
-		catch (IOException e) {
-			e.printStackTrace();
-		}
+
+		String voliereName = chooseEnclosureName();
+
+		float superficieVoliere = chooseNumber("Quelle est la superficie en m² de ta voliere ?");
 		
-		System.out.println("Quelle est la superficie en m² de ta voliere ?");
-		String superficieVoliereInput = null;
-		float superficieVoliere;
-		
-		while (true) {
-			try {
-				superficieVoliereInput = input.readLine();
-				
-				superficieVoliere = Float.parseFloat(superficieVoliereInput);
-				break;
-			} 
-			catch (IOException e) {
-				e.printStackTrace();
-			}
-			catch (NumberFormatException e) {
-				System.out.println("Tu dois indiquer la superficie en chiffre.");
-			}
-		}
-		
-		System.out.println("Quel est le nombre maximum d'animaux que peut acceuillir cette voliere ?");
-		String nbAnimauxInput = null;
-		int nbAnimaux;
-		
-		while (true) {
-			try {
-				nbAnimauxInput = input.readLine();
-				
-				nbAnimaux = Integer.parseInt(nbAnimauxInput);
-				break;
-			} 
-			catch (IOException e) {
-				e.printStackTrace();
-			}
-			catch (NumberFormatException e) {
-				System.out.println("Tu dois indiquer le nombre d'animaux en chiffres.");
-			}
-		}
-		
-		System.out.println("Quelle est la hauteur en m de ta volière ?");
-		String hauteurInput = null;
-		float hauteur;
-		
-		while (true) {
-			try {
-				hauteurInput = input.readLine();
-				
-				hauteur = Float.parseFloat(hauteurInput);
-				break;
-			} 
-			catch (IOException e) {
-				e.printStackTrace();
-			}
-			catch (NumberFormatException e) {
-				System.out.println("Tu dois indiquer la hauteur en chiffres.");
-			}
-		}
+		int nbAnimaux = (int) chooseNumber("Quel est le nombre maximum d'animaux que peut acceuillir cette voliere ?");
+
+		float hauteur = chooseNumber("Quelle est la hauteur en m de ta volière ?");
 		
 		Voliere voliere = new Voliere(voliereName, superficieVoliere, nbAnimaux, hauteur);
 		
@@ -337,112 +280,49 @@ public class ZooGame {
 	/*---------------------------------------enclos standard---------------------------*/
 	
 	private void newEnclosStandard(){
-		System.out.println("Choisi le nom de ton enclos.");
-		String enclosName = null;
-		try {
-			enclosName = input.readLine();
-		} 
-		catch (IOException e) {
-			e.printStackTrace();
-		}
+		String enclosName = chooseEnclosureName();
 		
-		System.out.println("Quelle est la superficie en m² de ton enclos ?");
-		String superficieEnclosInput = null;
-		float superficieEnclos;
-		
-		while (true) {
-			try {
-				superficieEnclosInput = input.readLine();
-				
-				superficieEnclos = Float.parseFloat(superficieEnclosInput);
-				break;
-			} 
-			catch (IOException e) {
-				e.printStackTrace();
-			}
-			catch (NumberFormatException e) {
-				System.out.println("Tu dois indiquer la superficie en chiffre.");
-			}
-		}
-		
-		System.out.println("Quel est le nombre maximum d'animaux que peut acceuillir cet enclos ?");
-		String nbAnimauxInput = null;
-		int nbAnimaux;
-		
-		while (true) {
-			try {
-				nbAnimauxInput = input.readLine();
-				
-				nbAnimaux = Integer.parseInt(nbAnimauxInput);
-				break;
-			} 
-			catch (IOException e) {
-				e.printStackTrace();
-			}
-			catch (NumberFormatException e) {
-				System.out.println("Tu dois indiquer le nombre d'animaux en chiffres.");
-			}
-		}
+		float superficieEnclos = chooseNumber("Quelle est la superficie en m² de ton enclos ?");
+
+		int nbAnimaux = (int) chooseNumber("Quel est le nombre maximum d'animaux que peut acceuillir cet enclos ?");
 		
 		EnclosStandard enclos = new EnclosStandard(enclosName, superficieEnclos, nbAnimaux);
 		
 		zoo.ajouterEnclos(enclos);
 	}
 	
-	/**/
-	private boolean selectEnclosure(final String input, boolean isReturn) {
-		if (input.equals(RETURN)) {
-			isReturn = true;
-			return true;
-		}
-		else if (input.equals(ENCLOSURE_NEW)) {
-			newEnclosure();
-			return true;
-		}
+	private void menuEnclosPrinc() {
+		
+		Menu enclosMenu = new Menu("Choix enclos : ", reader);
+		
 		for (AbstractEnclos enclos : zoo.getEnclos()) {
-			if (enclos.getNomEnclos().equals(input)) {
-				this.selectedEnclos = enclos;
+			enclosMenu.addAction(new MenuAction("selectionner " + enclos.getNomEnclos(), enclos.getNomEnclos()) {
+				
+				@Override
+				public boolean action() {
+					enclosureAction(enclos);
+					return true;
+				}
+			});
+		}
+		
+		enclosMenu.addAction(new MenuAction("Nouvel enclos", "n") {
+			
+			@Override
+			public boolean action() {
+				return newEnclosure();
+			}
+		});
+		
+		enclosMenu.addAction(new MenuAction("Retour", "r") {
+			
+			@Override
+			public boolean action() {
 				return true;
 			}
-		}
-		return false;
-	}
-	
-	private void displayAllEnclosures() {
-		for (AbstractEnclos enclos : zoo.getEnclos()) {
-			System.out.println(enclos);
-		}
-		System.out.println("Retour : " + RETURN);
-		System.out.println("Nouvel enclos : " + ENCLOSURE_NEW);
-	}
-	
-	private void enclosureHandler() {
-		String choix = "";
-		boolean isReturn = false;
+		});
 		
-		while(!selectEnclosure(choix, isReturn)) {
-			displayAllEnclosures();
-			
-			try {
-				choix = input.readLine();
-			} 
-			catch (IOException e) {
-				e.printStackTrace();
-			}
-			
-		}
-		
-		while(!isReturn && !enclosureAction(choix)) {
-			displayEnclosure();
-			
-			try {
-				choix = input.readLine();
-			} 
-			catch (IOException e) {
-				e.printStackTrace();
-			}
-			
-		}
+		enclosMenu.menu();
 	}
 	
 	

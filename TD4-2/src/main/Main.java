@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import IHM.Menu;
+import IHM.MenuAction;
 import animaux.AbstractAnimal;
 import animaux.AbstractAnimal.Sexe;
 import animaux.Baleine;
@@ -23,8 +25,7 @@ public abstract class Main {
 	
 	private static final int NB_MAX_ENCLOS = 10;
 	
-	public static final String NOUVELLE_PARTIE = "n";
-	public static final String QUITTER = "q";
+	static AbstractAnimal.Sexe employeSexe;
 
 	//initialisation
 	private static void intialisation() {
@@ -33,21 +34,26 @@ public abstract class Main {
 		System.out.println("Bienvenue dans Zoo!" + System.lineSeparator()); 
 	}
 	
-	//fin
-	private static void fin() {
-		try {
-			bReader.close();
-		} catch (IOException e) {
-			e.printStackTrace();
+	private static float chooseNumber(final String question) {
+		float inputFinal;
+		String input;
+		
+		while (true) {
+			System.out.println(question);
+			try {
+				input = bReader.readLine();
+				
+				inputFinal = Float.parseFloat(input);
+				break;
+			} 
+			catch (IOException e) {
+				e.printStackTrace();
+			}
+			catch (NumberFormatException e) {
+				continue;
+			}
 		}
-		System.out.println("Merci et a+!");
-	}
-
-	//afficherMenu
-	private static void afficherMenu() {
-		System.out.println("Menu : ");
-		System.out.println("Nouvelle partie : " + NOUVELLE_PARTIE);
-		System.out.println("Quitter : " + QUITTER);
+		return inputFinal;
 	}
 	
 	//nouvelle partie (creation du joueur)
@@ -63,46 +69,28 @@ public abstract class Main {
 			e.printStackTrace();
 		}
 		
-		System.out.println("Maintenant ton age.");
-		String employeAgeInput = null;
-		int employeAge;
+		int employeAge = (int) chooseNumber("Entre ton âge");
 		
-		while (true) {
-			try {
-				employeAgeInput = bReader.readLine();
-				
-				employeAge = Integer.parseInt(employeAgeInput);
-				break;
-			} 
-			catch (IOException e) {
-				e.printStackTrace();
+		Menu choixSexe = new Menu("Choix du sexe", bReader);
+		choixSexe.addAction(new MenuAction("Homme", "h") {
+			
+			@Override
+			public boolean action() {
+				employeSexe = Sexe.MALE;
+				return true;
 			}
-			catch (NumberFormatException e) {
-				System.out.println("Tu dois indiquer ton age en chiffre.");
-			}
-		}
+		});
 		
-		System.out.println("Enfin ton sexe : \"h\" pour homme et \"f\" pour femme.");
-		AbstractAnimal.Sexe employeSexe;
-		String employeSexeInput;
-		while (true) {
-			try {
-				employeSexeInput = bReader.readLine();
-				
-				if (employeSexeInput.equals("h")) {
-					employeSexe = Sexe.MALE;
-					break;
-				}
-				else if (employeSexeInput.equals("f")) {
-					employeSexe = Sexe.FEMELLE;
-					break;
-				}
-			} 
-			catch (IOException e) {
-				e.printStackTrace();
+		choixSexe.addAction(new MenuAction("Femme", "f") {
+			
+			@Override
+			public boolean action() {
+				employeSexe = Sexe.FEMELLE;
+				return true;
 			}
-			System.out.println("Tu dois indiquer \"h\" pour homme et \"f\" pour femme");
-		}
+		});
+		
+		choixSexe.menu();
 		
 		Employe employe = new Employe(employeName, employeSexe, employeAge);
 		
@@ -121,45 +109,40 @@ public abstract class Main {
 		game.play();
 	}
 	
-	//actionMenu
-	private static boolean actionMenu(String input) {
-		switch (input) {
-			case NOUVELLE_PARTIE :
-				nouvellePartie();
-				return false;
-			case QUITTER :
-				return true;
-		}
-		
-		return false;
-	}
-	
-	//gestion menu
-	private static void gestionMenu() {
-		
-		String choix = "";
-		
-		while (!actionMenu(choix)) {
-			afficherMenu();
-			
-			try {
-				choix = bReader.readLine();
-			} 
-			catch (IOException e) {
-				e.printStackTrace();
-			}
+	private static void fin() {
+		System.out.println("Merci et a+");
+		try {
+			bReader.close();
+		} 
+		catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 
 	public static void main(String[] args) {
 
-		intialisation();
+		intialisation();	
 
-		gestionMenu();
+		Menu mainMenu = new Menu("Menu principal", bReader);
+		mainMenu.addAction(new MenuAction("Nouvelle partie", "n") {
+			
+			@Override
+			public boolean action() {
+				nouvellePartie();
+				return true;
+			}
+		});
 		
+		mainMenu.addAction(new MenuAction("Quitter", "q") {
+			
+			@Override
+			public boolean action() {
+				return true;
+			}
+		});
+		
+		mainMenu.menu();
 		fin();
-		
-		
 
 		/*Employe philipe = new Employe("Philipe", Sexe.MALE, 42);
 
