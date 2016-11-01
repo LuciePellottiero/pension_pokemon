@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.LinkedList;
 
 import animaux.AbstractAnimal.AnimalType;
+import animaux.AbstractAnimal.Sexe;
 
 public class Requin extends Autre implements Marin{
 	
@@ -24,6 +25,10 @@ public class Requin extends Autre implements Marin{
 		this.setTypes(types);
 	}
 
+	public Requin(String nom, Sexe sexe, Requin requin) {
+		super(nom, sexe, requin);
+	}
+
 	@Override
 	public String Nager() {
 		return this.getNom() + " nage a une allure inquietante";
@@ -37,6 +42,20 @@ public class Requin extends Autre implements Marin{
 	@Override
 	public float getBebeTaille() {
 		return REQUIN_BEBE_TAILLE;
+	}
+	
+	@Override
+	public AbstractAnimal Pondre(final String nom) throws Exception {
+		if(sexe == Sexe.FEMELLE){
+			System.out.println(this.getNom() + " met bas.");
+		}
+		else{
+			System.out.println("Cet animal est un mâle, il ne peut pas mettre bas, abrutit !");
+			throw new Exception("Cet animal est un mâle, il ne peut pas mettre bas, abrutit !");
+		}
+		
+		// TODO : rendre sexe random
+		return new Requin(nom, Sexe.MALE, this);
 	}
 
 }

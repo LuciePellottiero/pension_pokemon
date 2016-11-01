@@ -3,6 +3,8 @@ package animaux;
 import java.util.Collection;
 import java.util.LinkedList;
 
+import animaux.AbstractAnimal.Sexe;
+
 public class Aigle extends Autre implements Volant{
 	
 	public final static String AIGLE_CRI = "Kluh";
@@ -22,6 +24,10 @@ public class Aigle extends Autre implements Volant{
 		this.setTypes(types);
 	}
 
+	public Aigle(String nom, Sexe sexe, Aigle aigle) {
+		super(nom, sexe, aigle);
+	}
+
 	@Override
 	public String Voler() {
 		return this.getNom() + " s'envole majestueusement vers d'autres cieux";
@@ -36,6 +42,20 @@ public class Aigle extends Autre implements Volant{
 	@Override
 	public float getBebeTaille() {
 		return AIGLE_BEBE_TAILLE;
+	}
+	
+	@Override
+	public AbstractAnimal Pondre(final String nom) throws Exception {
+		if(sexe == Sexe.FEMELLE){
+			System.out.println(this.getNom() + " met bas.");
+		}
+		else{
+			System.out.println("Cet animal est un mâle, il ne peut pas mettre bas, abrutit !");
+			throw new Exception("Cet animal est un mâle, il ne peut pas mettre bas, abrutit !");
+		}
+		
+		// TODO : rendre sexe random
+		return new Aigle(nom, Sexe.MALE, this);
 	}
 
 }

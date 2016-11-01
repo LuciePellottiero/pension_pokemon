@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.LinkedList;
 
 import animaux.AbstractAnimal.AnimalType;
+import animaux.AbstractAnimal.Sexe;
 
 public class Loup extends Mammifere implements Vagabondant{
 	
@@ -24,6 +25,10 @@ public class Loup extends Mammifere implements Vagabondant{
 		this.setTypes(types);
 	}
 
+	public Loup(String nom, Sexe sexe, Loup loup) {
+		super(nom, sexe, loup);
+	}
+
 	@Override
 	public String Vagabonder() {
 		return this.getNom() + " vagabonde tranquillement";
@@ -37,6 +42,20 @@ public class Loup extends Mammifere implements Vagabondant{
 	@Override
 	public float getBebeTaille() {
 		return LOUP_BEBE_TAILLE;
+	}
+
+	@Override
+	public AbstractAnimal MettreBas(final String nom) throws Exception {
+		if(sexe == Sexe.FEMELLE){
+			System.out.println(this.getNom() + " met bas.");
+		}
+		else{
+			System.out.println("Cet animal est un mâle, il ne peut pas mettre bas, abrutit !");
+			throw new Exception("Cet animal est un mâle, il ne peut pas mettre bas, abrutit !");
+		}
+		
+		// TODO : rendre sexe random
+		return new Loup(nom, Sexe.MALE, this);
 	}
 	
 }

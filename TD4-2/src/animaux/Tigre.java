@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.LinkedList;
 
 import animaux.AbstractAnimal.AnimalType;
+import animaux.AbstractAnimal.Sexe;
 
 public class Tigre extends Mammifere implements Vagabondant{
 	
@@ -24,6 +25,10 @@ public class Tigre extends Mammifere implements Vagabondant{
 		this.setTypes(types);
 	}
 
+	public Tigre(String nom, Sexe sexe, Tigre tigre) {
+		super(nom, sexe, tigre);
+	}
+
 	@Override
 	public String Vagabonder() {
 		return this.getNom() + " se deplace avec grace";
@@ -37,6 +42,20 @@ public class Tigre extends Mammifere implements Vagabondant{
 	@Override
 	public float getBebeTaille() {
 		return TIGRE_BEBE_TAILLE;
+	}
+	
+	@Override
+	public AbstractAnimal MettreBas(final String nom) throws Exception {
+		if(sexe == Sexe.FEMELLE){
+			System.out.println(this.getNom() + " met bas.");
+		}
+		else{
+			System.out.println("Cet animal est un mâle, il ne peut pas mettre bas, abrutit !");
+			throw new Exception("Cet animal est un mâle, il ne peut pas mettre bas, abrutit !");
+		}
+		
+		// TODO : rendre sexe random
+		return new Tigre(nom, Sexe.MALE, this);
 	}
 	
 }

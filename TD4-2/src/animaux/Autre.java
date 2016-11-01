@@ -21,13 +21,10 @@ public abstract class Autre extends AbstractAnimal{
 			final int tempsGestation) {
 		super(race, types, nom, sexe, poids, taille, age, cri, maxSante, seuilSommeil, seuilFaim, tempsGestation);
 	}
-
-	public void PondreOeufs(){
-		if(sexe == Sexe.FEMELLE){
-			System.out.println(this.getNom() + " pond un oeuf.");
-		}
-		else{
-			System.out.println("Cet animal est un mâle, il ne peut pas pondre d'oeuf, abrutit !");
-		}
+	
+	public Autre(final String nom, final Sexe sexe, final Autre animal) {
+		super(nom, sexe, animal);
 	}
+
+	public abstract AbstractAnimal Pondre(final String nom) throws Exception;
 }

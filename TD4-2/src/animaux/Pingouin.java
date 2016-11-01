@@ -3,6 +3,8 @@ package animaux;
 import java.util.Collection;
 import java.util.LinkedList;
 
+import animaux.AbstractAnimal.Sexe;
+
 public class Pingouin extends Autre implements Marin, Volant{
 
 	public static final String PINGOUIN_CRI = "Criahah";
@@ -23,6 +25,10 @@ public class Pingouin extends Autre implements Marin, Volant{
 		this.setTypes(types);
 	}
 
+	public Pingouin(String nom, Sexe sexe, Pingouin pingouin) {
+		super(nom, sexe, pingouin);
+	}
+
 	@Override
 	public String Voler() {
 		return this.getNom() + " vole, aussi etonnant que cela puisse paraitre";
@@ -41,6 +47,20 @@ public class Pingouin extends Autre implements Marin, Volant{
 	@Override
 	public float getBebeTaille() {
 		return PINGOUIN_BEBE_TAILLE;
+	}
+	
+	@Override
+	public AbstractAnimal Pondre(final String nom) throws Exception {
+		if(sexe == Sexe.FEMELLE){
+			System.out.println(this.getNom() + " met bas.");
+		}
+		else{
+			System.out.println("Cet animal est un mâle, il ne peut pas mettre bas, abrutit !");
+			throw new Exception("Cet animal est un mâle, il ne peut pas mettre bas, abrutit !");
+		}
+		
+		// TODO : rendre sexe random
+		return new Pingouin(nom, Sexe.MALE, this);
 	}
 
 }

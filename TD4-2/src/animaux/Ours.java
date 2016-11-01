@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.LinkedList;
 
 import animaux.AbstractAnimal.AnimalType;
+import animaux.AbstractAnimal.Sexe;
 
 public class Ours extends Mammifere{
 
@@ -24,6 +25,10 @@ public class Ours extends Mammifere{
 		this.setTypes(types);
 	}
 
+	public Ours(String nom, Sexe sexe, Ours ours) {
+		super(nom, sexe, ours);
+	}
+
 	@Override
 	public float getBebePoids() {
 		return OURS_BEBE_POIDS;
@@ -32,5 +37,19 @@ public class Ours extends Mammifere{
 	@Override
 	public float getBebeTaille() {
 		return OURS_BEBE_TAILLE;
+	}
+	
+	@Override
+	public AbstractAnimal MettreBas(final String nom) throws Exception {
+		if(sexe == Sexe.FEMELLE){
+			System.out.println(this.getNom() + " met bas.");
+		}
+		else{
+			System.out.println("Cet animal est un mâle, il ne peut pas mettre bas, abrutit !");
+			throw new Exception("Cet animal est un mâle, il ne peut pas mettre bas, abrutit !");
+		}
+		
+		// TODO : rendre sexe random
+		return new Ours(nom, Sexe.MALE, this);
 	}
 }

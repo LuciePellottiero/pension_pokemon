@@ -13,6 +13,10 @@ public abstract class AbstractAnimal implements IAnimal{
 		private Sexe(final String sexe) {
 			this.sexe = sexe;
 		}
+		
+		public String toString() {
+			return this.sexe;
+		}
 	}
 	
 	public static enum AnimalType {

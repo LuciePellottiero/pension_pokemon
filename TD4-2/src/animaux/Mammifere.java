@@ -19,13 +19,10 @@ public abstract class Mammifere extends AbstractAnimal{
 			final int tempsGestation) {
 		super(race, types,  nom, sexe, poids, taille, age, cri, maxSante, seuilSommeil, seuilFaim, tempsGestation);
 	}
-
-	public void MettreBas(){
-		if(sexe == Sexe.FEMELLE){
-			System.out.println(this.getNom() + " met bas.");
-		}
-		else{
-			System.out.println("Cet animal est un mâle, il ne peut pas mettre bas, abrutit !");
-		}
+	
+	public Mammifere(final String nom, final Sexe sexe, final Mammifere animal) {
+		super(nom, sexe, animal);
 	}
+
+	public abstract AbstractAnimal MettreBas(final String nom) throws Exception;
 }
