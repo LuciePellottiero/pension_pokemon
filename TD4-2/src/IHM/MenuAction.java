@@ -18,4 +18,8 @@ public abstract class MenuAction {
 	public boolean checkInput(String input){
 		return input.equals(this.input);
 	}
+	
+	public String getAction() {
+		return this.action;
+	}
 }

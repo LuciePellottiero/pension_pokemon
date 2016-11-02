@@ -21,6 +21,9 @@ public class Aquarium extends AbstractEnclos{
 
 	@Override
 	public boolean ajouterAnimal(AbstractAnimal animal) {
+		if (this.getNbAnimaux() >= this.getNbMaxAnimaux()) {
+			throw new IllegalArgumentException("Cet enclo est complet.");
+		}
 		if (!animal.getTypes().contains(AnimalType.MARIN)) {
 			throw new IllegalArgumentException("Un aquarium ne peut que contenir des animaux marins");
 		}

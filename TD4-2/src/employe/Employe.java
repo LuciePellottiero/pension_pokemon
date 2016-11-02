@@ -6,7 +6,9 @@ import enclos.AbstractEnclos;
 
 public class Employe {
 	private final String nom;
+	@SuppressWarnings("unused")
 	private final AbstractAnimal.Sexe sexe;
+	@SuppressWarnings("unused")
 	private final int age;
 	
 	public Employe(final String nom, final Sexe sexe, final int age) {
@@ -29,13 +31,13 @@ public class Employe {
 	}
 	
 	public String nettoyer(AbstractEnclos enclos) {
-		String res = this.nom + " netoie " + enclos.getNomEnclos();
-		res += enclos.entretenir();
+		String res = this.nom + " nettoie " + enclos.getNomEnclos();
+		res += ": état = " +enclos.entretenir();
 		return res;
 	}
 	
 	public String nourrir(AbstractEnclos enclos) {
-		String res = this.nom + " nourris  les animaux de " + enclos.getNomEnclos() + System.lineSeparator(); 
+		String res = this.nom + " nourris les animaux de " + enclos.getNomEnclos() + System.lineSeparator(); 
 		
 		for (AbstractAnimal animal : enclos.getAnimaux()) {
 			res += animal.manger();
@@ -50,17 +52,10 @@ public class Employe {
 		if (!ancienEnclos.getAnimaux().contains(animal)) {
 			throw new IllegalArgumentException("L'ancien enclos ne contient pas " + animal.getNom());
 		}
-		try {
-			nouvelEnclos.ajouterAnimal(animal);
-		}
-		catch (IllegalArgumentException e) {
-			System.out.println("Erreur lors du transfere vers " + nouvelEnclos.getNomEnclos());
-			System.out.println(e.getMessage());
-			return "";
-		}
+		nouvelEnclos.ajouterAnimal(animal);
 		
 		if (!ancienEnclos.enleverAnimal(animal)) {
-			res += "Erreur lors de du transfère depuis " + ancienEnclos.getNomEnclos();
+			res += "Erreur lors du transfère depuis " + ancienEnclos.getNomEnclos();
 		}
 		
 		return res;

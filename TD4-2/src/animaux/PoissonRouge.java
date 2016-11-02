@@ -3,9 +3,6 @@ package animaux;
 import java.util.Collection;
 import java.util.LinkedList;
 
-import animaux.AbstractAnimal.AnimalType;
-import animaux.AbstractAnimal.Sexe;
-
 public class PoissonRouge extends Autre implements Marin{
 
 	public static final String POISSON_ROUGE_CRI = "Bloubloup";

@@ -3,8 +3,6 @@ package animaux;
 import java.util.Collection;
 import java.util.LinkedList;
 
-import animaux.AbstractAnimal.Sexe;
-
 public class Pingouin extends Autre implements Marin, Volant{
 
 	public static final String PINGOUIN_CRI = "Criahah";

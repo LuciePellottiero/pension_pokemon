@@ -3,9 +3,6 @@ package animaux;
 import java.util.Collection;
 import java.util.LinkedList;
 
-import animaux.AbstractAnimal.AnimalType;
-import animaux.AbstractAnimal.Sexe;
-
 public class Baleine extends Mammifere implements Marin{
 	
 	public final static String BALEINE_CRI = "Lalala";

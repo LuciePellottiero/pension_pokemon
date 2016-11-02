@@ -5,6 +5,9 @@ import java.io.IOException;
 
 import IHM.Menu;
 import IHM.MenuAction;
+import animaux.AbstractAnimal;
+import animaux.AbstractAnimal.Sexe;
+import animaux.AnimalFactory;
 import enclos.AbstractEnclos;
 import enclos.Aquarium;
 import enclos.EnclosStandard;
@@ -15,20 +18,12 @@ public class ZooGame {
 	
 	private final static int NB_ACTION_PER_TURN = 6;
 	
-	private final static String RETURN = "r";
-	
-	private final static String ENCLOSURE_DISPLAY = "i";
-	private final static String ENCLOSURE_ANIMALS = "a";
-
-	private final static String AQUARIUM = "a";
-	private final static String VOLIERE = "v";
-	private final static String ENCLOS_STANDARD = "e";
-	
 	private final Zoo zoo;
 	private final BufferedReader reader;
 	private boolean gameOver = false;
-	private int nbAction;
-	private static boolean quitter;
+	private static int nbAction;
+	public static boolean quitter;
+	private static Sexe animalSexe;
 	
 	public ZooGame(final Zoo zoo, final BufferedReader input) {
 		this.zoo = zoo;
@@ -62,9 +57,9 @@ public class ZooGame {
 	public void play() {
 		System.out.println("Have fun");
 		
-		Menu menuPrincipal = new Menu("Actions possibles", reader);
+		Menu menuPrincipal = new Menu("Menu principal", reader);
 		
-		menuPrincipal.addAction(new MenuAction("Menu", "m") {
+		menuPrincipal.addAction(new MenuAction("Options", "o") {
 			
 			@Override
 			public boolean action() {
@@ -92,50 +87,320 @@ public class ZooGame {
 		
 		while (!gameOver) {
 			
-			//TODO random events.
-			
 			nbAction = 0;
+			System.out.println("New turn");
+			//TODO random events.
 			while(!gameOver && nbAction < NB_ACTION_PER_TURN) {
-								
 				menuPrincipal.menu();
 			}
 		}
 	}
 	
-	/*--------------------------------MENU ENCLOS---------------------------*/
-	
-	private void displayEnclosure() {
-		
-		System.out.println("Menu enclos : ");
-		System.out.println("Retour : " + RETURN);
-		System.out.println("Infos : " + ENCLOSURE_DISPLAY);
-		System.out.println("Animaux : " + ENCLOSURE_ANIMALS);
+	public static void useActionPoint() {
+		++nbAction;
+		System.out.println("Action effectuée (" + (NB_ACTION_PER_TURN - nbAction) + " actions restantes)");
 	}
 	
-	private void enclosureAction(final AbstractEnclos selectedEnclo) {
+	/*--------------------------------MENU ENCLOS SELECTIONNE---------------------------*/
+	
+	private void enclosureAction(final AbstractEnclos selectedEnclos) {
 		
-		/*switch(input) {
-			case RETURN:
+		Menu enclosureMenu = new Menu("Menu de l'enclos " + selectedEnclos.getNomEnclos(), reader);
+		
+		enclosureMenu.addAction(new MenuAction("Retour ", "r") {
+			
+			@Override
+			public boolean action() {
 				return true;
-			case ENCLOSURE_DISPLAY:
-				System.out.println(selectedEnclo);
+			}
+		});
+		
+		enclosureMenu.addAction(new MenuAction("Examiner", "e") {
+			
+			@Override
+			public boolean action() {
+				System.out.println(zoo.getEmploye().examinerEnclos(selectedEnclos));
 				return false;
-			case ENCLOSURE_ANIMALS:
-				for (AbstractAnimal animal : selectedEnclo.getAnimaux()) {
-					System.out.println(animal);
+			}
+		});
+		
+		enclosureMenu.addAction(new MenuAction("Nettoyer", "ne") {
+			
+			@Override
+			public boolean action() {
+				System.out.println(zoo.getEmploye().nettoyer(selectedEnclos));
+				return false;
+			}
+		});
+		
+		enclosureMenu.addAction(new MenuAction("Nourrir les animaux de l'enclos", "no") {
+			
+			@Override
+			public boolean action() {
+				System.out.println(zoo.getEmploye().nourrir(selectedEnclos));
+				return false;
+			}
+		});
+		
+		enclosureMenu.addAction(new MenuAction("Sélectionner des animaux", "a") {
+			
+			@Override
+			public boolean action() {
+				return animalMenu(selectedEnclos);
+			}
+		});
+		
+		enclosureMenu.addAction(new MenuAction("Renommer l'enclos", "re") {
+			
+			@Override
+			public boolean action() {
+				selectedEnclos.setNomEnclos(chooseName());
+				return true;
+			}
+		});
+		
+		enclosureMenu.menu();
+		return;
+	}
+	
+	/*------------------------------MENU ANIMAUX------------------------------*/
+	
+	private boolean animalMenu(final AbstractEnclos selectedEnclos) {
+		Menu animalMenu = new Menu("Choix animal : ", reader);
+		
+		for (AbstractAnimal animal : selectedEnclos.getAnimaux()) {
+			animalMenu.addAction(new MenuAction("selectionner " + animal.getNom(), animal.getNom()) {
+				
+				@Override
+				public boolean action() {
+					animalAction(animal, selectedEnclos);
+					return true;
 				}
+			});
+		}
+		
+		animalMenu.addAction(new MenuAction("Nouvel animal", "n") {
+			
+			@Override
+			public boolean action() {
+				quitter = newAnimal(selectedEnclos);
+				return true;
+			}
+		});
+		
+		animalMenu.addAction(new MenuAction("Retour", "r") {
+			
+			@Override
+			public boolean action() {
+				return true;
+			}
+		});
+		
+		animalMenu.menu();
+		return quitter;
+	}
+	
+	/*------------------------------CREATION ANIMAL---------------------------*/
+	
+	//TODO choisir type d'animal et sexe avant son nom
+	public class NewAnimalMenuAction extends MenuAction{
+		
+		private AbstractEnclos selectedEnclo;
+		private final String name;
+		private final Sexe sexe;
+		
+		public NewAnimalMenuAction(final String action, final String input, AbstractEnclos selectedEnclo, final String name, final Sexe sexe) {
+			super(action, input);
+			this.selectedEnclo = selectedEnclo;
+			this.name = name;
+			this.sexe = sexe;
+		}
+
+		@Override
+		public boolean action() {
+
+			try {
+				AbstractAnimal newAnimal = AnimalFactory.createAnimal(this.getAction(), name, sexe);
+				selectedEnclo.ajouterAnimal(newAnimal);
+				useActionPoint();
+			} 
+			catch (IllegalArgumentException e) {
+				System.err.println(e.getMessage());
+				System.out.println();
 				return false;
-		}*/
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
+			if (nbAction < NB_ACTION_PER_TURN) {
+				quitter = false;
+			}
+			else {
+				quitter = true;
+			}
+			return true;
+		}
+
+	}
+	
+	private boolean newAnimal(AbstractEnclos selectedEnclo) {
+				
+		String name;
+		while(true) {
+			name = chooseName();
+			for (AbstractAnimal animal : selectedEnclo.getAnimaux()) {
+				if (animal.getNom().equals(name)) {
+					System.err.println("Un autre animal de cet enclos porte déjà ce nom");
+					continue;
+				}
+			}
+			break;
+		}
+		
+		Menu choixSexe = new Menu("Choix du sexe", reader);
+		choixSexe.addAction(new MenuAction("Mâle", "m") {
+			
+			@Override
+			public boolean action() {
+				animalSexe = Sexe.MALE;
+				return true;
+			}
+		});
+		
+		choixSexe.addAction(new MenuAction("Femmelle", "f") {
+			
+			@Override
+			public boolean action() {
+				animalSexe = Sexe.FEMELLE;
+				return true;
+			}
+		});
+		choixSexe.menu();
+		
+		Menu animalCreation = new Menu("Choisi la race d'animal", reader);
+		
+		animalCreation.addAction(new NewAnimalMenuAction("Aigle", "ai", selectedEnclo, name, animalSexe));
+		animalCreation.addAction(new NewAnimalMenuAction("Baleine", "ba", selectedEnclo, name, animalSexe));
+		animalCreation.addAction(new NewAnimalMenuAction("Loup", "lo", selectedEnclo, name, animalSexe));
+		animalCreation.addAction(new NewAnimalMenuAction("Ours", "ou", selectedEnclo, name, animalSexe));
+		animalCreation.addAction(new NewAnimalMenuAction("Pingouin", "pi", selectedEnclo, name, animalSexe));
+		animalCreation.addAction(new NewAnimalMenuAction("Poisson rouge", "pr", selectedEnclo, name, animalSexe));
+		animalCreation.addAction(new NewAnimalMenuAction("Requin", "re", selectedEnclo, name, animalSexe));
+		animalCreation.addAction(new NewAnimalMenuAction("Tigre", "ti", selectedEnclo, name, animalSexe));
+		
+		animalCreation.addAction(new MenuAction("Retour", "r") {
+			
+			@Override
+			public boolean action() {
+				quitter = false;
+				return true;
+			}
+		});
+		
+		animalCreation.menu();
+		return quitter;
+	}
+	
+	/*------------------------------MENU ANIMAL SELECTIONNE-------------------------------*/
+	
+	private void animalAction(AbstractAnimal selectedAnimal, AbstractEnclos selectedEnclos) {
+
+		Menu animalMenu = new Menu("Menu de l'animal " + selectedAnimal.getNom(), reader);
+		
+		animalMenu.addAction(new MenuAction("Retour ", "r") {
+			
+			@Override
+			public boolean action() {
+				return true;
+			}
+		});
+		animalMenu.addAction(new MenuAction("Infos", "i") {
+			
+			@Override
+			public boolean action() {
+				System.out.println(selectedAnimal.toString());
+				return false;
+			}
+		});
+		
+		animalMenu.addAction(new MenuAction("Soigner", "s") {
+			
+			@Override
+			public boolean action() {
+				System.out.println(selectedAnimal.etreSoigne(1));
+				return false;
+			}
+		});
+		
+		animalMenu.addAction(new MenuAction("Réveiller", "rev") {
+			
+			@Override
+			public boolean action() {
+				System.out.println(selectedAnimal.seReveiller());
+				return false;
+			}
+		});
+		
+		animalMenu.addAction(new MenuAction("Transférer", "t") {
+			
+			@Override
+			public boolean action() {
+				transfererAnimal(selectedAnimal, selectedEnclos);
+				return false;
+			}
+		});
+		
+	
+		animalMenu.addAction(new MenuAction("Renommer l'animal", "re") {
+			
+			@Override
+			public boolean action() {
+				selectedAnimal.setNom(chooseName());
+				return true;
+			}
+		});
+		
+		animalMenu.menu();
+		return;
+	}
+	
+	public void transfererAnimal(AbstractAnimal selectedAnimal, AbstractEnclos selectedEnclos){
+		Menu transfereMenu = new Menu("Selectionner le nouvel enclos de l'animal " + selectedAnimal.getNom(), reader);
+		transfereMenu.addAction(new MenuAction("Retour", "r") {
+			
+			@Override
+			public boolean action() {
+				return true;
+			}
+		});
+		
+		for(AbstractEnclos enclos : zoo.getEnclos()){
+			transfereMenu.addAction(new MenuAction("Selectionner " + enclos.getNomEnclos(), enclos.getNomEnclos()) {
+				
+				@Override
+				public boolean action() {
+					try{
+						System.out.println(zoo.getEmploye().transferer(selectedAnimal, selectedEnclos, enclos));
+						return true;
+					}
+					catch(IllegalArgumentException e){
+						System.err.println(e.getMessage());
+						return false;
+					}
+				}
+			});
+		}
+		transfereMenu.menu();
 		return;
 	}
 	
 	/*------------------------------CREATION D'ENCLOS-------------------------*/
 	
-	private String chooseEnclosureName() {
+	private String chooseName() {
 		String name = "";
 		
 		while(name.length() < 2) {
-			System.out.println("Entrez nom de l'enclo (au moins deux charactères) : ");
+			System.out.println("Entrez le nom (au moins deux charactères) : ");
 			
 			try {
 				name = reader.readLine();
@@ -171,29 +436,6 @@ public class ZooGame {
 		return inputFinal;
 	}
 	
-	private boolean newEnclosureHandler(final String input) {
-		switch(input) {
-			case AQUARIUM:
-				newAquarium();
-				return true;
-			case VOLIERE:
-				newVoliere();
-				return true;
-			case ENCLOS_STANDARD:
-				newEnclosStandard();
-				return true;
-		
-		}
-		return false;
-	}
-	
-	private void displayNewEncolsure() {
-		System.out.println("Choisi le type d'enclos à créer :");
-		System.out.println("Aquarium : " + AQUARIUM);
-		System.out.println("Volière : " + VOLIERE);
-		System.out.println("Enclos standard : " + ENCLOS_STANDARD);
-	}
-	
 	private boolean newEnclosure() {
 		
 		Menu newEnclosure = new Menu("Nouvel enclos", reader);
@@ -203,7 +445,11 @@ public class ZooGame {
 			@Override
 			public boolean action() {
 				Aquarium newAquarium = newAquarium();
-				enclosureAction(newAquarium);
+				useActionPoint();
+				// If there is no action point left, then go back to main menu
+				if (nbAction < NB_ACTION_PER_TURN) {
+					enclosureAction(newAquarium);
+				}
 				quitter = true;
 				return true;
 			}
@@ -213,7 +459,12 @@ public class ZooGame {
 			
 			@Override
 			public boolean action() {
-				newVoliere();
+				Voliere newVoliere = newVoliere();
+				useActionPoint();
+				// If there is no action point left, then go back to main menu
+				if (nbAction < NB_ACTION_PER_TURN) {
+					enclosureAction(newVoliere);
+				}
 				quitter = true;
 				return true;
 			}
@@ -223,7 +474,12 @@ public class ZooGame {
 			
 			@Override
 			public boolean action() {
-				newEnclosStandard();
+				EnclosStandard newEnclos = newEnclosStandard();
+				useActionPoint();
+				// If there is no action point left, then go back to main menu
+				if (nbAction < NB_ACTION_PER_TURN) {
+					enclosureAction(newEnclos);
+				}
 				quitter = true;
 				return true;
 			}
@@ -246,7 +502,7 @@ public class ZooGame {
 	/*--------------------------------aquarium--------------------------*/
 	
 	private Aquarium newAquarium(){
-		String aquariumName = chooseEnclosureName();
+		String aquariumName = chooseName();
 		
 		float superficieAquarium = chooseNumber("Quelle est la superficie en m² de ton aquarium ?");
 		
@@ -262,9 +518,9 @@ public class ZooGame {
 	
 	/*------------------------------------voliere---------------------------------------*/
 	
-	private void newVoliere(){
+	private Voliere newVoliere(){
 
-		String voliereName = chooseEnclosureName();
+		String voliereName = chooseName();
 
 		float superficieVoliere = chooseNumber("Quelle est la superficie en m² de ta voliere ?");
 		
@@ -275,12 +531,14 @@ public class ZooGame {
 		Voliere voliere = new Voliere(voliereName, superficieVoliere, nbAnimaux, hauteur);
 		
 		zoo.ajouterEnclos(voliere);
+		
+		return voliere;
 	}
 	
 	/*---------------------------------------enclos standard---------------------------*/
 	
-	private void newEnclosStandard(){
-		String enclosName = chooseEnclosureName();
+	private EnclosStandard newEnclosStandard(){
+		String enclosName = chooseName();
 		
 		float superficieEnclos = chooseNumber("Quelle est la superficie en m² de ton enclos ?");
 
@@ -289,6 +547,8 @@ public class ZooGame {
 		EnclosStandard enclos = new EnclosStandard(enclosName, superficieEnclos, nbAnimaux);
 		
 		zoo.ajouterEnclos(enclos);
+		
+		return enclos;
 	}
 	
 	private void menuEnclosPrinc() {

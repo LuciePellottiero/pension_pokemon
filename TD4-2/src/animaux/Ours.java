@@ -3,9 +3,6 @@ package animaux;
 import java.util.Collection;
 import java.util.LinkedList;
 
-import animaux.AbstractAnimal.AnimalType;
-import animaux.AbstractAnimal.Sexe;
-
 public class Ours extends Mammifere{
 
 	public static final String OURS_CRI = "Grohar";

@@ -140,6 +140,9 @@ public abstract class AbstractAnimal implements IAnimal{
 	
 	@Override
 	public String seReveiller(){
+		if(!this.dort) {
+			return this.nom + " ne dormait pas.";
+		}
 		this.dort = false;
 		return this.nom + " s'est reveille.";
 	}

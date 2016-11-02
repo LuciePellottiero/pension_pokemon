@@ -2,8 +2,6 @@ package animaux;
 
 import java.util.Collection;
 
-import animaux.AbstractAnimal.Sexe;
-
 public abstract class Autre extends AbstractAnimal{
 
 	public Autre(

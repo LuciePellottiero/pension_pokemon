@@ -10,6 +10,9 @@ public class EnclosStandard extends AbstractEnclos{
 
 	@Override
 	public boolean ajouterAnimal(AbstractAnimal animal) {
+		if (this.getNbAnimaux() >= this.getNbMaxAnimaux()) {
+			throw new IllegalArgumentException("Cet enclo est complet.");
+		}
 		if (this.getNbAnimaux() > 0) {
 			
 			String raceCourante = this.getAnimaux().iterator().next().getRace();

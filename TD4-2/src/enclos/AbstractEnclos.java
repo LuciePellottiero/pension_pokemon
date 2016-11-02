@@ -25,6 +25,10 @@ public abstract class AbstractEnclos {
 	public String getNomEnclos() {
 		return nomEnclos;
 	}
+	
+	public void setNomEnclos(String nomEnclos){
+		this.nomEnclos = nomEnclos;
+	}
 
 	public float getSuperficie() {
 		return superficie;

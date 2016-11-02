@@ -3,9 +3,6 @@ package animaux;
 import java.util.Collection;
 import java.util.LinkedList;
 
-import animaux.AbstractAnimal.AnimalType;
-import animaux.AbstractAnimal.Sexe;
-
 public class Tigre extends Mammifere implements Vagabondant{
 	
 	public static final String TIGRE_CRI = "Miahou";

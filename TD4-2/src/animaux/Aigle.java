@@ -3,8 +3,6 @@ package animaux;
 import java.util.Collection;
 import java.util.LinkedList;
 
-import animaux.AbstractAnimal.Sexe;
-
 public class Aigle extends Autre implements Volant{
 	
 	public final static String AIGLE_CRI = "Kluh";
