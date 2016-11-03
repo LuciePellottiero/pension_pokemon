@@ -399,8 +399,8 @@ public class ZooGame {
 	private String chooseName() {
 		String name = "";
 		
-		while(name.length() < 2) {
-			System.out.println("Entrez le nom (au moins deux charactères) : ");
+		while(name.length() < 3) {
+			System.out.println("Entrez le nom (au moins trois charactères) : ");
 			
 			try {
 				name = reader.readLine();

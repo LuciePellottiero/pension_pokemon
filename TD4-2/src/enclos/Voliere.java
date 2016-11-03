@@ -21,7 +21,7 @@ public class Voliere extends AbstractEnclos{
 	@Override
 	public boolean ajouterAnimal(AbstractAnimal animal) {
 		if (this.getNbAnimaux() >= this.getNbMaxAnimaux()) {
-			throw new IllegalArgumentException("Cet enclo est complet.");
+			throw new IllegalArgumentException("Cet enclos est complet.");
 		}
 		if (!animal.getTypes().contains(AnimalType.VOLANT)) {
 			throw new IllegalArgumentException("Une voliere ne peut que contenir des animaux volants");
@@ -44,7 +44,7 @@ public class Voliere extends AbstractEnclos{
 	@Override
 	public String entretenir() {
 		if (!this.getAnimaux().isEmpty()) {
-			return "L'entretient ne peut se faire que si l'enclo est vide";
+			return "L'entretien ne peut se faire que si l'enclos est vide";
 		}
 		
 		if (this.etatToit.getEtat() >= this.getProprete().getEtat()) {

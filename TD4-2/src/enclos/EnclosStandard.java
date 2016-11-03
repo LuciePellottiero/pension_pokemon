@@ -11,7 +11,7 @@ public class EnclosStandard extends AbstractEnclos{
 	@Override
 	public boolean ajouterAnimal(AbstractAnimal animal) {
 		if (this.getNbAnimaux() >= this.getNbMaxAnimaux()) {
-			throw new IllegalArgumentException("Cet enclo est complet.");
+			throw new IllegalArgumentException("Cet enclos est complet.");
 		}
 		if (this.getNbAnimaux() > 0) {
 			
@@ -29,7 +29,7 @@ public class EnclosStandard extends AbstractEnclos{
 	@Override
 	public String entretenir() {
 		if (!this.getAnimaux().isEmpty()) {
-			return "L'entretient ne peut se faire que si l'enclos est vide";
+			return "L'entretien ne peut se faire que si l'enclos est vide";
 		}
 		
 		return this.getProprete().entretient();

@@ -5,7 +5,7 @@ import java.util.LinkedList;
 
 public class Requin extends Autre implements Marin{
 	
-	public static final String REQUIN_CRI = "Tintan, tintan, tintantantant";
+	public static final String REQUIN_CRI = "Tintan tintan tintantantant";
 	public static final int REQUIN_SANTE_MAX = 100;
 	public static final int REQUIN_SEUIL_SOMMEIL = 80;
 	public static final int REQUIN_SEUIL_FAIM = 70;
