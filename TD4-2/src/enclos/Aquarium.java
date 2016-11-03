@@ -5,14 +5,12 @@ import animaux.AbstractAnimal.AnimalType;
 
 public class Aquarium extends AbstractEnclos{
 	private final float profondeur;
-	private Proprete niveauEau;
-	private Proprete salinite;
 
 	public Aquarium(String nomEnclos, float superficie, int nbMaxAnimaux, float profondeur) {
 		super(nomEnclos, superficie, nbMaxAnimaux);
 		this.profondeur = profondeur;
-		niveauEau = new Proprete("niveau de l'eau");
-		salinite = new Proprete("salinite");
+		this.getPropretes().add(new Proprete("niveau de l'eau"));
+		this.getPropretes().add(new Proprete("salinite"));
 	}
 	
 	public final float getProfondeur(){
@@ -39,38 +37,12 @@ public class Aquarium extends AbstractEnclos{
 	}
 
 	@Override
-	public String entretenir() {
-		if (!this.getAnimaux().isEmpty()) {
-			return "L'entretien ne peut se faire que si l'enclos est vide";
-		}
-		
-		Proprete priorite;
-		
-		int etat = Math.min(this.niveauEau.getEtat(), this.getProprete().getEtat());
-		if (etat == this.niveauEau.getEtat()) {
-			priorite = this.niveauEau;
-		}
-		else {
-			priorite = this.salinite;
-		}
-		
-		etat = Math.min(priorite.getEtat(), this.salinite.getEtat());
-		if (etat == this.salinite.getEtat()) {
-			priorite = this.salinite;
-		}
-		
-		return priorite.entretient();
-	}
-
-	@Override
 	public String toString() {
 		 
 		String res = this.getNomEnclos() + " : " + this.getSuperficie() + "m², " + 
 				"profondeur: " + this.getProfondeur() + "m, " +
 				this.getNbAnimaux() + "/" + this.getNbMaxAnimaux() + " animaux, " + 
-				this.getProprete().getNom() + " : " + this.getProprete().getEtatStr() + ", " + 
-				this.niveauEau.getNom() + " : " + niveauEau.getEtatStr() + System.lineSeparator() + ", " +
-				this.salinite.getNom() + " : " + salinite.getEtatStr() + System.lineSeparator();
+				this.getPropretes();
 		
 		return res;
 	}

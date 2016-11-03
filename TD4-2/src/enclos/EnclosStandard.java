@@ -27,20 +27,11 @@ public class EnclosStandard extends AbstractEnclos{
 	}
 
 	@Override
-	public String entretenir() {
-		if (!this.getAnimaux().isEmpty()) {
-			return "L'entretien ne peut se faire que si l'enclos est vide";
-		}
-		
-		return this.getProprete().entretient();
-	}
-
-	@Override
 	public String toString() {
 		 
 		String res = this.getNomEnclos() + " : " + this.getSuperficie() + "m², " + 
 				this.getNbAnimaux() + "/" + this.getNbMaxAnimaux() + " animaux, " + 
-				this.getProprete().getNom() + " : " + this.getProprete().getEtatStr() + System.lineSeparator();
+				this.getPropretes();
 		
 		return res;
 	}

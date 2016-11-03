@@ -39,7 +39,7 @@ public class Proprete {
 		}
 	}
 	
-	public String entretient() {
+	public String entretien() {
 		
 		if (this.etat == BON) {
 			return this.etatStr(etat);

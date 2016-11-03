@@ -90,16 +90,39 @@ public class ZooGame {
 			nbAction = 0;
 			System.out.println("New turn");
 			//TODO random events.
+			//après chaque action :
+			//les faire dormir
+			//faire baisser leur niveau de faim
+			//faire crier les animaux quand il leur arrive quelque chose
+			
+			//après chaque tour:
+			//les faire avoir des bébé (si deux animaux de sexes différents dans le même enclos + place dans l'enclos)
+			//rendre les animaux malade (baisse des pv)
+			//rendre les enclos sales
+			
 			while(!gameOver && nbAction < NB_ACTION_PER_TURN) {
 				menuPrincipal.menu();
 			}
+			
+			evenementTour();
 		}
 	}
 	
-	public static void useActionPoint() {
+	public void evenementTour(){
+		for(AbstractEnclos enclos : zoo.getEnclos()){
+			enclos.getEvenement().verifEvenement(zoo);
+		}
+	}
+	
+	public void useActionPoint() {
 		++nbAction;
 		System.out.println("Action effectuée (" + (NB_ACTION_PER_TURN - nbAction) + " actions restantes)");
+		evenementAction();
 	}
+	
+	public void evenementAction(){
+		
+	}	
 	
 	/*--------------------------------MENU ENCLOS SELECTIONNE---------------------------*/
 	
@@ -128,8 +151,15 @@ public class ZooGame {
 			
 			@Override
 			public boolean action() {
-				System.out.println(zoo.getEmploye().nettoyer(selectedEnclos));
-				return false;
+				try {
+					System.out.println(zoo.getEmploye().nettoyer(selectedEnclos));
+					useActionPoint();
+					return false;
+				}
+				catch(Exception e) {
+					System.err.println(e.getMessage());
+					return false;
+				}
 			}
 		});
 		
@@ -138,6 +168,7 @@ public class ZooGame {
 			@Override
 			public boolean action() {
 				System.out.println(zoo.getEmploye().nourrir(selectedEnclos));
+				useActionPoint();
 				return false;
 			}
 		});
@@ -205,13 +236,13 @@ public class ZooGame {
 	//TODO choisir type d'animal et sexe avant son nom
 	public class NewAnimalMenuAction extends MenuAction{
 		
-		private AbstractEnclos selectedEnclo;
+		private AbstractEnclos selectedEnclos;
 		private final String name;
 		private final Sexe sexe;
 		
 		public NewAnimalMenuAction(final String action, final String input, AbstractEnclos selectedEnclo, final String name, final Sexe sexe) {
 			super(action, input);
-			this.selectedEnclo = selectedEnclo;
+			this.selectedEnclos = selectedEnclo;
 			this.name = name;
 			this.sexe = sexe;
 		}
@@ -221,7 +252,7 @@ public class ZooGame {
 
 			try {
 				AbstractAnimal newAnimal = AnimalFactory.createAnimal(this.getAction(), name, sexe);
-				selectedEnclo.ajouterAnimal(newAnimal);
+				selectedEnclos.ajouterAnimal(newAnimal);
 				useActionPoint();
 			} 
 			catch (IllegalArgumentException e) {
@@ -243,12 +274,12 @@ public class ZooGame {
 
 	}
 	
-	private boolean newAnimal(AbstractEnclos selectedEnclo) {
+	private boolean newAnimal(AbstractEnclos selectedEnclos) {
 				
 		String name;
 		while(true) {
 			name = chooseName();
-			for (AbstractAnimal animal : selectedEnclo.getAnimaux()) {
+			for (AbstractAnimal animal : selectedEnclos.getAnimaux()) {
 				if (animal.getNom().equals(name)) {
 					System.err.println("Un autre animal de cet enclos porte déjà ce nom");
 					continue;
@@ -279,14 +310,14 @@ public class ZooGame {
 		
 		Menu animalCreation = new Menu("Choisi la race d'animal", reader);
 		
-		animalCreation.addAction(new NewAnimalMenuAction("Aigle", "ai", selectedEnclo, name, animalSexe));
-		animalCreation.addAction(new NewAnimalMenuAction("Baleine", "ba", selectedEnclo, name, animalSexe));
-		animalCreation.addAction(new NewAnimalMenuAction("Loup", "lo", selectedEnclo, name, animalSexe));
-		animalCreation.addAction(new NewAnimalMenuAction("Ours", "ou", selectedEnclo, name, animalSexe));
-		animalCreation.addAction(new NewAnimalMenuAction("Pingouin", "pi", selectedEnclo, name, animalSexe));
-		animalCreation.addAction(new NewAnimalMenuAction("Poisson rouge", "pr", selectedEnclo, name, animalSexe));
-		animalCreation.addAction(new NewAnimalMenuAction("Requin", "re", selectedEnclo, name, animalSexe));
-		animalCreation.addAction(new NewAnimalMenuAction("Tigre", "ti", selectedEnclo, name, animalSexe));
+		animalCreation.addAction(new NewAnimalMenuAction("Aigle", "ai", selectedEnclos, name, animalSexe));
+		animalCreation.addAction(new NewAnimalMenuAction("Baleine", "ba", selectedEnclos, name, animalSexe));
+		animalCreation.addAction(new NewAnimalMenuAction("Loup", "lo", selectedEnclos, name, animalSexe));
+		animalCreation.addAction(new NewAnimalMenuAction("Ours", "ou", selectedEnclos, name, animalSexe));
+		animalCreation.addAction(new NewAnimalMenuAction("Pingouin", "pi", selectedEnclos, name, animalSexe));
+		animalCreation.addAction(new NewAnimalMenuAction("Poisson rouge", "pr", selectedEnclos, name, animalSexe));
+		animalCreation.addAction(new NewAnimalMenuAction("Requin", "re", selectedEnclos, name, animalSexe));
+		animalCreation.addAction(new NewAnimalMenuAction("Tigre", "ti", selectedEnclos, name, animalSexe));
 		
 		animalCreation.addAction(new MenuAction("Retour", "r") {
 			

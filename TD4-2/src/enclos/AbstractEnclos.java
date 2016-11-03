@@ -1,9 +1,11 @@
 package enclos;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
 
 import animaux.AbstractAnimal;
+import evenement.EvenementEnclos;
 
 public abstract class AbstractEnclos {
 	
@@ -11,15 +13,22 @@ public abstract class AbstractEnclos {
 	private final float superficie;
 	private final int nbMaxAnimaux;
 	private Collection<AbstractAnimal> animaux;
-	private Proprete proprete;
+	private Collection<Proprete> propretes;
+	private EvenementEnclos evenement;
 	
 	protected AbstractEnclos(final String nomEnclos, final float superficie, final int nbMaxAnimaux) {
 		this.nomEnclos = nomEnclos;
 		this.superficie = superficie;
 		this.nbMaxAnimaux = nbMaxAnimaux;
 	
-		this.animaux = new LinkedList<AbstractAnimal>();
-		this.proprete = new Proprete("cage");
+		this.animaux = new ArrayList<AbstractAnimal>();
+		this.propretes = new ArrayList<Proprete>();
+		this.propretes.add(new Proprete("sol"));
+		this.evenement = new EvenementEnclos(this);
+	}
+	
+	public EvenementEnclos getEvenement(){
+		return evenement;
 	}
 
 	public String getNomEnclos() {
@@ -46,8 +55,8 @@ public abstract class AbstractEnclos {
 		return animaux.size();
 	}
 
-	public Proprete getProprete() {
-		return proprete;
+	public Collection<Proprete> getPropretes() {
+		return propretes;
 	}
 	
 	public abstract boolean ajouterAnimal(final AbstractAnimal animal);
@@ -56,7 +65,21 @@ public abstract class AbstractEnclos {
 		return animaux.remove(animal);
 	}
 	
-	public abstract String entretenir();
+	public String entretenir() {
+		if (!this.getAnimaux().isEmpty()) {
+			throw new IllegalArgumentException("L'entretien ne peut se faire que si l'enclos est vide");
+		}
+		
+		Proprete priorite = this.getPropretes().iterator().next();
+		
+		for (Proprete proprete : this.getPropretes()) {
+			if (priorite.getEtat() < proprete.getEtat()) {
+				priorite = proprete;
+			}
+		}
+		
+		return priorite.entretien();
+	}
 	
 	@Override
 	public abstract String toString();
