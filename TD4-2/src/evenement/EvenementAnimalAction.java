@@ -1,11 +1,8 @@
 package evenement;
 
-import java.util.Iterator;
 import java.util.concurrent.ThreadLocalRandom;
 
 import animaux.AbstractAnimal;
-import enclos.AbstractEnclos;
-import enclos.Proprete;
 import zoo.Zoo;
 
 public class EvenementAnimalAction extends EvenementAction {
@@ -37,7 +34,6 @@ public class EvenementAnimalAction extends EvenementAction {
 		}
 		
 		if(!animal.isFaim()){
-			random = ThreadLocalRandom.current().nextInt(0, 100 + 1);
 			if(random <= CHANCE_FAIM){
 				System.out.println(animal.emettreSon());
 				System.out.println(animal.aFaim());

@@ -8,15 +8,7 @@ import IHM.Menu;
 import IHM.MenuAction;
 import animaux.AbstractAnimal;
 import animaux.AbstractAnimal.Sexe;
-import animaux.Baleine;
-import animaux.Mammifere;
-import animaux.Pingouin;
-import animaux.Tigre;
 import employe.Employe;
-import enclos.AbstractEnclos;
-import enclos.Aquarium;
-import enclos.EnclosStandard;
-import enclos.Voliere;
 import zoo.Zoo;
 
 public abstract class Main {

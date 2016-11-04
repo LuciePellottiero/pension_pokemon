@@ -22,7 +22,7 @@ public abstract class Autre extends AbstractAnimal{
 	}
 	
 	@Override
-	public AbstractAnimal seReproduir(String nom) throws Exception {
+	public AbstractAnimal seReproduire(String nom) throws Exception {
 		return this.pondre(nom);
 	}
 

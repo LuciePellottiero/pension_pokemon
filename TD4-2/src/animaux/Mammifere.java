@@ -22,7 +22,7 @@ public abstract class Mammifere extends AbstractAnimal{
 	}
 
 	@Override
-	public AbstractAnimal seReproduir(String nom) throws Exception {
+	public AbstractAnimal seReproduire(String nom) throws Exception {
 		return this.MettreBas(nom);
 	}
 	public abstract AbstractAnimal MettreBas(final String nom) throws Exception;

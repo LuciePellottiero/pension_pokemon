@@ -35,6 +35,6 @@ public interface IAnimal extends Comparable<AbstractAnimal>{
 	public EvenementAnimalAction getEvenementAction();
 	public EvenementAnimalTour getEvenementTour();
 	public String tombeMalade();
-	public AbstractAnimal seReproduir(String nom) throws Exception;
+	public AbstractAnimal seReproduire(String nom) throws Exception;
 
 }
