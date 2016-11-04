@@ -6,15 +6,12 @@ import java.util.LinkedList;
 public class Aigle extends Autre implements Volant{
 	
 	public final static String AIGLE_CRI = "Kluh";
-	public final static int AIGLE_MAX_SANTE = 60;
-	public final static int AIGLE_SEUIL_SOMMEIL = 100;
-	public final static int AIGLE_SEUIL_FAIM = 40;
 	public final static int AIGLE_TEMPS_GESTATION = 40;
 	public final static float AIGLE_POIDS_BEBE = 0.2f;
 	public final static float AIGLE_BEBE_TAILLE = 0.01f;
 
 	public Aigle(final String nom, final Sexe sexe, final int poids, final int taille, final int age) {
-		super("Aigle", null, nom, sexe, poids, taille, age, AIGLE_CRI, AIGLE_MAX_SANTE, AIGLE_SEUIL_SOMMEIL, AIGLE_SEUIL_FAIM, AIGLE_TEMPS_GESTATION);
+		super("Aigle", null, nom, sexe, poids, taille, age, AIGLE_CRI, AIGLE_TEMPS_GESTATION);
 		
 		Collection<AnimalType> types = new LinkedList<AnimalType>();
 		types.add(AnimalType.VOLANT);
@@ -43,13 +40,13 @@ public class Aigle extends Autre implements Volant{
 	}
 	
 	@Override
-	public AbstractAnimal Pondre(final String nom) throws Exception {
+	public AbstractAnimal pondre(final String nom) throws Exception {
 		if(sexe == Sexe.FEMELLE){
-			System.out.println(this.getNom() + " met bas.");
+			System.out.println(this.getNom() + " pond.");
 		}
 		else{
-			System.out.println("Cet animal est un mâle, il ne peut pas mettre bas, abrutit !");
-			throw new Exception("Cet animal est un mâle, il ne peut pas mettre bas, abrutit !");
+			System.out.println("Cet animal est un mâle, il ne peut pas pondre, abrutit !");
+			throw new Exception("Cet animal est un mâle, il ne peut pas pondre, abrutit !");
 		}
 		
 		// TODO : rendre sexe random

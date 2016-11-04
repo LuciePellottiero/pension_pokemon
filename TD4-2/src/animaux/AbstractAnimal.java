@@ -2,6 +2,9 @@ package animaux;
 
 import java.util.Collection;
 
+import evenement.EvenementAnimalAction;
+import evenement.EvenementAnimalTour;
+
 public abstract class AbstractAnimal implements IAnimal{
 	
 	public static enum Sexe {
@@ -33,15 +36,13 @@ public abstract class AbstractAnimal implements IAnimal{
 	private float poids;
 	private float taille;
 	private int age;
-	private int faim;
-	private final int seuilFaim;
-	private final int seuilSommeil;
-	private int sommeil;
+	private boolean faim;
 	private boolean dort;
-	private int sante;
-	private final int maxSante;
+	private boolean malade;
 	private final String cri;
 	private final int tempsGestation;
+	private final EvenementAnimalAction action;
+	private final EvenementAnimalTour tour;
 	
 	protected AbstractAnimal(
 					final String race,
@@ -52,9 +53,6 @@ public abstract class AbstractAnimal implements IAnimal{
 					final int taille,
 					final int age,
 					final String cri, 
-					final int maxSante, 
-					final int seuilSommeil, 
-					final int seuilFaim,
 					final int tempsGestation) {
 		
 		this.race = race;
@@ -65,14 +63,13 @@ public abstract class AbstractAnimal implements IAnimal{
 		this.taille = taille;
 		this.age = age;
 		this.cri = cri;
-		this.maxSante = maxSante;
-		this.seuilSommeil = seuilSommeil;
-		this.seuilFaim = seuilFaim;
 		this.tempsGestation = tempsGestation;
-		
-		this.faim = 0;
+		this.faim = false;
 		this.dort = false;
-		this.sante = maxSante;
+		this.malade = false;
+		
+		this.action = new EvenementAnimalAction(this);
+		this.tour = new EvenementAnimalTour(this);
 	}
 	
 	public AbstractAnimal(
@@ -87,14 +84,24 @@ public abstract class AbstractAnimal implements IAnimal{
 		this.taille = animal.getBebeTaille();
 		this.age = 0;
 		this.cri = animal.cri;
-		this.maxSante = animal.maxSante;
-		this.seuilSommeil = animal.seuilSommeil;
-		this.seuilFaim = animal.seuilFaim;
 		this.tempsGestation = animal.tempsGestation;
 		
-		this.faim = 0;
+		this.faim = false;
 		this.dort = false;
-		this.sante = maxSante;
+		this.malade = false;
+		
+		this.action = new EvenementAnimalAction(this);
+		this.tour = new EvenementAnimalTour(this);
+	}
+	
+	@Override
+	public EvenementAnimalAction getEvenementAction() {
+		return this.action;
+	}
+	
+	@Override
+	public EvenementAnimalTour getEvenementTour() {
+		return this.tour;
 	}
 	
 	@Override
@@ -105,10 +112,10 @@ public abstract class AbstractAnimal implements IAnimal{
 	@Override
 	public String manger(){
 		if (!dort){
-			if (this.faim <= 0) {
+			if (this.faim == false) {
 				return this.nom + " n'a pas faim";
 			}
-			--faim;
+			this.faim = false;
 			return this.nom + " a mange";
 		}
 		return this.nom + " dort et ne peux pas manger";
@@ -116,26 +123,32 @@ public abstract class AbstractAnimal implements IAnimal{
 	
 	@Override
 	public String emettreSon(){
-		return this.cri;
+		return this.nom + " : " + this.cri;
 		
 	}
 	
 	@Override
-	public String etreSoigne(final int soin){
-		this.sante += soin;
-		
-		if (this.sante > this.maxSante) {
-			this.sante = this.maxSante;
-		}
-		
+	public String etreSoigne(){
+		this.malade = false;
 		return this.nom + " a ete soigne.";
 	}
 	
 	@Override
-	public String sendormir(final int temps) {
-		this.sommeil -= temps;
+	public String sendormir() {
 		this.dort = true;
 		return this.nom + " s'endort.";
+	}
+	
+	@Override
+	public String aFaim() {
+		this.faim = true;
+		return this.nom + " a faim.";
+	}
+	
+	@Override
+	public String tombeMalade() {
+		this.malade = true;
+		return this.nom + " est malade.";
 	}
 	
 	@Override
@@ -204,7 +217,7 @@ public abstract class AbstractAnimal implements IAnimal{
 	}
 
 	@Override
-	public int getFaim() {
+	public boolean isFaim() {
 		return faim;
 	}
 
@@ -214,28 +227,13 @@ public abstract class AbstractAnimal implements IAnimal{
 	}
 	
 	@Override
-	public int getSommeil() {
-		return this.sommeil;
-	}
-	
-	@Override
-	public int getSeuilSommeil() {
-		return this.seuilSommeil;
-	}
-	
-	@Override
-	public int getSeuilFaim() {
-		return this.seuilFaim;
-	}
-	
-	@Override
-	public int getSante() {
-		return sante;
+	public boolean isMalade() {
+		return malade;
 	}
 
 	@Override
-	public void setSante(int sante) {
-		this.sante = sante;
+	public void setSante(boolean malade) {
+		this.malade = malade;
 	}
 	
 	@Override
@@ -247,7 +245,12 @@ public abstract class AbstractAnimal implements IAnimal{
 	@Override
 	public String toString() {
 		return race + " " + nom + " : " + sexe + ", " + poids + "Kg, " + taille + "m, " + age
-				+ " ans, " + sante + "/" + maxSante + " PV, faim = " + faim + ", " + (dort ? "dort" : "reveille") + 
+				+ " ans, " + (malade ? "malade " : "en bonne santé ") + (faim ? "affamé " : " ") + (dort ? "dort" : "reveillé") + 
 				", cri = " + cri;
+	}
+	
+	@Override
+	public int compareTo(AbstractAnimal o) {
+		return this.getNom().compareTo(o.getNom());
 	}
 }

@@ -1,7 +1,9 @@
 package zoo;
 
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.LinkedList;
+import java.util.Collections;
+import java.util.List;
 
 import animaux.AbstractAnimal;
 import employe.Employe;
@@ -19,16 +21,24 @@ public class Zoo {
 		this.nbMaxEnclos = nbMaxEnclos;
 		this.employe = employe;
 		
-		enclos = new LinkedList<AbstractEnclos>();
+		enclos = new ArrayList<AbstractEnclos>();
 	}
 	
 	public String getAnimauxStr() {
 		String str = "";
 		
+		List<AbstractAnimal> sortedAnimals = new ArrayList<AbstractAnimal>();
+		
 		for(AbstractEnclos enclos : enclos) {
 			for (AbstractAnimal animal : enclos.getAnimaux()) {
-				str += animal.toString() + System.lineSeparator();
+				sortedAnimals.add(animal);
 			}
+		}
+		
+		Collections.sort(sortedAnimals);
+		
+		for (AbstractAnimal animalsName : sortedAnimals) {
+			str += animalsName + System.lineSeparator();
 		}
 		
 		return str;

@@ -89,16 +89,6 @@ public class ZooGame {
 			
 			nbAction = 0;
 			System.out.println("New turn");
-			//TODO random events.
-			//après chaque action :
-			//les faire dormir
-			//faire baisser leur niveau de faim
-			//faire crier les animaux quand il leur arrive quelque chose
-			
-			//après chaque tour:
-			//les faire avoir des bébé (si deux animaux de sexes différents dans le même enclos + place dans l'enclos)
-			//rendre les animaux malade (baisse des pv)
-			//rendre les enclos sales
 			
 			while(!gameOver && nbAction < NB_ACTION_PER_TURN) {
 				menuPrincipal.menu();
@@ -111,6 +101,10 @@ public class ZooGame {
 	public void evenementTour(){
 		for(AbstractEnclos enclos : zoo.getEnclos()){
 			enclos.getEvenement().verifEvenement(zoo);
+			
+			for(AbstractAnimal animal : enclos.getAnimaux()) {
+				animal.getEvenementTour().verifEvenement(zoo);
+			}
 		}
 	}
 	
@@ -121,7 +115,11 @@ public class ZooGame {
 	}
 	
 	public void evenementAction(){
-		
+		for(AbstractEnclos enclos : zoo.getEnclos()){			
+			for(AbstractAnimal animal : enclos.getAnimaux()) {
+				animal.getEvenementAction().verifEvenement(zoo);
+			}
+		}
 	}	
 	
 	/*--------------------------------MENU ENCLOS SELECTIONNE---------------------------*/
@@ -240,9 +238,9 @@ public class ZooGame {
 		private final String name;
 		private final Sexe sexe;
 		
-		public NewAnimalMenuAction(final String action, final String input, AbstractEnclos selectedEnclo, final String name, final Sexe sexe) {
+		public NewAnimalMenuAction(final String action, final String input, AbstractEnclos selectedEnclos, final String name, final Sexe sexe) {
 			super(action, input);
-			this.selectedEnclos = selectedEnclo;
+			this.selectedEnclos = selectedEnclos;
 			this.name = name;
 			this.sexe = sexe;
 		}
@@ -298,7 +296,7 @@ public class ZooGame {
 			}
 		});
 		
-		choixSexe.addAction(new MenuAction("Femmelle", "f") {
+		choixSexe.addAction(new MenuAction("Femelle", "f") {
 			
 			@Override
 			public boolean action() {
@@ -310,6 +308,7 @@ public class ZooGame {
 		
 		Menu animalCreation = new Menu("Choisi la race d'animal", reader);
 		
+		//TODO : ne proposer que les animaux valides
 		animalCreation.addAction(new NewAnimalMenuAction("Aigle", "ai", selectedEnclos, name, animalSexe));
 		animalCreation.addAction(new NewAnimalMenuAction("Baleine", "ba", selectedEnclos, name, animalSexe));
 		animalCreation.addAction(new NewAnimalMenuAction("Loup", "lo", selectedEnclos, name, animalSexe));
@@ -358,7 +357,7 @@ public class ZooGame {
 			
 			@Override
 			public boolean action() {
-				System.out.println(selectedAnimal.etreSoigne(1));
+				System.out.println(selectedAnimal.etreSoigne());
 				return false;
 			}
 		});
@@ -430,8 +429,8 @@ public class ZooGame {
 	private String chooseName() {
 		String name = "";
 		
-		while(name.length() < 3) {
-			System.out.println("Entrez le nom (au moins trois charactères) : ");
+		while(name.length() < 2) {
+			System.out.println("Entrez le nom (au moins deux charactères) : ");
 			
 			try {
 				name = reader.readLine();

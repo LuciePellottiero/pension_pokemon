@@ -13,16 +13,17 @@ public abstract class Mammifere extends AbstractAnimal{
 			final int taille, 
 			final int age, 
 			final String cri,
-			final int maxSante,
-			final int seuilSommeil,
-			final int seuilFaim,
 			final int tempsGestation) {
-		super(race, types,  nom, sexe, poids, taille, age, cri, maxSante, seuilSommeil, seuilFaim, tempsGestation);
+		super(race, types,  nom, sexe, poids, taille, age, cri, tempsGestation);
 	}
 	
 	public Mammifere(final String nom, final Sexe sexe, final Mammifere animal) {
 		super(nom, sexe, animal);
 	}
 
+	@Override
+	public AbstractAnimal seReproduir(String nom) throws Exception {
+		return this.MettreBas(nom);
+	}
 	public abstract AbstractAnimal MettreBas(final String nom) throws Exception;
 }

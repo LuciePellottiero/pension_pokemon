@@ -14,7 +14,7 @@ public class Requin extends Autre implements Marin{
 	public static final float REQUIN_BEBE_TAILLE = 15f;
 
 	public Requin(String nom, Sexe sexe, int poids, int taille, int age) {
-		super("Requin", null, nom, sexe, poids, taille, age, REQUIN_CRI, REQUIN_SANTE_MAX, REQUIN_SEUIL_SOMMEIL, REQUIN_SEUIL_FAIM, REQUIN_TEMPS_GESTATION);
+		super("Requin", null, nom, sexe, poids, taille, age, REQUIN_CRI, REQUIN_TEMPS_GESTATION);
 		
 		Collection<AnimalType> types = new LinkedList<AnimalType>();
 		types.add(AnimalType.MARIN);
@@ -42,13 +42,13 @@ public class Requin extends Autre implements Marin{
 	}
 	
 	@Override
-	public AbstractAnimal Pondre(final String nom) throws Exception {
+	public AbstractAnimal pondre(final String nom) throws Exception {
 		if(sexe == Sexe.FEMELLE){
-			System.out.println(this.getNom() + " met bas.");
+			System.out.println(this.getNom() + " pond.");
 		}
 		else{
-			System.out.println("Cet animal est un mâle, il ne peut pas mettre bas, abrutit !");
-			throw new Exception("Cet animal est un mâle, il ne peut pas mettre bas, abrutit !");
+			System.out.println("Cet animal est un mâle, il ne peut pas pondre, abrutit !");
+			throw new Exception("Cet animal est un mâle, il ne peut pas pondre, abrutit !");
 		}
 		
 		// TODO : rendre sexe random

@@ -13,16 +13,18 @@ public abstract class Autre extends AbstractAnimal{
 			final int taille, 
 			final int age,
 			final String cri,
-			final int maxSante,
-			final int seuilSommeil,
-			final int seuilFaim,
 			final int tempsGestation) {
-		super(race, types, nom, sexe, poids, taille, age, cri, maxSante, seuilSommeil, seuilFaim, tempsGestation);
+		super(race, types, nom, sexe, poids, taille, age, cri, tempsGestation);
 	}
 	
 	public Autre(final String nom, final Sexe sexe, final Autre animal) {
 		super(nom, sexe, animal);
 	}
+	
+	@Override
+	public AbstractAnimal seReproduir(String nom) throws Exception {
+		return this.pondre(nom);
+	}
 
-	public abstract AbstractAnimal Pondre(final String nom) throws Exception;
+	public abstract AbstractAnimal pondre(final String nom) throws Exception;
 }

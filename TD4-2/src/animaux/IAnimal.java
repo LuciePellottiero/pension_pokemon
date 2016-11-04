@@ -4,13 +4,15 @@ import java.util.Collection;
 
 import animaux.AbstractAnimal.AnimalType;
 import animaux.AbstractAnimal.Sexe;
+import evenement.EvenementAnimalAction;
+import evenement.EvenementAnimalTour;
 
-public interface IAnimal {
+public interface IAnimal extends Comparable<AbstractAnimal>{
 	public String getRace();
 	public String manger();
 	public String emettreSon();
-	public String etreSoigne(final int soin);
-	public String sendormir(final int temps);
+	public String etreSoigne();
+	public String sendormir();
 	public String seReveiller();
 	public Collection<AnimalType> getTypes();
 	public void setTypes(final Collection<AnimalType> types);
@@ -23,14 +25,16 @@ public interface IAnimal {
 	public void setTaille(float taille);
 	public int getAge();
 	public String viellir();
-	public int getFaim();
+	public boolean isFaim();
 	public boolean isDodo();
-	public int getSommeil();
-	public int getSeuilSommeil();
-	public int getSeuilFaim();
-	public int getSante();
-	public void setSante(int sante);
+	public boolean isMalade();
+	public void setSante(boolean malade);
 	public abstract float getBebePoids();
 	public abstract float getBebeTaille();
+	public String aFaim();
+	public EvenementAnimalAction getEvenementAction();
+	public EvenementAnimalTour getEvenementTour();
+	public String tombeMalade();
+	public AbstractAnimal seReproduir(String nom) throws Exception;
 
 }

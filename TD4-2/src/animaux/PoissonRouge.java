@@ -6,15 +6,12 @@ import java.util.LinkedList;
 public class PoissonRouge extends Autre implements Marin{
 
 	public static final String POISSON_ROUGE_CRI = "Bloubloup";
-	public static final int POISSON_ROUGE_SANTE_MAX = 10;
-	public static final int POISSON_ROUGE_SEUIL_SOMMEIL = 70;
-	public static final int POISSON_ROUGE_SEUIL_FAIM = 65;
 	public static final int POISSON_ROUGE_TEMPS_GESTATION = 4;
 	public static final float POISSON_ROUGE_BEBE_POIDS = 0.0001f;
 	public static final float POISSON_ROUGE_BEBE_TAILLE = 0.0002f;
 	
 	public PoissonRouge(String nom, Sexe sexe, int poids, int taille, int age) {
-		super("Poisson rouge", null, nom, sexe, poids, taille, age, POISSON_ROUGE_CRI, POISSON_ROUGE_SANTE_MAX, POISSON_ROUGE_SEUIL_SOMMEIL, POISSON_ROUGE_SEUIL_FAIM, POISSON_ROUGE_TEMPS_GESTATION);
+		super("Poisson rouge", null, nom, sexe, poids, taille, age, POISSON_ROUGE_CRI, POISSON_ROUGE_TEMPS_GESTATION);
 		
 		Collection<AnimalType> types = new LinkedList<AnimalType>();
 		types.add(AnimalType.MARIN);
@@ -42,13 +39,13 @@ public class PoissonRouge extends Autre implements Marin{
 	}
 
 	@Override
-	public AbstractAnimal Pondre(final String nom) throws Exception {
+	public AbstractAnimal pondre(final String nom) throws Exception {
 		if(sexe == Sexe.FEMELLE){
-			System.out.println(this.getNom() + " met bas.");
+			System.out.println(this.getNom() + "pond.");
 		}
 		else{
-			System.out.println("Cet animal est un mâle, il ne peut pas mettre bas, abrutit !");
-			throw new Exception("Cet animal est un mâle, il ne peut pas mettre bas, abrutit !");
+			System.out.println("Cet animal est un mâle, il ne peut pas pondre, abrutit !");
+			throw new Exception("Cet animal est un mâle, il ne peut pas pondre, abrutit !");
 		}
 		
 		// TODO : rendre sexe random
