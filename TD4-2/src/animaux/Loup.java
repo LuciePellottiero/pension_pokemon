@@ -2,6 +2,9 @@ package animaux;
 
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.concurrent.ThreadLocalRandom;
+
+import animaux.AbstractAnimal.Sexe;
 
 public class Loup extends Mammifere implements Vagabondant{
 	
@@ -48,8 +51,13 @@ public class Loup extends Mammifere implements Vagabondant{
 			throw new Exception("Cet animal est un mâle, il ne peut pas mettre bas, abrutit !");
 		}
 		
-		// TODO : rendre sexe random
-		return new Loup(nom, Sexe.MALE, this);
+		int random = ThreadLocalRandom.current().nextInt(0, 1 + 1);
+		if (random == 0){
+			return new Loup(nom, Sexe.MALE, this);
+		}
+		else{
+			return new Loup(nom, Sexe.FEMELLE, this);
+		}
 	}
 	
 }

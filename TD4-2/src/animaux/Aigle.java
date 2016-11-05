@@ -2,6 +2,7 @@ package animaux;
 
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Aigle extends Autre implements Volant{
 	
@@ -49,8 +50,13 @@ public class Aigle extends Autre implements Volant{
 			throw new Exception("Cet animal est un mâle, il ne peut pas pondre, abrutit !");
 		}
 		
-		// TODO : rendre sexe random
-		return new Aigle(nom, Sexe.MALE, this);
+		int random = ThreadLocalRandom.current().nextInt(0, 1 + 1);
+		if (random == 0){
+			return new Aigle(nom, Sexe.MALE, this);
+		}
+		else{
+			return new Aigle(nom, Sexe.FEMELLE, this);
+		}
 	}
 
 }

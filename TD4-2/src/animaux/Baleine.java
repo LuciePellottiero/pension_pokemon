@@ -2,6 +2,9 @@ package animaux;
 
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.concurrent.ThreadLocalRandom;
+
+import animaux.AbstractAnimal.Sexe;
 
 public class Baleine extends Mammifere implements Marin{
 	
@@ -48,8 +51,13 @@ public class Baleine extends Mammifere implements Marin{
 			throw new Exception("Cet animal est un mâle, il ne peut pas mettre bas, abrutit !");
 		}
 		
-		// TODO : rendre sexe random
-		return new Baleine(nom, Sexe.MALE, this);
+		int random = ThreadLocalRandom.current().nextInt(0, 1 + 1);
+		if (random == 0){
+			return new Baleine(nom, Sexe.MALE, this);
+		}
+		else{
+			return new Baleine(nom, Sexe.FEMELLE, this);
+		}
 	}
 
 }
