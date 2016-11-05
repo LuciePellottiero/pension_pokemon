@@ -1,17 +1,18 @@
 package employe;
 
 import animaux.AbstractAnimal;
-import animaux.AbstractAnimal.Sexe;
+import animaux.IAnimal;
+import animaux.IAnimal.Sexe;
 import enclos.AbstractEnclos;
 
 public class Employe {
 	private final String nom;
 	@SuppressWarnings("unused")
-	private final AbstractAnimal.Sexe sexe;
+	private final IAnimal.Sexe sexe;
 	@SuppressWarnings("unused")
 	private final int age;
 	
-	public Employe(final String nom, final Sexe sexe, final int age) {
+	public Employe(final String nom, final IAnimal.Sexe sexe, final int age) {
 		this.nom = nom;
 		this.sexe = sexe;
 		this.age = age;

@@ -57,4 +57,11 @@ public class Proprete {
 			return "état de l'enclos : " + this.etatStr(--etat);
 		}
 	}
+
+	@Override
+	public String toString() {
+		return nom + " : " + etatStr(this.etat);
+	}
+	
+	
 }

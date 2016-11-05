@@ -6,18 +6,18 @@ import java.io.InputStreamReader;
 
 import IHM.Menu;
 import IHM.MenuAction;
-import animaux.AbstractAnimal;
-import animaux.AbstractAnimal.Sexe;
+import animaux.IAnimal;
+import animaux.IAnimal.Sexe;
 import employe.Employe;
 import zoo.Zoo;
 
 public abstract class Main {
 	
-	private static BufferedReader bReader;
+	public static BufferedReader bReader;
 	
 	private static final int NB_MAX_ENCLOS = 10;
 	
-	static AbstractAnimal.Sexe employeSexe;
+	static IAnimal.Sexe employeSexe;
 
 	//initialisation
 	private static void intialisation() {
@@ -68,7 +68,7 @@ public abstract class Main {
 			
 			@Override
 			public boolean action() {
-				employeSexe = Sexe.MALE;
+				employeSexe = IAnimal.Sexe.MALE;
 				return true;
 			}
 		});
@@ -77,7 +77,7 @@ public abstract class Main {
 			
 			@Override
 			public boolean action() {
-				employeSexe = Sexe.FEMELLE;
+				employeSexe = IAnimal.Sexe.FEMELLE;
 				return true;
 			}
 		});

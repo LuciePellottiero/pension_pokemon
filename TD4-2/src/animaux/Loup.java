@@ -1,10 +1,12 @@
 package animaux;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.concurrent.ThreadLocalRandom;
 
-import animaux.AbstractAnimal.Sexe;
+import animaux.IAnimal.AnimalType;
+import animaux.IAnimal.Sexe;
 
 public class Loup extends Mammifere implements Vagabondant{
 	
@@ -12,17 +14,13 @@ public class Loup extends Mammifere implements Vagabondant{
 	public final static int LOUP_TEMPS_GESTATION = 60;
 	public final static float LOUP_BEBE_POIDS = 0.5f;
 	public final static float LOUP_BEBE_TAILLE = 0.3f;
+	public final static IAnimal.AnimalType TYPES[] = {AnimalType.VAGABONDANT};
 
-	public Loup(String nom, Sexe sexe, int poids, int taille, int age) {
-		super("Loup", null, nom, sexe, poids, taille, age, LOUP_CRI, LOUP_TEMPS_GESTATION);
-		
-		Collection<AnimalType> types = new LinkedList<AnimalType>();
-		types.add(AnimalType.VAGABONDANT);
-		
-		this.setTypes(types);
+	public Loup(String nom, IAnimal.Sexe sexe, int poids, int taille, int age) {
+		super("Loup", new LinkedList<IAnimal.AnimalType>(Arrays.asList(TYPES)), nom, sexe, poids, taille, age, LOUP_CRI, LOUP_TEMPS_GESTATION);
 	}
 
-	public Loup(String nom, Sexe sexe, Loup loup) {
+	public Loup(String nom, IAnimal.Sexe sexe, Loup loup) {
 		super(nom, sexe, loup);
 	}
 
@@ -43,7 +41,7 @@ public class Loup extends Mammifere implements Vagabondant{
 
 	@Override
 	public AbstractAnimal MettreBas(final String nom) throws Exception {
-		if(sexe == Sexe.FEMELLE){
+		if(sexe == IAnimal.Sexe.FEMELLE){
 			System.out.println(this.getNom() + " met bas.");
 		}
 		else{
@@ -53,10 +51,10 @@ public class Loup extends Mammifere implements Vagabondant{
 		
 		int random = ThreadLocalRandom.current().nextInt(0, 1 + 1);
 		if (random == 0){
-			return new Loup(nom, Sexe.MALE, this);
+			return new Loup(nom, IAnimal.Sexe.MALE, this);
 		}
 		else{
-			return new Loup(nom, Sexe.FEMELLE, this);
+			return new Loup(nom, IAnimal.Sexe.FEMELLE, this);
 		}
 	}
 	

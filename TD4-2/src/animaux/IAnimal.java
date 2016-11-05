@@ -2,23 +2,42 @@ package animaux;
 
 import java.util.Collection;
 
-import animaux.AbstractAnimal.AnimalType;
-import animaux.AbstractAnimal.Sexe;
+import animaux.IAnimal.AnimalType;
+import animaux.IAnimal.Sexe;
 import evenement.EvenementAnimalAction;
 import evenement.EvenementAnimalTour;
 
 public interface IAnimal extends Comparable<AbstractAnimal>{
+	enum AnimalType {
+		VOLANT,
+		MARIN,
+		VAGABONDANT,
+		NORMAL;
+	}
+	enum Sexe {
+		MALE("\u2642"),
+		FEMELLE("\u2640");
+		
+		private final String sexe;
+		
+		private Sexe(final String sexe) {
+			this.sexe = sexe;
+		}
+		
+		public String toString() {
+			return this.sexe;
+		}
+	}
 	public String getRace();
 	public String manger();
 	public String emettreSon();
 	public String etreSoigne();
 	public String sendormir();
 	public String seReveiller();
-	public Collection<AnimalType> getTypes();
-	public void setTypes(final Collection<AnimalType> types);
+	public Collection<IAnimal.AnimalType> getTypes();
 	public String getNom();
 	public void setNom(String nom);
-	public Sexe getSexe();
+	public IAnimal.Sexe getSexe();
 	public float getPoids();
 	public void setPoids(float poids);
 	public float getTaille();
@@ -36,5 +55,4 @@ public interface IAnimal extends Comparable<AbstractAnimal>{
 	public EvenementAnimalTour getEvenementTour();
 	public String tombeMalade();
 	public AbstractAnimal seReproduire(String nom) throws Exception;
-
 }

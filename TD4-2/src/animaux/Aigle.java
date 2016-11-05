@@ -1,5 +1,7 @@
 package animaux;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.concurrent.ThreadLocalRandom;
@@ -10,17 +12,13 @@ public class Aigle extends Autre implements Volant{
 	public final static int AIGLE_TEMPS_GESTATION = 40;
 	public final static float AIGLE_POIDS_BEBE = 0.2f;
 	public final static float AIGLE_BEBE_TAILLE = 0.01f;
+	public final static AnimalType[] TYPES = {AnimalType.VOLANT};
 
-	public Aigle(final String nom, final Sexe sexe, final int poids, final int taille, final int age) {
-		super("Aigle", null, nom, sexe, poids, taille, age, AIGLE_CRI, AIGLE_TEMPS_GESTATION);
-		
-		Collection<AnimalType> types = new LinkedList<AnimalType>();
-		types.add(AnimalType.VOLANT);
-		
-		this.setTypes(types);
+	public Aigle(final String nom, final IAnimal.Sexe sexe, final int poids, final int taille, final int age) {
+		super("Aigle", new LinkedList<IAnimal.AnimalType>(Arrays.asList(TYPES)), nom, sexe, poids, taille, age, AIGLE_CRI, AIGLE_TEMPS_GESTATION);
 	}
 
-	public Aigle(String nom, Sexe sexe, Aigle aigle) {
+	public Aigle(String nom, IAnimal.Sexe sexe, Aigle aigle) {
 		super(nom, sexe, aigle);
 	}
 
@@ -42,7 +40,7 @@ public class Aigle extends Autre implements Volant{
 	
 	@Override
 	public AbstractAnimal pondre(final String nom) throws Exception {
-		if(sexe == Sexe.FEMELLE){
+		if(sexe == IAnimal.Sexe.FEMELLE){
 			System.out.println(this.getNom() + " pond.");
 		}
 		else{
@@ -52,10 +50,10 @@ public class Aigle extends Autre implements Volant{
 		
 		int random = ThreadLocalRandom.current().nextInt(0, 1 + 1);
 		if (random == 0){
-			return new Aigle(nom, Sexe.MALE, this);
+			return new Aigle(nom, IAnimal.Sexe.MALE, this);
 		}
 		else{
-			return new Aigle(nom, Sexe.FEMELLE, this);
+			return new Aigle(nom, IAnimal.Sexe.FEMELLE, this);
 		}
 	}
 

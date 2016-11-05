@@ -20,6 +20,10 @@ public class Menu {
 		actions.add(menuAction);
 	}
 	
+	public boolean containsAction(MenuAction menuAction) {
+		return this.actions.contains(menuAction);
+	}
+	
 	private String displayMenu(){
 		String res = menuName + System.lineSeparator();
 		for(MenuAction action : actions){

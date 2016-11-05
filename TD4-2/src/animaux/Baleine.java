@@ -1,10 +1,12 @@
 package animaux;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.concurrent.ThreadLocalRandom;
 
-import animaux.AbstractAnimal.Sexe;
+import animaux.IAnimal.AnimalType;
+import animaux.IAnimal.Sexe;
 
 public class Baleine extends Mammifere implements Marin{
 	
@@ -12,17 +14,13 @@ public class Baleine extends Mammifere implements Marin{
 	public final static int BALEINE_TEMPS_GESTATION = 365;
 	public final static float BALEINE_BEBE_POIDS = 1000f;
 	public final static float BALEINE_BEBE_TAILLE = 5f;
+	public final static IAnimal.AnimalType TYPES[] = {AnimalType.MARIN};
 	
-	public Baleine(final String nom, Sexe sexe, int poids, int taille, int age) {
-		super("Baleine", null, nom, sexe, poids, taille, age, BALEINE_CRI, BALEINE_TEMPS_GESTATION);
-		
-		Collection<AnimalType> types = new LinkedList<AnimalType>();
-		types.add(AnimalType.MARIN);
-		
-		this.setTypes(types);
+	public Baleine(final String nom, IAnimal.Sexe sexe, int poids, int taille, int age) {
+		super("Baleine", new LinkedList<IAnimal.AnimalType>(Arrays.asList(TYPES)), nom, sexe, poids, taille, age, BALEINE_CRI, BALEINE_TEMPS_GESTATION);
 	}
 	
-	public Baleine(final String nom, final Sexe sexe, final Baleine baleine) {
+	public Baleine(final String nom, final IAnimal.Sexe sexe, final Baleine baleine) {
 		super(nom, sexe, baleine);
 	}
 	
@@ -43,7 +41,7 @@ public class Baleine extends Mammifere implements Marin{
 
 	@Override
 	public AbstractAnimal MettreBas(final String nom) throws Exception {
-		if(sexe == Sexe.FEMELLE){
+		if(sexe == IAnimal.Sexe.FEMELLE){
 			System.out.println(this.getNom() + " met bas.");
 		}
 		else{
@@ -53,10 +51,10 @@ public class Baleine extends Mammifere implements Marin{
 		
 		int random = ThreadLocalRandom.current().nextInt(0, 1 + 1);
 		if (random == 0){
-			return new Baleine(nom, Sexe.MALE, this);
+			return new Baleine(nom, IAnimal.Sexe.MALE, this);
 		}
 		else{
-			return new Baleine(nom, Sexe.FEMELLE, this);
+			return new Baleine(nom, IAnimal.Sexe.FEMELLE, this);
 		}
 	}
 

@@ -1,10 +1,12 @@
 package animaux;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.concurrent.ThreadLocalRandom;
 
-import animaux.AbstractAnimal.Sexe;
+import animaux.IAnimal.AnimalType;
+import animaux.IAnimal.Sexe;
 
 public class Requin extends Autre implements Marin{
 	
@@ -15,17 +17,13 @@ public class Requin extends Autre implements Marin{
 	public static final int REQUIN_TEMPS_GESTATION = 380;
 	public static final float REQUIN_BEBE_POIDS = 10f;
 	public static final float REQUIN_BEBE_TAILLE = 15f;
+	public final static IAnimal.AnimalType TYPES[] = {AnimalType.MARIN};
 
-	public Requin(String nom, Sexe sexe, int poids, int taille, int age) {
-		super("Requin", null, nom, sexe, poids, taille, age, REQUIN_CRI, REQUIN_TEMPS_GESTATION);
-		
-		Collection<AnimalType> types = new LinkedList<AnimalType>();
-		types.add(AnimalType.MARIN);
-		
-		this.setTypes(types);
+	public Requin(String nom, IAnimal.Sexe sexe, int poids, int taille, int age) {
+		super("Requin", new LinkedList<IAnimal.AnimalType>(Arrays.asList(TYPES)), nom, sexe, poids, taille, age, REQUIN_CRI, REQUIN_TEMPS_GESTATION);
 	}
 
-	public Requin(String nom, Sexe sexe, Requin requin) {
+	public Requin(String nom, IAnimal.Sexe sexe, Requin requin) {
 		super(nom, sexe, requin);
 	}
 
@@ -46,7 +44,7 @@ public class Requin extends Autre implements Marin{
 	
 	@Override
 	public AbstractAnimal pondre(final String nom) throws Exception {
-		if(sexe == Sexe.FEMELLE){
+		if(sexe == IAnimal.Sexe.FEMELLE){
 			System.out.println(this.getNom() + " pond.");
 		}
 		else{
@@ -56,10 +54,10 @@ public class Requin extends Autre implements Marin{
 		
 		int random = ThreadLocalRandom.current().nextInt(0, 1 + 1);
 		if (random == 0){
-			return new Requin(nom, Sexe.MALE, this);
+			return new Requin(nom, IAnimal.Sexe.MALE, this);
 		}
 		else{
-			return new Requin(nom, Sexe.FEMELLE, this);
+			return new Requin(nom, IAnimal.Sexe.FEMELLE, this);
 		}
 	}
 

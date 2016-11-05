@@ -2,12 +2,22 @@ package main;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import IHM.Menu;
 import IHM.MenuAction;
 import animaux.AbstractAnimal;
-import animaux.AbstractAnimal.Sexe;
+import animaux.Aigle;
 import animaux.AnimalFactory;
+import animaux.Baleine;
+import animaux.IAnimal;
+import animaux.Loup;
+import animaux.Ours;
+import animaux.Pingouin;
+import animaux.PoissonRouge;
+import animaux.Requin;
+import animaux.Tigre;
 import enclos.AbstractEnclos;
 import enclos.Aquarium;
 import enclos.EnclosStandard;
@@ -23,11 +33,15 @@ public class ZooGame {
 	private boolean gameOver = false;
 	private static int nbAction;
 	public static boolean quitter;
-	private static Sexe animalSexe;
+	private static IAnimal.Sexe animalSexe;
+	public static Collection<AbstractAnimal> bebe;
+	public static Collection<AbstractEnclos> bebeEnclos;
 	
 	public ZooGame(final Zoo zoo, final BufferedReader input) {
 		this.zoo = zoo;
 		this.reader = input;
+		bebe = new ArrayList<AbstractAnimal>();
+		bebeEnclos = new ArrayList<AbstractEnclos>();
 	}
 	
 	private boolean menuQuitter() {
@@ -94,17 +108,25 @@ public class ZooGame {
 				menuPrincipal.menu();
 			}
 			
+			if (gameOver) {
+				break;
+			}
+			
 			evenementTour();
 		}
 	}
 	
 	public void evenementTour(){
+		Collection<AbstractAnimal> animaux = new ArrayList<AbstractAnimal>();
+		
 		for(AbstractEnclos enclos : zoo.getEnclos()){
 			enclos.getEvenement().verifEvenement(zoo);
 			
-			for(AbstractAnimal animal : enclos.getAnimaux()) {
-				animal.getEvenementTour().verifEvenement(zoo);
-			}
+			animaux.addAll(enclos.getAnimaux());
+		}
+		
+		for(AbstractAnimal animal : animaux) {
+			animal.getEvenementTour().verifEvenement(zoo);
 		}
 	}
 	
@@ -152,11 +174,16 @@ public class ZooGame {
 				try {
 					System.out.println(zoo.getEmploye().nettoyer(selectedEnclos));
 					useActionPoint();
-					return false;
 				}
 				catch(Exception e) {
 					System.err.println(e.getMessage());
+					
+				}
+				if (nbAction < NB_ACTION_PER_TURN) {
 					return false;
+				}
+				else {
+					return true;
 				}
 			}
 		});
@@ -167,7 +194,12 @@ public class ZooGame {
 			public boolean action() {
 				System.out.println(zoo.getEmploye().nourrir(selectedEnclos));
 				useActionPoint();
-				return false;
+				if (nbAction < NB_ACTION_PER_TURN) {
+					return false;
+				}
+				else {
+					return true;
+				}
 			}
 		});
 		
@@ -236,13 +268,20 @@ public class ZooGame {
 		
 		private AbstractEnclos selectedEnclos;
 		private final String name;
-		private final Sexe sexe;
+		private final IAnimal.Sexe sexe;
+		private final Collection<IAnimal.AnimalType> types;
 		
-		public NewAnimalMenuAction(final String action, final String input, AbstractEnclos selectedEnclos, final String name, final Sexe sexe) {
+		public NewAnimalMenuAction(final String action, final String input, AbstractEnclos selectedEnclos, 
+				final String name, final IAnimal.Sexe sexe, IAnimal.AnimalType...types) {
 			super(action, input);
 			this.selectedEnclos = selectedEnclos;
 			this.name = name;
 			this.sexe = sexe;
+			this.types = new ArrayList<IAnimal.AnimalType>(Arrays.asList(types));
+		}
+		
+		public Collection<IAnimal.AnimalType> getTypes() {
+			return this.types;
 		}
 
 		@Override
@@ -291,7 +330,7 @@ public class ZooGame {
 			
 			@Override
 			public boolean action() {
-				animalSexe = Sexe.MALE;
+				animalSexe = IAnimal.Sexe.MALE;
 				return true;
 			}
 		});
@@ -300,7 +339,7 @@ public class ZooGame {
 			
 			@Override
 			public boolean action() {
-				animalSexe = Sexe.FEMELLE;
+				animalSexe = IAnimal.Sexe.FEMELLE;
 				return true;
 			}
 		});
@@ -309,14 +348,7 @@ public class ZooGame {
 		Menu animalCreation = new Menu("Choisi la race d'animal", reader);
 		
 		//TODO : ne proposer que les animaux valides
-		animalCreation.addAction(new NewAnimalMenuAction("Aigle", "ai", selectedEnclos, name, animalSexe));
-		animalCreation.addAction(new NewAnimalMenuAction("Baleine", "ba", selectedEnclos, name, animalSexe));
-		animalCreation.addAction(new NewAnimalMenuAction("Loup", "lo", selectedEnclos, name, animalSexe));
-		animalCreation.addAction(new NewAnimalMenuAction("Ours", "ou", selectedEnclos, name, animalSexe));
-		animalCreation.addAction(new NewAnimalMenuAction("Pingouin", "pi", selectedEnclos, name, animalSexe));
-		animalCreation.addAction(new NewAnimalMenuAction("Poisson rouge", "pr", selectedEnclos, name, animalSexe));
-		animalCreation.addAction(new NewAnimalMenuAction("Requin", "re", selectedEnclos, name, animalSexe));
-		animalCreation.addAction(new NewAnimalMenuAction("Tigre", "ti", selectedEnclos, name, animalSexe));
+		addValidAnimalAction(animalCreation, selectedEnclos, name);
 		
 		animalCreation.addAction(new MenuAction("Retour", "r") {
 			
@@ -329,6 +361,27 @@ public class ZooGame {
 		
 		animalCreation.menu();
 		return quitter;
+	}
+	
+	private void addValidAnimalAction(Menu menu, final AbstractEnclos selectedEnclos, final String name) {
+		Collection<NewAnimalMenuAction> menuActions = new ArrayList<NewAnimalMenuAction>();	
+		menuActions.add(new NewAnimalMenuAction("Aigle", "ai", selectedEnclos, name, animalSexe, Aigle.TYPES));
+		menuActions.add(new NewAnimalMenuAction("Pingouin", "pi", selectedEnclos, name, animalSexe, Pingouin.TYPES));
+		menuActions.add(new NewAnimalMenuAction("Baleine", "ba", selectedEnclos, name, animalSexe, Baleine.TYPES));
+		menuActions.add(new NewAnimalMenuAction("Loup", "lo", selectedEnclos, name, animalSexe, Loup.TYPES));
+		menuActions.add(new NewAnimalMenuAction("Ours", "ou", selectedEnclos, name, animalSexe, Ours.TYPES));
+		menuActions.add(new NewAnimalMenuAction("Poisson rouge", "pr", selectedEnclos, name, animalSexe, PoissonRouge.TYPES));
+		menuActions.add(new NewAnimalMenuAction("Requin", "re", selectedEnclos, name, animalSexe, Requin.TYPES));
+		menuActions.add(new NewAnimalMenuAction("Tigre", "ti", selectedEnclos, name, animalSexe, Tigre.TYPES));
+		
+		for(NewAnimalMenuAction menuAction : menuActions) {
+			for (IAnimal.AnimalType type : selectedEnclos.getAcceptedtypes()) {
+				if(!menu.containsAction(menuAction) && menuAction.getTypes().contains(type)) {
+					menu.addAction(menuAction);
+					break;
+				}
+			}
+		}
 	}
 	
 	/*------------------------------MENU ANIMAL SELECTIONNE-------------------------------*/
@@ -358,7 +411,13 @@ public class ZooGame {
 			@Override
 			public boolean action() {
 				System.out.println(selectedAnimal.etreSoigne());
-				return false;
+				useActionPoint();
+				if (nbAction < NB_ACTION_PER_TURN) {
+					return false;
+				}
+				else {
+					return true;
+				}
 			}
 		});
 		
@@ -367,7 +426,13 @@ public class ZooGame {
 			@Override
 			public boolean action() {
 				System.out.println(selectedAnimal.seReveiller());
-				return false;
+				useActionPoint();
+				if (nbAction < NB_ACTION_PER_TURN) {
+					return false;
+				}
+				else {
+					return true;
+				}
 			}
 		});
 		
@@ -376,7 +441,13 @@ public class ZooGame {
 			@Override
 			public boolean action() {
 				transfererAnimal(selectedAnimal, selectedEnclos);
-				return false;
+				useActionPoint();
+				if (nbAction < NB_ACTION_PER_TURN) {
+					return false;
+				}
+				else {
+					return true;
+				}
 			}
 		});
 		

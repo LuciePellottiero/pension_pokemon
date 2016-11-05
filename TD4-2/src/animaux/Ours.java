@@ -1,10 +1,12 @@
 package animaux;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.concurrent.ThreadLocalRandom;
 
-import animaux.AbstractAnimal.Sexe;
+import animaux.IAnimal.AnimalType;
+import animaux.IAnimal.Sexe;
 
 public class Ours extends Mammifere{
 
@@ -12,17 +14,13 @@ public class Ours extends Mammifere{
 	public static final int OURS_TEMPS_GESTATION = 49;
 	public static final float OURS_BEBE_POIDS = 10f;
 	public static final float OURS_BEBE_TAILLE = 0.2f;
+	public final static IAnimal.AnimalType TYPES[] = {AnimalType.NORMAL};
 	
-	public Ours(String nom, Sexe sexe, int poids, int taille, int age) {
-		super("Ours", null, nom, sexe, poids, taille, age, OURS_CRI, OURS_TEMPS_GESTATION);
-		
-		Collection<AnimalType> types = new LinkedList<AnimalType>();
-		types.add(AnimalType.NORMAL);
-		
-		this.setTypes(types);
+	public Ours(String nom, IAnimal.Sexe sexe, int poids, int taille, int age) {
+		super("Ours", new LinkedList<IAnimal.AnimalType>(Arrays.asList(TYPES)), nom, sexe, poids, taille, age, OURS_CRI, OURS_TEMPS_GESTATION);
 	}
 
-	public Ours(String nom, Sexe sexe, Ours ours) {
+	public Ours(String nom, IAnimal.Sexe sexe, Ours ours) {
 		super(nom, sexe, ours);
 	}
 
@@ -38,7 +36,7 @@ public class Ours extends Mammifere{
 	
 	@Override
 	public AbstractAnimal MettreBas(final String nom) throws Exception {
-		if(sexe == Sexe.FEMELLE){
+		if(sexe == IAnimal.Sexe.FEMELLE){
 			System.out.println(this.getNom() + " met bas.");
 		}
 		else{
@@ -48,10 +46,10 @@ public class Ours extends Mammifere{
 		
 		int random = ThreadLocalRandom.current().nextInt(0, 1 + 1);
 		if (random == 0){
-			return new Ours(nom, Sexe.MALE, this);
+			return new Ours(nom, IAnimal.Sexe.MALE, this);
 		}
 		else{
-			return new Ours(nom, Sexe.FEMELLE, this);
+			return new Ours(nom, IAnimal.Sexe.FEMELLE, this);
 		}
 	}
 }

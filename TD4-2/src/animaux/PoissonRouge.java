@@ -1,10 +1,12 @@
 package animaux;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.concurrent.ThreadLocalRandom;
 
-import animaux.AbstractAnimal.Sexe;
+import animaux.IAnimal.AnimalType;
+import animaux.IAnimal.Sexe;
 
 public class PoissonRouge extends Autre implements Marin{
 
@@ -12,17 +14,13 @@ public class PoissonRouge extends Autre implements Marin{
 	public static final int POISSON_ROUGE_TEMPS_GESTATION = 4;
 	public static final float POISSON_ROUGE_BEBE_POIDS = 0.0001f;
 	public static final float POISSON_ROUGE_BEBE_TAILLE = 0.0002f;
+	public final static IAnimal.AnimalType TYPES[] = {AnimalType.MARIN};
 	
-	public PoissonRouge(String nom, Sexe sexe, int poids, int taille, int age) {
-		super("Poisson rouge", null, nom, sexe, poids, taille, age, POISSON_ROUGE_CRI, POISSON_ROUGE_TEMPS_GESTATION);
-		
-		Collection<AnimalType> types = new LinkedList<AnimalType>();
-		types.add(AnimalType.MARIN);
-		
-		this.setTypes(types);
+	public PoissonRouge(String nom, IAnimal.Sexe sexe, int poids, int taille, int age) {
+		super("Poisson rouge", new LinkedList<IAnimal.AnimalType>(Arrays.asList(TYPES)), nom, sexe, poids, taille, age, POISSON_ROUGE_CRI, POISSON_ROUGE_TEMPS_GESTATION);
 	}
 
-	public PoissonRouge(String nom, Sexe sexe, PoissonRouge poissonRouge) {
+	public PoissonRouge(String nom, IAnimal.Sexe sexe, PoissonRouge poissonRouge) {
 		super(nom, sexe, poissonRouge);
 	}
 
@@ -43,7 +41,7 @@ public class PoissonRouge extends Autre implements Marin{
 
 	@Override
 	public AbstractAnimal pondre(final String nom) throws Exception {
-		if(sexe == Sexe.FEMELLE){
+		if(sexe == IAnimal.Sexe.FEMELLE){
 			System.out.println(this.getNom() + "pond.");
 		}
 		else{
@@ -53,10 +51,10 @@ public class PoissonRouge extends Autre implements Marin{
 		
 		int random = ThreadLocalRandom.current().nextInt(0, 1 + 1);
 		if (random == 0){
-			return new PoissonRouge(nom, Sexe.MALE, this);
+			return new PoissonRouge(nom, IAnimal.Sexe.MALE, this);
 		}
 		else{
-			return new PoissonRouge(nom, Sexe.FEMELLE, this);
+			return new PoissonRouge(nom, IAnimal.Sexe.FEMELLE, this);
 		}
 	}
 }

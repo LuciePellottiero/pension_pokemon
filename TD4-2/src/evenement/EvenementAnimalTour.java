@@ -6,14 +6,16 @@ import java.io.InputStreamReader;
 import java.util.concurrent.ThreadLocalRandom;
 
 import animaux.AbstractAnimal;
-import animaux.AbstractAnimal.Sexe;
+import animaux.IAnimal;
+import animaux.IAnimal.Sexe;
 import enclos.AbstractEnclos;
+import main.Main;
 import zoo.Zoo;
 
 public class EvenementAnimalTour extends EvenementTour{
 	
 	private final static int CHANCE_MALADE = 30;
-	private final static int CHANCE_BEBE = 10;
+	private final static int CHANCE_BEBE = 100;
 	
 	private final AbstractAnimal animal;
 	
@@ -33,12 +35,16 @@ public class EvenementAnimalTour extends EvenementTour{
 		}
 		
 		random = ThreadLocalRandom.current().nextInt(0, 100 + 1);
-		if(random <= CHANCE_BEBE && animal.getSexe() == Sexe.FEMELLE) {
+		if(random <= CHANCE_BEBE && animal.getSexe() == IAnimal.Sexe.FEMELLE) {
+			
+			AbstractAnimal bebe = null;
+			String name = "";
+			
 			for(AbstractEnclos enclos : zoo.getEnclos()) {
 				if(enclos.getAnimaux().contains(animal)) {
 					boolean hasMale = false;
 					for (AbstractAnimal currentAnimal : enclos.getAnimaux()) {
-						if(currentAnimal.getSexe() == Sexe.MALE) {
+						if(currentAnimal.getSexe() == IAnimal.Sexe.MALE) {
 							hasMale = true;
 							break;
 						}
@@ -46,38 +52,33 @@ public class EvenementAnimalTour extends EvenementTour{
 					
 					if (hasMale && enclos.getNbAnimaux() < enclos.getNbMaxAnimaux()) {
 						
-						String name = "";
-						BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-						System.out.println(animal.getNom() + " va avoir un bébé!");
-						while(true) {
-							while(name.length() < 2) {
-								System.out.println("Entrez le nom du bébé (au moins deux charactères) : ");
-								
-								try {
-									name = reader.readLine();
-								} 
-								catch (IOException e) {
-									e.printStackTrace();
-								}
-								
-							}
-							for (AbstractAnimal animal : enclos.getAnimaux()) {
-								if (animal.getNom().equals(name)) {
-									System.err.println("Un autre animal de cet enclos porte déjà ce nom");
-									continue;
-								}
-							}
-							break;
-						}
 						
-						AbstractAnimal bebe;
+						BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+						
 						try {
 							bebe = animal.seReproduire(name);
-							enclos.ajouterAnimal(bebe);
 						} 
-						catch (Exception e) {
-							e.printStackTrace();
+						catch (Exception e1) {
+							e1.printStackTrace();
 						}
+						
+						System.out.println(animal.getNom() + " a eu un bébé!");
+						System.out.println(bebe);
+						
+						while(name.length() < 2) {
+							System.out.println("Entrez le nom du bébé (au moins deux charactères) : ");
+							
+							try {
+								name = reader.readLine();
+							} 
+							catch (IOException e) {
+								e.printStackTrace();
+							}
+							
+						}
+						bebe.setNom(name);
+						enclos.ajouterAnimal(bebe);
+						break;
 					}
 				}
 			}

@@ -1,11 +1,11 @@
 package animaux;
 
-import animaux.AbstractAnimal.Sexe;
+import animaux.IAnimal.Sexe;
 
 public abstract class AnimalFactory {
 	
 	
-	public static AbstractAnimal createAnimal(final String race, final String name, final Sexe sexe) throws Exception {
+	public static AbstractAnimal createAnimal(final String race, final String name, final IAnimal.Sexe sexe) throws Exception {
 		switch(race) {
 			case "Aigle":
 				return new Aigle(name, sexe, (int) Aigle.AIGLE_POIDS_BEBE, (int) Aigle.AIGLE_BEBE_TAILLE, 1);

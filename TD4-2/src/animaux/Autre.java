@@ -6,9 +6,9 @@ public abstract class Autre extends AbstractAnimal{
 
 	public Autre(
 			final String race, 
-			final Collection<AnimalType> types,
+			final Collection<IAnimal.AnimalType> types,
 			final String nom, 
-			final Sexe sexe,
+			final IAnimal.Sexe sexe,
 			final int poids, 
 			final int taille, 
 			final int age,
@@ -17,7 +17,7 @@ public abstract class Autre extends AbstractAnimal{
 		super(race, types, nom, sexe, poids, taille, age, cri, tempsGestation);
 	}
 	
-	public Autre(final String nom, final Sexe sexe, final Autre animal) {
+	public Autre(final String nom, final IAnimal.Sexe sexe, final Autre animal) {
 		super(nom, sexe, animal);
 	}
 	

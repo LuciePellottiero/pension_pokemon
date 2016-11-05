@@ -7,32 +7,10 @@ import evenement.EvenementAnimalTour;
 
 public abstract class AbstractAnimal implements IAnimal{
 	
-	public static enum Sexe {
-		MALE("\u2642"),
-		FEMELLE("\u2640");
-		
-		private final String sexe;
-		
-		private Sexe(final String sexe) {
-			this.sexe = sexe;
-		}
-		
-		public String toString() {
-			return this.sexe;
-		}
-	}
-	
-	public static enum AnimalType {
-		VOLANT,
-		MARIN,
-		VAGABONDANT,
-		NORMAL;
-	}
-	
 	private final String race;
-	private Collection<AnimalType> types;
+	private Collection<IAnimal.AnimalType> types;
 	private String nom;
-	protected final Sexe sexe;
+	protected final IAnimal.Sexe sexe;
 	private float poids;
 	private float taille;
 	private int age;
@@ -46,9 +24,9 @@ public abstract class AbstractAnimal implements IAnimal{
 	
 	protected AbstractAnimal(
 					final String race,
-					final Collection<AnimalType> types,
+					final Collection<IAnimal.AnimalType> types,
 					final String nom, 
-					final Sexe sexe, 
+					final IAnimal.Sexe sexe, 
 					final int poids,
 					final int taille,
 					final int age,
@@ -74,7 +52,7 @@ public abstract class AbstractAnimal implements IAnimal{
 	
 	public AbstractAnimal(
 			final String nom,
-			final Sexe sexe,
+			final IAnimal.Sexe sexe,
 			final AbstractAnimal animal) {
 		this.race = animal.getRace();
 		this.types = animal.getTypes();
@@ -161,13 +139,8 @@ public abstract class AbstractAnimal implements IAnimal{
 	}
 
 	@Override
-	public Collection<AnimalType> getTypes() {
+	public Collection<IAnimal.AnimalType> getTypes() {
 		return this.types;
-	}
-	
-	@Override
-	public void setTypes(final Collection<AnimalType> types) {
-		this.types = types;
 	}
 	
 	@Override
@@ -181,7 +154,7 @@ public abstract class AbstractAnimal implements IAnimal{
 	}
 
 	@Override
-	public Sexe getSexe() {
+	public IAnimal.Sexe getSexe() {
 		return sexe;
 	}
 

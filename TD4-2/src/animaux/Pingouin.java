@@ -1,10 +1,12 @@
 package animaux;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.concurrent.ThreadLocalRandom;
 
-import animaux.AbstractAnimal.Sexe;
+import animaux.IAnimal.AnimalType;
+import animaux.IAnimal.Sexe;
 
 public class Pingouin extends Autre implements Marin, Volant{
 
@@ -12,18 +14,13 @@ public class Pingouin extends Autre implements Marin, Volant{
 	public static final int PINGOUIN_TEMPS_GESTATION = 29;
 	public static final float PINGOUIN_BEBE_POIDS = 2f;
 	public static final float PINGOUIN_BEBE_TAILLE = 0.02f;
+	public final static IAnimal.AnimalType TYPES[] = {AnimalType.VOLANT, AnimalType.MARIN};
 	
-	public Pingouin(String nom, Sexe sexe, int poids, int taille, int age) {
-		super("Pingouin", null, nom, sexe, poids, taille, age, PINGOUIN_CRI, PINGOUIN_TEMPS_GESTATION);
-		
-		Collection<AnimalType> types = new LinkedList<AnimalType>();
-		types.add(AnimalType.MARIN);
-		types.add(AnimalType.VOLANT);
-		
-		this.setTypes(types);
+	public Pingouin(String nom, IAnimal.Sexe sexe, int poids, int taille, int age) {
+		super("Pingouin", new LinkedList<IAnimal.AnimalType>(Arrays.asList(TYPES)), nom, sexe, poids, taille, age, PINGOUIN_CRI, PINGOUIN_TEMPS_GESTATION);
 	}
 
-	public Pingouin(String nom, Sexe sexe, Pingouin pingouin) {
+	public Pingouin(String nom, IAnimal.Sexe sexe, Pingouin pingouin) {
 		super(nom, sexe, pingouin);
 	}
 
@@ -49,7 +46,7 @@ public class Pingouin extends Autre implements Marin, Volant{
 	
 	@Override
 	public AbstractAnimal pondre(final String nom) throws Exception {
-		if(sexe == Sexe.FEMELLE){
+		if(sexe == IAnimal.Sexe.FEMELLE){
 			System.out.println(this.getNom() + " pond.");
 		}
 		else{
@@ -59,10 +56,10 @@ public class Pingouin extends Autre implements Marin, Volant{
 		
 		int random = ThreadLocalRandom.current().nextInt(0, 1 + 1);
 		if (random == 0){
-			return new Pingouin(nom, Sexe.MALE, this);
+			return new Pingouin(nom, IAnimal.Sexe.MALE, this);
 		}
 		else{
-			return new Pingouin(nom, Sexe.FEMELLE, this);
+			return new Pingouin(nom, IAnimal.Sexe.FEMELLE, this);
 		}
 	}
 

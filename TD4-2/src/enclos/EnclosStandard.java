@@ -1,29 +1,11 @@
 package enclos;
 
-import animaux.AbstractAnimal;
+import animaux.IAnimal;
 
 public class EnclosStandard extends AbstractEnclos{
 
 	public EnclosStandard(String nomEnclos, float superficie, int nbMaxAnimaux) {
-		super(nomEnclos, superficie, nbMaxAnimaux);
-	}
-
-	@Override
-	public boolean ajouterAnimal(AbstractAnimal animal) {
-		if (this.getNbAnimaux() >= this.getNbMaxAnimaux()) {
-			throw new IllegalArgumentException("Cet enclos est complet.");
-		}
-		if (this.getNbAnimaux() > 0) {
-			
-			String raceCourante = this.getAnimaux().iterator().next().getRace();
-			if (!raceCourante.equals(animal.getRace())) {
-				throw new IllegalArgumentException("Le race d'animaux de cet enclos est " + raceCourante);
-			}
-			else {
-				return this.getAnimaux().add(animal);
-			}
-		}
-		return this.getAnimaux().add(animal);
+		super(nomEnclos, superficie, nbMaxAnimaux, IAnimal.AnimalType.NORMAL, IAnimal.AnimalType.VAGABONDANT);
 	}
 
 	@Override

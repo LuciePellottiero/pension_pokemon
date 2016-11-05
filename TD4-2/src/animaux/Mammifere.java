@@ -6,9 +6,9 @@ public abstract class Mammifere extends AbstractAnimal{
 	
 	public Mammifere(
 			final String race,
-			final Collection<AnimalType> types,
+			final Collection<IAnimal.AnimalType> types,
 			final String nom, 
-			final Sexe sexe,
+			final IAnimal.Sexe sexe,
 			final int poids, 
 			final int taille, 
 			final int age, 
@@ -17,7 +17,7 @@ public abstract class Mammifere extends AbstractAnimal{
 		super(race, types,  nom, sexe, poids, taille, age, cri, tempsGestation);
 	}
 	
-	public Mammifere(final String nom, final Sexe sexe, final Mammifere animal) {
+	public Mammifere(final String nom, final IAnimal.Sexe sexe, final Mammifere animal) {
 		super(nom, sexe, animal);
 	}
 

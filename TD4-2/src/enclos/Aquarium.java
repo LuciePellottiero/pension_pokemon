@@ -1,13 +1,12 @@
 package enclos;
 
-import animaux.AbstractAnimal;
-import animaux.AbstractAnimal.AnimalType;
+import animaux.IAnimal;
 
 public class Aquarium extends AbstractEnclos{
 	private final float profondeur;
 
 	public Aquarium(String nomEnclos, float superficie, int nbMaxAnimaux, float profondeur) {
-		super(nomEnclos, superficie, nbMaxAnimaux);
+		super(nomEnclos, superficie, nbMaxAnimaux, IAnimal.AnimalType.MARIN);
 		this.profondeur = profondeur;
 		this.getPropretes().add(new Proprete("niveau de l'eau"));
 		this.getPropretes().add(new Proprete("salinite"));
@@ -15,25 +14,6 @@ public class Aquarium extends AbstractEnclos{
 	
 	public final float getProfondeur(){
 		return profondeur;
-	}
-
-	@Override
-	public boolean ajouterAnimal(AbstractAnimal animal) {
-		if (this.getNbAnimaux() >= this.getNbMaxAnimaux()) {
-			throw new IllegalArgumentException("Cet enclos est complet.");
-		}
-		if (!animal.getTypes().contains(AnimalType.MARIN)) {
-			throw new IllegalArgumentException("Un aquarium ne peut que contenir des animaux marins");
-		}
-		if (this.getNbAnimaux() > 0) {
-			
-			String raceCourante = this.getAnimaux().iterator().next().getRace();
-			if (!raceCourante.equals(animal.getRace())) {
-				throw new IllegalArgumentException("Le race d'animaux de cet enclos est " + raceCourante);
-			}
-			return this.getAnimaux().add(animal);
-		}
-		return this.getAnimaux().add(animal);
 	}
 
 	@Override
