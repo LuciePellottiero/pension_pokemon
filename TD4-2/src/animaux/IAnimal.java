@@ -1,13 +1,12 @@
 package animaux;
 
+import java.io.Serializable;
 import java.util.Collection;
 
-import animaux.IAnimal.AnimalType;
-import animaux.IAnimal.Sexe;
 import evenement.EvenementAnimalAction;
 import evenement.EvenementAnimalTour;
 
-public interface IAnimal extends Comparable<AbstractAnimal>{
+public interface IAnimal extends Comparable<AbstractAnimal>, Serializable{
 	enum AnimalType {
 		VOLANT,
 		MARIN,

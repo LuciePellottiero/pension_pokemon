@@ -1,15 +1,16 @@
 package animaux;
 
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.LinkedList;
 import java.util.concurrent.ThreadLocalRandom;
 
-import animaux.IAnimal.AnimalType;
-import animaux.IAnimal.Sexe;
-
 public class Ours extends Mammifere{
 
+	/**
+	 * @see Serializable
+	 */
+	private static final long serialVersionUID = 4308624581623051846L;
+	
 	public static final String OURS_CRI = "Grohar";
 	public static final int OURS_TEMPS_GESTATION = 49;
 	public static final float OURS_BEBE_POIDS = 10f;

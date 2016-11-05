@@ -1,14 +1,15 @@
 package animaux;
 
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.LinkedList;
 import java.util.concurrent.ThreadLocalRandom;
 
-import animaux.IAnimal.AnimalType;
-import animaux.IAnimal.Sexe;
-
 public class Requin extends Autre implements Marin{
+	
+	/**
+	 * @see Serializable
+	 */
+	private static final long serialVersionUID = 1748288755320168156L;
 	
 	public static final String REQUIN_CRI = "Tintan tintan tintantantant";
 	public static final int REQUIN_SANTE_MAX = 100;

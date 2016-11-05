@@ -1,7 +1,5 @@
 package animaux;
 
-import animaux.IAnimal.Sexe;
-
 public abstract class AnimalFactory {
 	
 	

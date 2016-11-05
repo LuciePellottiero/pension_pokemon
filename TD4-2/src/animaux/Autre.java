@@ -4,6 +4,11 @@ import java.util.Collection;
 
 public abstract class Autre extends AbstractAnimal{
 
+	/**
+	 * @see Serializable
+	 */
+	private static final long serialVersionUID = 3647827102634278508L;
+
 	public Autre(
 			final String race, 
 			final Collection<IAnimal.AnimalType> types,

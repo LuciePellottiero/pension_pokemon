@@ -7,6 +7,11 @@ import zoo.Zoo;
 
 public class EvenementAnimalAction extends EvenementAction {
 
+	/**
+	 * @see Serializable
+	 */
+	private static final long serialVersionUID = 7978513932511704772L;
+	
 	private AbstractAnimal animal;
 	private final static int CHANCE_DODO = 20;
 	private final static int CHANCE_REVEIL = 75;

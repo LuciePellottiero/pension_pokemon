@@ -1,7 +1,12 @@
 package main;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -24,12 +29,17 @@ import enclos.EnclosStandard;
 import enclos.Voliere;
 import zoo.Zoo;
 
-public class ZooGame {
+public class ZooGame implements Serializable{
 	
+	/**
+	 * @see Serializable
+	 */
+	private static final long serialVersionUID = 901926969115423814L;
+
 	private final static int NB_ACTION_PER_TURN = 6;
 	
 	private final Zoo zoo;
-	private final BufferedReader reader;
+	private BufferedReader reader;
 	private boolean gameOver = false;
 	private static int nbAction;
 	public static boolean quitter;
@@ -40,12 +50,45 @@ public class ZooGame {
 	public ZooGame(final Zoo zoo, final BufferedReader input) {
 		this.zoo = zoo;
 		this.reader = input;
+		if (reader == null) {
+			this.reader = new BufferedReader(new InputStreamReader(System.in));
+		}
 		bebe = new ArrayList<AbstractAnimal>();
 		bebeEnclos = new ArrayList<AbstractEnclos>();
 	}
 	
 	private boolean menuQuitter() {
 		Menu menu = new Menu("Menu", reader);
+		
+		final ZooGame thisGame = this;
+		menu.addAction(new MenuAction("Sauvegarder", "s") {
+			
+			@Override
+			public boolean action() {
+				FileOutputStream fileOut = null;
+				try {
+					fileOut = new FileOutputStream(Main.SAVE_FOLDER + zoo.getEmploye().getNom() + zoo.getNom());
+				} 
+				catch (FileNotFoundException e) {
+					e.printStackTrace();
+				}
+				try {
+					ObjectOutputStream out = new ObjectOutputStream(fileOut);
+					reader = null;
+					out.writeObject(thisGame);
+					out.close();
+					fileOut.close();
+					
+					System.out.println("Partie sauvegardée");
+				} 
+				catch (IOException e) {
+					e.printStackTrace();
+				}
+				
+				return false;
+			}
+		});
+		
 		menu.addAction(new MenuAction("Quitter", "q") {
 			@Override
 			public boolean action() {
@@ -70,6 +113,10 @@ public class ZooGame {
 	
 	public void play() {
 		System.out.println("Have fun");
+		
+		if (reader == null) {
+			this.reader = new BufferedReader(new InputStreamReader(System.in));
+		}
 		
 		Menu menuPrincipal = new Menu("Menu principal", reader);
 		

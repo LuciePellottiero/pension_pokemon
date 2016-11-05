@@ -1,5 +1,6 @@
 package zoo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -9,8 +10,13 @@ import animaux.AbstractAnimal;
 import employe.Employe;
 import enclos.AbstractEnclos;
 
-public class Zoo {
+public class Zoo implements Serializable{
 
+	/**
+	 * @see Serializable
+	 */
+	private static final long serialVersionUID = 7020412288975185458L;
+	
 	private final String nom;
 	private final Employe employe;
 	private final int nbMaxEnclos;
@@ -22,6 +28,10 @@ public class Zoo {
 		this.employe = employe;
 		
 		enclos = new ArrayList<AbstractEnclos>();
+	}
+	
+	public String getNom() {
+		return this.nom;
 	}
 	
 	public String getAnimauxStr() {

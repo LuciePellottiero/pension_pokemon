@@ -1,15 +1,16 @@
 package animaux;
 
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.LinkedList;
 import java.util.concurrent.ThreadLocalRandom;
 
-import animaux.IAnimal.AnimalType;
-import animaux.IAnimal.Sexe;
-
 public class PoissonRouge extends Autre implements Marin{
 
+	/**
+	 * @see Serializable
+	 */
+	private static final long serialVersionUID = 6371399193106500530L;
+	
 	public static final String POISSON_ROUGE_CRI = "Bloubloup";
 	public static final int POISSON_ROUGE_TEMPS_GESTATION = 4;
 	public static final float POISSON_ROUGE_BEBE_POIDS = 0.0001f;

@@ -3,6 +3,11 @@ package enclos;
 import animaux.IAnimal;
 
 public class Aquarium extends AbstractEnclos{
+	/**
+	 * @see Serializable
+	 */
+	private static final long serialVersionUID = 862366975768595026L;
+	
 	private final float profondeur;
 
 	public Aquarium(String nomEnclos, float superficie, int nbMaxAnimaux, float profondeur) {

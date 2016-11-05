@@ -1,6 +1,13 @@
 package enclos;
 
-public class Proprete {
+import java.io.Serializable;
+
+public class Proprete implements Serializable{
+	
+	/**
+	 * @see Serializable
+	 */
+	private static final long serialVersionUID = 8929590470289944138L;
 	
 	private static final int BON = 2;
 	private static final int CORRECT = 1;

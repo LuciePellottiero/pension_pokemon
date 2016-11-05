@@ -9,6 +9,11 @@ import zoo.Zoo;
 
 public class EvenementEnclos extends EvenementTour{
 
+	/**
+	 * @see Serializable
+	 */
+	private static final long serialVersionUID = 3187678995873192467L;
+	
 	private AbstractEnclos enclos;
 	private final static int CHANCE_SALISURE = 25;
 	

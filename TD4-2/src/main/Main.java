@@ -1,13 +1,14 @@
 package main;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-
+import java.io.ObjectInputStream;
 import IHM.Menu;
 import IHM.MenuAction;
 import animaux.IAnimal;
-import animaux.IAnimal.Sexe;
 import employe.Employe;
 import zoo.Zoo;
 
@@ -17,7 +18,10 @@ public abstract class Main {
 	
 	private static final int NB_MAX_ENCLOS = 10;
 	
-	static IAnimal.Sexe employeSexe;
+	private static IAnimal.Sexe employeSexe;
+	private static String chosenSave;
+	public static final String SAVE_FOLDER = "save" + File.separatorChar;
+	private static boolean quitter;
 
 	//initialisation
 	private static void intialisation() {
@@ -110,6 +114,69 @@ public abstract class Main {
 			e.printStackTrace();
 		}
 	}
+	
+	public static boolean chooseGame() {
+		Menu menu = new Menu("Choisissez la sauvegarde", bReader);
+		
+		menu.addAction(new MenuAction("Retour", "r") {
+			@Override
+			public boolean action() {
+				quitter = false;
+				return true;
+			}
+		});
+		
+		File saveFolder = new File(SAVE_FOLDER);
+		
+		for (File fileEntry : saveFolder.listFiles()) {
+		    if (fileEntry.isDirectory()) {
+		        continue;
+		    } 
+		    else {
+		        menu.addAction(new MenuAction(fileEntry.getName(), fileEntry.getName()) {
+					
+					@Override
+					public boolean action() {
+						chosenSave = fileEntry.getAbsolutePath();
+						quitter = true;
+						return true;
+					}
+				});
+		    }
+		}; 
+		
+		menu.menu();
+		
+		return quitter;
+	}
+	
+	public static boolean loadGame() {
+		ZooGame game = null;
+		
+		if (!chooseGame()) {
+			return false;
+		}
+		
+	    try {
+	       FileInputStream fileIn = new FileInputStream(chosenSave);
+	       ObjectInputStream in = new ObjectInputStream(fileIn);
+	       game = (ZooGame) in.readObject();
+	       in.close();
+	       fileIn.close();
+	    }
+	    catch(IOException i) {
+	       i.printStackTrace();
+	       return false;
+	    }
+	    catch(ClassNotFoundException c) {
+	       c.printStackTrace();
+	       return false;
+	    }
+	    
+	    game.play();
+	    
+		return true;
+	}
 
 	public static void main(String[] args) {
 
@@ -122,6 +189,14 @@ public abstract class Main {
 			public boolean action() {
 				nouvellePartie();
 				return true;
+			}
+		});
+		
+		mainMenu.addAction(new MenuAction("Charger partie", "c") {
+			
+			@Override
+			public boolean action() {
+				return loadGame();
 			}
 		});
 		

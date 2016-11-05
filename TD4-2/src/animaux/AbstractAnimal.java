@@ -1,11 +1,17 @@
 package animaux;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 import evenement.EvenementAnimalAction;
 import evenement.EvenementAnimalTour;
 
-public abstract class AbstractAnimal implements IAnimal{
+public abstract class AbstractAnimal implements IAnimal, Serializable{
+	
+	/**
+	 * @see Serializable
+	 */
+	private static final long serialVersionUID = 3003146390313202310L;
 	
 	private final String race;
 	private Collection<IAnimal.AnimalType> types;

@@ -1,11 +1,17 @@
 package employe;
 
+import java.io.Serializable;
+
 import animaux.AbstractAnimal;
 import animaux.IAnimal;
-import animaux.IAnimal.Sexe;
 import enclos.AbstractEnclos;
 
-public class Employe {
+public class Employe implements Serializable{
+	/**
+	 * @see Serializable
+	 */
+	private static final long serialVersionUID = -7214996969319942034L;
+	
 	private final String nom;
 	@SuppressWarnings("unused")
 	private final IAnimal.Sexe sexe;
@@ -16,6 +22,10 @@ public class Employe {
 		this.nom = nom;
 		this.sexe = sexe;
 		this.age = age;
+	}
+	
+	public String getNom() {
+		return nom;
 	}
 	
 	public String examinerEnclos(AbstractEnclos enclos) {

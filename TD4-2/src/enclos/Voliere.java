@@ -4,6 +4,11 @@ import animaux.IAnimal;
 
 public class Voliere extends AbstractEnclos{
 	
+	/**
+	 * @see Serializable
+	 */
+	private static final long serialVersionUID = -3650306296290063545L;
+	
 	private float hauteur;
 	
 	public Voliere(String nomEnclos, float superficie, int nbMaxAnimaux, float hauteur) {

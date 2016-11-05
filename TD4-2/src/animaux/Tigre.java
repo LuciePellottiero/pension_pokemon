@@ -6,6 +6,11 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Tigre extends Mammifere implements Vagabondant{
 	
+	/**
+	 * @see Serializable
+	 */
+	private static final long serialVersionUID = 8810462180912771858L;
+	
 	public static final String TIGRE_CRI = "Miahou";
 	public static final int TIGRE_TEMPS_GESTATION = 105;
 	public static final float TIGRE_BEBE_POIDS = 10f;

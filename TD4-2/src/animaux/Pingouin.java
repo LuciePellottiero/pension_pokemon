@@ -1,15 +1,16 @@
 package animaux;
 
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.LinkedList;
 import java.util.concurrent.ThreadLocalRandom;
 
-import animaux.IAnimal.AnimalType;
-import animaux.IAnimal.Sexe;
-
 public class Pingouin extends Autre implements Marin, Volant{
 
+	/**
+	 * @see Serializable
+	 */
+	private static final long serialVersionUID = -7758874200330358160L;
+	
 	public static final String PINGOUIN_CRI = "Criahah";
 	public static final int PINGOUIN_TEMPS_GESTATION = 29;
 	public static final float PINGOUIN_BEBE_POIDS = 2f;

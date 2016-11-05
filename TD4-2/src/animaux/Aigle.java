@@ -1,12 +1,15 @@
 package animaux;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.LinkedList;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Aigle extends Autre implements Volant{
+	
+	/**
+	 * @see Serializable
+	 */
+	private static final long serialVersionUID = 1539152368906171554L;
 	
 	public final static String AIGLE_CRI = "Kluh";
 	public final static int AIGLE_TEMPS_GESTATION = 40;

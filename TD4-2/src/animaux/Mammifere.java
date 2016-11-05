@@ -4,6 +4,11 @@ import java.util.Collection;
 
 public abstract class Mammifere extends AbstractAnimal{
 	
+	/**
+	 * @see Serializable
+	 */
+	private static final long serialVersionUID = -1297433208816214359L;
+	
 	public Mammifere(
 			final String race,
 			final Collection<IAnimal.AnimalType> types,

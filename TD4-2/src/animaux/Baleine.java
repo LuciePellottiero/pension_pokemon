@@ -1,14 +1,15 @@
 package animaux;
 
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.LinkedList;
 import java.util.concurrent.ThreadLocalRandom;
 
-import animaux.IAnimal.AnimalType;
-import animaux.IAnimal.Sexe;
-
 public class Baleine extends Mammifere implements Marin{
+	
+	/**
+	 * @see Serializable
+	 */
+	private static final long serialVersionUID = 2846029674344293648L;
 	
 	public final static String BALEINE_CRI = "Lalala";
 	public final static int BALEINE_TEMPS_GESTATION = 365;

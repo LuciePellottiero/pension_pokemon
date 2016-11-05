@@ -7,12 +7,15 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import animaux.AbstractAnimal;
 import animaux.IAnimal;
-import animaux.IAnimal.Sexe;
 import enclos.AbstractEnclos;
-import main.Main;
 import zoo.Zoo;
 
 public class EvenementAnimalTour extends EvenementTour{
+	
+	/**
+	 * @see Serializable
+	 */
+	private static final long serialVersionUID = -2921241511488905808L;
 	
 	private final static int CHANCE_MALADE = 30;
 	private final static int CHANCE_BEBE = 100;

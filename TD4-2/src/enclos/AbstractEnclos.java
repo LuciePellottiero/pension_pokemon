@@ -1,5 +1,6 @@
 package enclos;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -8,7 +9,12 @@ import animaux.IAnimal;
 import animaux.IAnimal.AnimalType;
 import evenement.EvenementEnclos;
 
-public abstract class AbstractEnclos {
+public abstract class AbstractEnclos implements Serializable {
+	
+	/**
+	 * @see Serializable
+	 */
+	private static final long serialVersionUID = 3233730202455437781L;
 	
 	private String nomEnclos;
 	private final float superficie;

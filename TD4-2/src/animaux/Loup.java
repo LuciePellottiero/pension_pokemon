@@ -1,14 +1,15 @@
 package animaux;
 
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.LinkedList;
 import java.util.concurrent.ThreadLocalRandom;
 
-import animaux.IAnimal.AnimalType;
-import animaux.IAnimal.Sexe;
-
 public class Loup extends Mammifere implements Vagabondant{
+	
+	/**
+	 * @see Serializable
+	 */
+	private static final long serialVersionUID = 3007740908533717611L;
 	
 	public final static String LOUP_CRI = "Ahouuuuuu";
 	public final static int LOUP_TEMPS_GESTATION = 60;
