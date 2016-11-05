@@ -27,6 +27,11 @@ public abstract class Main {
 	private static void intialisation() {
 		bReader = new BufferedReader(new InputStreamReader(System.in));
 		
+		File saveFolder = new File(SAVE_FOLDER);
+		if(!saveFolder.exists()) {
+			saveFolder.mkdirs();
+		}
+		
 		System.out.println("Bienvenue dans Zoo!" + System.lineSeparator()); 
 	}
 	
