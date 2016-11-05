@@ -113,12 +113,12 @@ public abstract class AbstractAnimal implements IAnimal{
 	public String manger(){
 		if (!dort){
 			if (this.faim == false) {
-				return this.nom + " n'a pas faim";
+				return this.nom + " n'a pas faim" + System.lineSeparator();
 			}
 			this.faim = false;
-			return this.nom + " a mange";
+			return this.nom + " a mangé" + System.lineSeparator();
 		}
-		return this.nom + " dort et ne peux pas manger";
+		return this.nom + " dort et ne peux pas manger" + System.lineSeparator();
 	}
 	
 	@Override
@@ -130,7 +130,7 @@ public abstract class AbstractAnimal implements IAnimal{
 	@Override
 	public String etreSoigne(){
 		this.malade = false;
-		return this.nom + " a ete soigne.";
+		return this.nom + " a ete soigné.";
 	}
 	
 	@Override
@@ -157,7 +157,7 @@ public abstract class AbstractAnimal implements IAnimal{
 			return this.nom + " ne dormait pas.";
 		}
 		this.dort = false;
-		return this.nom + " s'est reveille.";
+		return this.nom + " s'est reveillé.";
 	}
 
 	@Override
@@ -245,8 +245,8 @@ public abstract class AbstractAnimal implements IAnimal{
 	@Override
 	public String toString() {
 		return race + " " + nom + " : " + sexe + ", " + poids + "Kg, " + taille + "m, " + age
-				+ " ans, " + (malade ? "malade " : "en bonne santé ") + (faim ? "affamé " : " ") + (dort ? "dort" : "reveillé") + 
-				", cri = " + cri;
+				+ " ans, " + (malade ? "malade, " : "en bonne santé, ") + (faim ? "affamé, " : "") + (dort ? "dort, " : "reveillé, ") + 
+				"cri = " + cri;
 	}
 	
 	@Override

@@ -48,7 +48,7 @@ public class Voliere extends AbstractEnclos{
 		String res = this.getNomEnclos() + " : " + this.getSuperficie() + "m², " + 
 				"hauteur: " + this.getHauteur() + "m, " +
 				this.getNbAnimaux() + "/" + this.getNbMaxAnimaux() + " animaux, " + 
-				this.getPropretes();
+				this.getPropretes() + System.lineSeparator();
 		
 		return res;
 	}

@@ -8,7 +8,7 @@ public class Tigre extends Mammifere implements Vagabondant{
 	public static final String TIGRE_CRI = "Miahou";
 	public static final int TIGRE_TEMPS_GESTATION = 105;
 	public static final float TIGRE_BEBE_POIDS = 10f;
-	public static final float TIGRE_BEBE_TAILLE = 15f;
+	public static final float TIGRE_BEBE_TAILLE = 1.5f;
 
 	public Tigre(String nom, Sexe sexe, int poids, int taille, int age) {
 		super("Tigre", null, nom, sexe, poids, taille, age, TIGRE_CRI, TIGRE_TEMPS_GESTATION);

@@ -32,6 +32,7 @@ public class EvenementAnimalTour extends EvenementTour{
 			}
 		}
 		
+		random = ThreadLocalRandom.current().nextInt(0, 100 + 1);
 		if(random <= CHANCE_BEBE && animal.getSexe() == Sexe.FEMELLE) {
 			for(AbstractEnclos enclos : zoo.getEnclos()) {
 				if(enclos.getAnimaux().contains(animal)) {

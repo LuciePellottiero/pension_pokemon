@@ -42,7 +42,7 @@ public class Aquarium extends AbstractEnclos{
 		String res = this.getNomEnclos() + " : " + this.getSuperficie() + "m², " + 
 				"profondeur: " + this.getProfondeur() + "m, " +
 				this.getNbAnimaux() + "/" + this.getNbMaxAnimaux() + " animaux, " + 
-				this.getPropretes();
+				this.getPropretes() + System.lineSeparator();
 		
 		return res;
 	}

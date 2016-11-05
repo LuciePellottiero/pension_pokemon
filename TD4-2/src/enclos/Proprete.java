@@ -51,10 +51,10 @@ public class Proprete {
 	
 	public String deteriore() {
 		if (this.etat == MAUVAIS) {
-			return this.etatStr(etat);
+			return "état de l'enclos : " + this.etatStr(etat);
 		}
 		else {
-			return this.etatStr(--etat);
+			return "état de l'enclos : " + this.etatStr(--etat);
 		}
 	}
 }

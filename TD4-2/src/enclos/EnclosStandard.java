@@ -31,7 +31,7 @@ public class EnclosStandard extends AbstractEnclos{
 		 
 		String res = this.getNomEnclos() + " : " + this.getSuperficie() + "m², " + 
 				this.getNbAnimaux() + "/" + this.getNbMaxAnimaux() + " animaux, " + 
-				this.getPropretes();
+				this.getPropretes() + System.lineSeparator();
 		
 		return res;
 	}
