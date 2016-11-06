@@ -5,7 +5,11 @@ import java.util.Collection;
 
 import evenement.EvenementPokemonAction;
 import evenement.EvenementPokemonTour;
-
+/**
+ * Décrit les capacité d'un pokemon
+ * @author Lucie
+ *
+ */
 public interface IPokemon extends Comparable<AbstractPokemon>, Serializable{
 	enum PokemonType {
 		VOL,
