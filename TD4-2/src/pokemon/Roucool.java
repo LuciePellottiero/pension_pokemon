@@ -4,6 +4,11 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ * Roucool, pokemon de type vol. Il est souvent vu dans les forêts. Il brasse l'air de ses ailes près du sol pour projeter du sable.
+ * @author Lucie
+ *
+ */
 public class Roucool extends AbstractPokemon implements TypeVol{
 	
 	/**
@@ -25,7 +30,7 @@ public class Roucool extends AbstractPokemon implements TypeVol{
 	}
 
 	@Override
-	public String Voler() {
+	public String voler() {
 		return this.getNom() + " s'envole majestueusement vers d'autres cieux";
 		
 	}

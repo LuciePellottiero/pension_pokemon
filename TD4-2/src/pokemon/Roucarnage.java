@@ -4,6 +4,11 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ * Roucarnage, pokemon de type vol. Il chasse en survolant la surface de l'eau et en plongeant pour attraper des proies faciles.
+ * @author Lucie
+ *
+ */
 public class Roucarnage extends AbstractPokemon implements TypeVol{
 	
 	/**
@@ -12,8 +17,8 @@ public class Roucarnage extends AbstractPokemon implements TypeVol{
 	private static final long serialVersionUID = 1539152368906171554L;
 	
 	public final static String ROUCARNAGE_CRI = "roucarnaaaaaaage";
-	public final static float ROUCARNAGE_POIDS = 1.8f;
-	public final static float ROUCARNAGE_TAILLE = 0.3f;
+	public final static float ROUCARNAGE_POIDS = 39.5f;
+	public final static float ROUCARNAGE_TAILLE = 1.8f;
 	public final static PokemonType[] TYPES = {PokemonType.VOL};
 
 	public Roucarnage(String nom, IPokemon.Sexe sexe, float poids, float taille, int age, int level) {
@@ -25,7 +30,7 @@ public class Roucarnage extends AbstractPokemon implements TypeVol{
 	}
 
 	@Override
-	public String Voler() {
+	public String voler() {
 		return this.getNom() + " s'envole majestueusement vers d'autres cieux";
 		
 	}

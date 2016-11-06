@@ -70,5 +70,10 @@ public class Bulbizarre extends AbstractPokemon implements TypePlante{
 		}
 		return false;
 	}
+
+	@Override
+	public String fouetLiane() {
+		return this.getNom() + " agite maladroitement ses lianes";
+	}
 	
 }

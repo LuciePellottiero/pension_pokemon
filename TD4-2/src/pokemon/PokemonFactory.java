@@ -1,5 +1,10 @@
 package pokemon;
 
+/**
+ * Permet de créer des pokemons en fonction de leur race
+ * @author Lucie
+ *
+ */
 public abstract class PokemonFactory {
 	
 	

@@ -67,4 +67,14 @@ public class Florizarre extends AbstractPokemon implements TypePlante, TypePoiso
 	public boolean canEvolved() {
 		return false;
 	}
+
+	@Override
+	public String secreterPoison() {
+		return this.getNom() + " sécrète une grande quantité de poison";
+	}
+
+	@Override
+	public String fouetLiane() {
+		return this.getNom() + " agite ses lianes avec violence";
+	}
 }

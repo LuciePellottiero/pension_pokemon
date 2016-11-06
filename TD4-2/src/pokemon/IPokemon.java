@@ -14,7 +14,6 @@ public interface IPokemon extends Comparable<AbstractPokemon>, Serializable{
 	enum PokemonType {
 		VOL,
 		EAU,
-		NORMAL,
 		PLANTE,
 		ELECTRIK,
 		GLACE,

@@ -4,6 +4,11 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ * Lokhlass, pokemon de type eau et glace. Ce pokemon en voie d'extinction peut transporter des passagers sur son dos par-delà les océans.
+ * @author Lucie
+ *
+ */
 public class Lokhlass extends AbstractPokemon implements TypeEau, TypeGlace{
 	
 	/**
@@ -25,8 +30,8 @@ public class Lokhlass extends AbstractPokemon implements TypeEau, TypeGlace{
 	}
 	
 	@Override
-	public String Nager() {
-		return this.getNom() + " nage calmement";
+	public String nager() {
+		return this.getNom() + " nage majestuesement";
 	}
 
 	@Override
@@ -60,13 +65,16 @@ public class Lokhlass extends AbstractPokemon implements TypeEau, TypeGlace{
 
 	@Override
 	public AbstractPokemon evoluer() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public boolean canEvolved() {
-		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public String glacier() {
+		return this.getNom() + " produit un peu de glace";
 	}
 }

@@ -4,8 +4,11 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.concurrent.ThreadLocalRandom;
 
-import pokemon.IPokemon.PokemonType;
-
+/**
+ * Raichu, pokemon de type electrik. Il doit garder sa queue en contact avec le sol pour éviter toute électrocution.
+ * @author Lucie
+ *
+ */
 public class Raichu extends AbstractPokemon implements TypeElectrik{
 	
 	/**
@@ -63,5 +66,10 @@ public class Raichu extends AbstractPokemon implements TypeElectrik{
 	@Override
 	public boolean canEvolved() {
 		return false;
+	}
+
+	@Override
+	public String foudroyer() {
+		return this.getNom() + " provoque de puissants éclairs";
 	}
 }

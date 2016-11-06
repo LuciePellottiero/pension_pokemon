@@ -4,6 +4,11 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ * Pikachu, pokemon de type electrik. Quand plusieurs de ces POKéMON se réunissent, ils provoquent de gigantesques orages.
+ * @author Lucie
+ *
+ */
 public class Pikachu extends AbstractPokemon implements TypeElectrik{
 	
 	/**
@@ -64,6 +69,11 @@ public class Pikachu extends AbstractPokemon implements TypeElectrik{
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public String foudroyer() {
+		return this.getNom() + " provoque de petits éclairs";
 	}
 	
 }

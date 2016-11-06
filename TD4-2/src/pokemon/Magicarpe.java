@@ -4,6 +4,11 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ * Magicarpe, pokemon de type eau. Autrefois, il était beaucoup plus puissant que cette créature minablement faible.
+ * @author Lucie
+ *
+ */
 public class Magicarpe extends AbstractPokemon implements TypeEau{
 
 	/**
@@ -25,7 +30,7 @@ public class Magicarpe extends AbstractPokemon implements TypeEau{
 	}
 
 	@Override
-	public String Nager() {
+	public String nager() {
 		return this.getNom() + " nage un peu ridiculement";
 	}
 

@@ -71,4 +71,14 @@ public class Herbizarre extends AbstractPokemon implements TypePlante, TypePoiso
 		return false;
 	}
 
+	@Override
+	public String secreterPoison() {
+		return this.getNom() + " sécrète un peu de poison";
+	}
+
+	@Override
+	public String fouetLiane() {
+		return this.getNom() + " agite vigoureusement ses lianes";
+	}
+
 }

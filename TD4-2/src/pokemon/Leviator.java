@@ -3,7 +3,11 @@ package pokemon;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.concurrent.ThreadLocalRandom;
-
+/**
+ * Leviator, pokemon de type eau et dargon. Gigantesque et maléfique, il est capable de raser une ville dans un accès de rage terrifiante.
+ * @author Lucie
+ *
+ */
 public class Leviator extends AbstractPokemon implements TypeEau, TypeDragon{
 	
 	/**
@@ -25,8 +29,8 @@ public class Leviator extends AbstractPokemon implements TypeEau, TypeDragon{
 	}
 
 	@Override
-	public String Nager() {
-		return this.getNom() + " nage a une allure inquietante";
+	public String nager() {
+		return this.getNom() + " nage a une allure inquiétante";
 	}
 
 	@Override
@@ -66,6 +70,11 @@ public class Leviator extends AbstractPokemon implements TypeEau, TypeDragon{
 	@Override
 	public boolean canEvolved() {
 		return false;
+	}
+
+	@Override
+	public String etreClasse() {
+		return this.getNom() + " prend une pose de dragon pour être classe";
 	}
 
 }

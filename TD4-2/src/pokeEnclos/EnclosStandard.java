@@ -16,7 +16,7 @@ public class EnclosStandard extends AbstractPokeEnclos{
 	
 
 	public EnclosStandard(String nomEnclos, float superficie, int nbMaxAnimaux) {
-		super(nomEnclos, superficie, nbMaxAnimaux, IPokemon.PokemonType.PLANTE, IPokemon.PokemonType.NORMAL, IPokemon.PokemonType.ELECTRIK, IPokemon.PokemonType.POISON);
+		super(nomEnclos, superficie, nbMaxAnimaux, IPokemon.PokemonType.PLANTE, IPokemon.PokemonType.ELECTRIK, IPokemon.PokemonType.POISON);
 	}
 
 	@Override

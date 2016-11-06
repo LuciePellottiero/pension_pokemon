@@ -4,6 +4,11 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ * Roucoups, pokemon de type vol. Il protège son territoire avec ardeur et repousse à coups de bec tout intrus.
+ * @author Lucie
+ *
+ */
 public class Roucoups extends AbstractPokemon implements TypeVol{
 	
 	/**
@@ -25,7 +30,7 @@ public class Roucoups extends AbstractPokemon implements TypeVol{
 	}
 
 	@Override
-	public String Voler() {
+	public String voler() {
 		return this.getNom() + " s'envole majestueusement vers d'autres cieux";
 		
 	}
