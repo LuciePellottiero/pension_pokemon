@@ -60,13 +60,11 @@ public class Leviator extends AbstractPokemon implements TypeEau, TypeDragon{
 
 	@Override
 	public AbstractPokemon evoluer() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public boolean canEvolved() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 

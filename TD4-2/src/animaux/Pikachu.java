@@ -55,13 +55,14 @@ public class Pikachu extends AbstractPokemon implements TypeElectrik{
 
 	@Override
 	public AbstractPokemon evoluer() {
-		// TODO Auto-generated method stub
-		return null;
+		return new Raichu(this.getNom(), this.getSexe(), Raichu.RAICHU_POIDS, Raichu.RAICHU_TAILLE, this.getAge(), this.getLevel());
 	}
 
 	@Override
 	public boolean canEvolved() {
-		// TODO Auto-generated method stub
+		if(this.getLevel() >= 30) {
+			return true;
+		}
 		return false;
 	}
 	

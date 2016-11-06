@@ -60,13 +60,14 @@ public class Magicarpe extends AbstractPokemon implements TypeEau{
 
 	@Override
 	public AbstractPokemon evoluer() {
-		// TODO Auto-generated method stub
-		return null;
+		return new Leviator(this.getNom(), this.getSexe(), Leviator.LEVIATOR_POIDS, Leviator.LEVIATOR_TAILLE, this.getAge(), this.getLevel());
 	}
 
 	@Override
 	public boolean canEvolved() {
-		// TODO Auto-generated method stub
+		if(this.getLevel() >= 30) {
+			return true;
+		}
 		return false;
 	}
 }

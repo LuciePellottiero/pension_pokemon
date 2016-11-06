@@ -55,13 +55,14 @@ public class Herbizarre extends AbstractPokemon implements TypePlante, TypePoiso
 
 	@Override
 	public AbstractPokemon evoluer() {
-		// TODO Auto-generated method stub
-		return null;
+		return new Florizarre(this.getNom(), this.getSexe(), Florizarre.FLORIZARRE_POIDS, Florizarre.FLORIZARRE_TAILLE, this.getAge(), this.getLevel());
 	}
 
 	@Override
 	public boolean canEvolved() {
-		//TODO
+		if(this.getLevel() >= 30) {
+			return true;
+		}
 		return false;
 	}
 

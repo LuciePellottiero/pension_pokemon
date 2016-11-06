@@ -55,7 +55,6 @@ public class Florizarre extends AbstractPokemon implements TypePlante{
 
 	@Override
 	public AbstractPokemon evoluer() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
