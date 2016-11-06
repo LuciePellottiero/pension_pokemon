@@ -2,9 +2,9 @@ package employe;
 
 import java.io.Serializable;
 
-import animaux.AbstractPokemon;
-import animaux.IPokemon;
 import pokeEnclos.AbstractPokeEnclos;
+import pokemon.AbstractPokemon;
+import pokemon.IPokemon;
 
 public class Employe implements Serializable{
 	/**

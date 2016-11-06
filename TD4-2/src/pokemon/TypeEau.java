@@ -1,4 +1,4 @@
-package animaux;
+package pokemon;
 
 public interface TypeEau extends IPokemon{
 	

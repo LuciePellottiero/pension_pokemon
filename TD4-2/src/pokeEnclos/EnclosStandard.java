@@ -1,6 +1,6 @@
 package pokeEnclos;
 
-import animaux.IPokemon;
+import pokemon.IPokemon;
 
 public class EnclosStandard extends AbstractPokeEnclos{
 

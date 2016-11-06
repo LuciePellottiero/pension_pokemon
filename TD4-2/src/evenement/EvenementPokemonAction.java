@@ -2,8 +2,8 @@ package evenement;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-import animaux.AbstractPokemon;
 import pensionPokemon.PensionPokemon;
+import pokemon.AbstractPokemon;
 
 public class EvenementPokemonAction extends EvenementAction {
 

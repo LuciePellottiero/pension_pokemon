@@ -12,22 +12,24 @@ import java.util.Arrays;
 import java.util.Collection;
 import IHM.Menu;
 import IHM.MenuAction;
-import animaux.AbstractPokemon;
-import animaux.Roucool;
-import animaux.PokemonFactory;
-import animaux.Lokhlass;
-import animaux.IPokemon;
-import animaux.Bulbizarre;
-import animaux.Florizarre;
-import animaux.Herbizarre;
-import animaux.Magicarpe;
-import animaux.Leviator;
-import animaux.Pikachu;
 import pensionPokemon.PensionPokemon;
 import pokeEnclos.AbstractPokeEnclos;
 import pokeEnclos.PokeBassin;
 import pokeEnclos.EnclosStandard;
 import pokeEnclos.PokeVoliere;
+import pokemon.AbstractPokemon;
+import pokemon.Bulbizarre;
+import pokemon.Florizarre;
+import pokemon.Herbizarre;
+import pokemon.IPokemon;
+import pokemon.Leviator;
+import pokemon.Lokhlass;
+import pokemon.Magicarpe;
+import pokemon.Pikachu;
+import pokemon.PokemonFactory;
+import pokemon.Roucarnage;
+import pokemon.Roucool;
+import pokemon.Roucoups;
 
 public class PensionPokemonGame implements Serializable{
 	
@@ -411,7 +413,7 @@ public class PensionPokemonGame implements Serializable{
 	
 	private void addValidPokemonAction(Menu menu, final AbstractPokeEnclos selectedEnclos, final String name) {
 		Collection<NewPokemonMenuAction> menuActions = new ArrayList<NewPokemonMenuAction>();	
-		menuActions.add(new NewPokemonMenuAction("Roucool", "ro", selectedEnclos, name, pokemonSexe, Roucool.TYPES));
+		menuActions.add(new NewPokemonMenuAction("Roucool", "rl", selectedEnclos, name, pokemonSexe, Roucool.TYPES));
 		menuActions.add(new NewPokemonMenuAction("Herbizarre", "he", selectedEnclos, name, pokemonSexe, Herbizarre.TYPES));
 		menuActions.add(new NewPokemonMenuAction("Lokhlass", "lo", selectedEnclos, name, pokemonSexe, Lokhlass.TYPES));
 		menuActions.add(new NewPokemonMenuAction("Bulbizarre", "bu", selectedEnclos, name, pokemonSexe, Bulbizarre.TYPES));
@@ -419,6 +421,8 @@ public class PensionPokemonGame implements Serializable{
 		menuActions.add(new NewPokemonMenuAction("Magicarpe", "ma", selectedEnclos, name, pokemonSexe, Magicarpe.TYPES));
 		menuActions.add(new NewPokemonMenuAction("Leviator", "le", selectedEnclos, name, pokemonSexe, Leviator.TYPES));
 		menuActions.add(new NewPokemonMenuAction("Pikachu", "pi", selectedEnclos, name, pokemonSexe, Pikachu.TYPES));
+		menuActions.add(new NewPokemonMenuAction("Roucoups", "rs", selectedEnclos, name, pokemonSexe, Roucoups.TYPES));
+		menuActions.add(new NewPokemonMenuAction("Roucarnage", "re", selectedEnclos, name, pokemonSexe, Roucarnage.TYPES));
 		
 		for(NewPokemonMenuAction menuAction : menuActions) {
 			for (IPokemon.PokemonType type : selectedEnclos.getAcceptedtypes()) {

@@ -1,27 +1,27 @@
-package animaux;
+package pokemon;
 
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Roucool extends AbstractPokemon implements TypeVol{
+public class Roucoups extends AbstractPokemon implements TypeVol{
 	
 	/**
 	 * @see Serializable
 	 */
 	private static final long serialVersionUID = 1539152368906171554L;
 	
-	public final static String ROUCOOL_CRI = "rourou roucooool";
-	public final static float ROUCOOL_POIDS = 1.8f;
-	public final static float ROUCOOL_TAILLE = 0.3f;
+	public final static String ROUCOUPS_CRI = "rourou roucooool";
+	public final static float ROUCOUPS_POIDS = 30f;
+	public final static float ROUCOUPS_TAILLE = 1.1f;
 	public final static PokemonType[] TYPES = {PokemonType.VOL};
 
-	public Roucool(String nom, IPokemon.Sexe sexe, float poids, float taille, int age, int level) {
-		super("Roucool", new LinkedList<IPokemon.PokemonType>(Arrays.asList(TYPES)), nom, sexe, poids, taille, age, ROUCOOL_CRI, level);
+	public Roucoups(String nom, IPokemon.Sexe sexe, float poids, float taille, int age, int level) {
+		super("Roucoups", new LinkedList<IPokemon.PokemonType>(Arrays.asList(TYPES)), nom, sexe, poids, taille, age, ROUCOUPS_CRI, level);
 	}
 
-	public Roucool(String nom, IPokemon.Sexe sexe, Roucool roucool) {
-		super(nom, sexe, roucool);
+	public Roucoups(String nom, IPokemon.Sexe sexe, Roucoups roucoups) {
+		super(nom, sexe, roucoups);
 	}
 
 	@Override
@@ -32,12 +32,12 @@ public class Roucool extends AbstractPokemon implements TypeVol{
 
 	@Override
 	public float getPoids() {
-		return ROUCOOL_POIDS;
+		return ROUCOUPS_POIDS;
 	}
 
 	@Override
 	public float getTaille() {
-		return ROUCOOL_TAILLE;
+		return ROUCOUPS_TAILLE;
 	}
 	
 	@Override
@@ -52,22 +52,23 @@ public class Roucool extends AbstractPokemon implements TypeVol{
 		
 		int random = ThreadLocalRandom.current().nextInt(0, 1 + 1);
 		if (random == 0){
-			return new Roucool(nom, IPokemon.Sexe.MALE, this);
+			return new Roucool(nom, IPokemon.Sexe.MALE, Roucool.ROUCOOL_POIDS, Roucool.ROUCOOL_TAILLE, 0, 1);
 		}
 		else{
-			return new Roucool(nom, IPokemon.Sexe.FEMELLE, this);
+			return new Roucool(nom, IPokemon.Sexe.FEMELLE, Roucool.ROUCOOL_POIDS, Roucool.ROUCOOL_TAILLE, 0, 1);
 		}
 	}
 
 	@Override
 	public AbstractPokemon evoluer() {
-		// TODO Auto-generated method stub
-		return null;
+		return new Roucarnage(this.getNom(), this.getSexe(), Roucarnage.ROUCARNAGE_POIDS, Roucarnage.ROUCARNAGE_TAILLE, this.getAge(), this.getLevel());
 	}
 
 	@Override
 	public boolean canEvolved() {
-		// TODO Auto-generated method stub
+		if(this.getLevel() >= 36) {
+			return true;
+		}
 		return false;
 	}
 

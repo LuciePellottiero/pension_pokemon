@@ -8,9 +8,9 @@ import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import IHM.Menu;
 import IHM.MenuAction;
-import animaux.IPokemon;
 import employe.Employe;
 import pensionPokemon.PensionPokemon;
+import pokemon.IPokemon;
 
 public abstract class Main {
 	

@@ -1,10 +1,10 @@
-package animaux;
+package pokemon;
 
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.concurrent.ThreadLocalRandom;
 
-import animaux.IPokemon.PokemonType;
+import pokemon.IPokemon.PokemonType;
 
 public class Raichu extends AbstractPokemon implements TypeElectrik{
 	

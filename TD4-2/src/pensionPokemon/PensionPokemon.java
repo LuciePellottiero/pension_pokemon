@@ -6,9 +6,9 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import animaux.AbstractPokemon;
 import employe.Employe;
 import pokeEnclos.AbstractPokeEnclos;
+import pokemon.AbstractPokemon;
 
 public class PensionPokemon implements Serializable{
 

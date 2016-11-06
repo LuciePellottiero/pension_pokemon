@@ -1,4 +1,4 @@
-package animaux;
+package pokemon;
 
 public abstract class PokemonFactory {
 	
@@ -21,6 +21,10 @@ public abstract class PokemonFactory {
 				return new Leviator(name, sexe, (int) Leviator.LEVIATOR_POIDS, (int) Leviator.LEVIATOR_TAILLE, 1, 30);
 			case "Pikachu":
 				return new Pikachu(name, sexe, (int) Pikachu.PIKACHU_POIDS, (int) Pikachu.PIKACHU_TAILLE, 1, 1);
+			case "Roucoups":
+				return new Roucoups(name, sexe, (int) Roucoups.ROUCOUPS_POIDS, (int) Roucoups.ROUCOUPS_TAILLE, 1, 18);
+			case "Roucarnage":
+				return new Roucarnage(name, sexe, (int) Roucarnage.ROUCARNAGE_POIDS, (int) Roucarnage.ROUCARNAGE_TAILLE, 1, 18);
 			default: 
 				throw new Exception("Unknown race");
 		}

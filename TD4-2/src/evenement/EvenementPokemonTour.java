@@ -5,10 +5,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.concurrent.ThreadLocalRandom;
 
-import animaux.AbstractPokemon;
-import animaux.IPokemon;
 import pensionPokemon.PensionPokemon;
 import pokeEnclos.AbstractPokeEnclos;
+import pokemon.AbstractPokemon;
+import pokemon.IPokemon;
 
 public class EvenementPokemonTour extends EvenementTour{
 	

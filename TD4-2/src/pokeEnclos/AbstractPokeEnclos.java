@@ -4,10 +4,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import animaux.AbstractPokemon;
-import animaux.IPokemon;
-import animaux.IPokemon.PokemonType;
+
 import evenement.EvenementPokeEnclosTour;
+import pokemon.AbstractPokemon;
+import pokemon.IPokemon;
+import pokemon.IPokemon.PokemonType;
 
 public abstract class AbstractPokeEnclos implements Serializable {
 	
@@ -90,14 +91,15 @@ public abstract class AbstractPokeEnclos implements Serializable {
 					System.lineSeparator() + this.acceptedTypes);
 		}
 		
-		if (this.getNbPokemon() > 0) {
+		// pour n'avoir que des animaux de même race dans un enclos mais inutile pour les pokemon (qui en plus évoluent)
+		/*if (this.getNbPokemon() > 0) {
 			
 			String raceCourante = this.getPokemon().iterator().next().getRace();
 			if (!raceCourante.equals(pokemon.getRace())) {
 				throw new IllegalArgumentException("Le race de pokemon de cet enclos est " + raceCourante);
 			}
 			return this.getPokemon().add(pokemon);
-		}
+		}*/
 		return this.getPokemon().add(pokemon);
 	}
 	

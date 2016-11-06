@@ -1,4 +1,4 @@
-package animaux;
+package pokemon;
 
 import java.io.Serializable;
 import java.util.Collection;
