@@ -5,6 +5,11 @@ import java.util.concurrent.ThreadLocalRandom;
 import pensionPokemon.PensionPokemon;
 import pokemon.AbstractPokemon;
 
+/**
+ * Décrit les événements concernant les pokemon pour une action
+ * @author Lucie
+ *
+ */
 public class EvenementPokemonAction extends EvenementAction {
 
 	/**

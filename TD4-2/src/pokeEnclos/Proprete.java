@@ -2,6 +2,11 @@ package pokeEnclos;
 
 import java.io.Serializable;
 
+/**
+ * Etat de propreté des éléments d'un enclos
+ * @author Lucie
+ *
+ */
 public class Proprete implements Serializable{
 	
 	/**

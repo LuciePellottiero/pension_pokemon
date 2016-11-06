@@ -11,7 +11,11 @@ import IHM.MenuAction;
 import employe.Employe;
 import pensionPokemon.PensionPokemon;
 import pokemon.IPokemon;
-
+/**
+ * Fonction principale de l'application
+ * @author Lucie
+ *
+ */
 public abstract class Main {
 	
 	public static BufferedReader bReader;

@@ -6,6 +6,11 @@ import java.util.Collection;
 import evenement.EvenementPokemonAction;
 import evenement.EvenementPokemonTour;
 
+/**
+ * Modèle d'un pokemon
+ * @author Lucie
+ *
+ */
 public abstract class AbstractPokemon implements IPokemon, Serializable{
 	
 	/**
@@ -213,7 +218,7 @@ public abstract class AbstractPokemon implements IPokemon, Serializable{
 
 	@Override
 	public String toString() {
-		return race + " " + nom + " : " + sexe + ", level : " + level + ", " + poids + "Kg, " + taille + "m, " + age
+		return race + " " + nom + " : " + sexe + ", level " + level + ", " + poids + "Kg, " + taille + "m, " + age
 				+ " ans, " + (malade ? "malade, " : "en bonne santé, ") + (faim ? "affamé, " : "") + (dort ? "dort, " : "reveillé, ") + 
 				"cri = " + cri;
 	}

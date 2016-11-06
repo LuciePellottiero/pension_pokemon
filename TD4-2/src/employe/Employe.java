@@ -6,6 +6,11 @@ import pokeEnclos.AbstractPokeEnclos;
 import pokemon.AbstractPokemon;
 import pokemon.IPokemon;
 
+/**
+ * L'employé (joueur) qui s'occupe de la pension Pokemon
+ * @author Lucie
+ *
+ */
 public class Employe implements Serializable{
 	/**
 	 * @see Serializable

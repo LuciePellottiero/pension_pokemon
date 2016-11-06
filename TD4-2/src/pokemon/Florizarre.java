@@ -4,7 +4,12 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Florizarre extends AbstractPokemon implements TypePlante{
+/**
+ * Florizarre, pokemon de type plante et poison. Sa plante mûrit en absorbant les rayons du soleil. Il migre souvent vers les endroits ensoleillés.
+ * @author Lucie
+ *
+ */
+public class Florizarre extends AbstractPokemon implements TypePlante, TypePoison{
 
 	/**
 	 * @see Serializable

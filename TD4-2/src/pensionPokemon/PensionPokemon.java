@@ -10,6 +10,11 @@ import employe.Employe;
 import pokeEnclos.AbstractPokeEnclos;
 import pokemon.AbstractPokemon;
 
+/**
+ * La pension qui contient tous les enclos
+ * @author Lucie
+ *
+ */
 public class PensionPokemon implements Serializable{
 
 	/**

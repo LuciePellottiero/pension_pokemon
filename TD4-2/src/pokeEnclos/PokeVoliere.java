@@ -2,6 +2,11 @@ package pokeEnclos;
 
 import pokemon.IPokemon;
 
+/**
+ * Enclos de type volière pouvant acceuillir des pokemon de type vol
+ * @author Lucie
+ *
+ */
 public class PokeVoliere extends AbstractPokeEnclos{
 	
 	/**

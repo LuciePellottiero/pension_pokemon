@@ -3,7 +3,11 @@ package pokemon;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.concurrent.ThreadLocalRandom;
-
+/**
+ * Bulbizarre, pokemon de type plante. Il a une étrange graine plantée sur son dos. Elle grandit avec lui depuis la naissance.
+ * @author Lucie
+ *
+ */
 public class Bulbizarre extends AbstractPokemon implements TypePlante{
 	
 	/**

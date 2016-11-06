@@ -17,7 +17,7 @@ public class Magicarpe extends AbstractPokemon implements TypeEau{
 	public final static IPokemon.PokemonType TYPES[] = {PokemonType.EAU};
 	
 	public Magicarpe(String nom, IPokemon.Sexe sexe, float poids, float taille, int age, int level) {
-		super("Poisson rouge", new LinkedList<IPokemon.PokemonType>(Arrays.asList(TYPES)), nom, sexe, poids, taille, age, MAGICARPE_CRI, level);
+		super("Magicarpe", new LinkedList<IPokemon.PokemonType>(Arrays.asList(TYPES)), nom, sexe, poids, taille, age, MAGICARPE_CRI, level);
 	}
 
 	public Magicarpe(String nom, IPokemon.Sexe sexe, Magicarpe magicarpe) {

@@ -2,6 +2,11 @@ package pokeEnclos;
 
 import pokemon.IPokemon;
 
+/**
+ * Enclos de format bassin pouvant acceuillir des pokemon aquatiques (types eau et glace)
+ * @author Lucie
+ *
+ */
 public class PokeBassin extends AbstractPokeEnclos{
 	/**
 	 * @see Serializable
@@ -11,7 +16,7 @@ public class PokeBassin extends AbstractPokeEnclos{
 	private final float profondeur;
 
 	public PokeBassin(String nomEnclos, float superficie, int nbMaxAnimaux, float profondeur) {
-		super(nomEnclos, superficie, nbMaxAnimaux, IPokemon.PokemonType.EAU);
+		super(nomEnclos, superficie, nbMaxAnimaux, IPokemon.PokemonType.EAU, IPokemon.PokemonType.GLACE);
 		this.profondeur = profondeur;
 		this.getPropretes().add(new Proprete("niveau de l'eau"));
 		this.getPropretes().add(new Proprete("salinite"));

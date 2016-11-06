@@ -9,7 +9,11 @@ import pensionPokemon.PensionPokemon;
 import pokeEnclos.AbstractPokeEnclos;
 import pokemon.AbstractPokemon;
 import pokemon.IPokemon;
-
+/**
+ * Décrit les événements concernant les pokemon pour un tour
+ * @author Lucie
+ *
+ */
 public class EvenementPokemonTour extends EvenementTour{
 	
 	/**
@@ -18,7 +22,7 @@ public class EvenementPokemonTour extends EvenementTour{
 	private static final long serialVersionUID = -2921241511488905808L;
 	
 	private final static int CHANCE_MALADE = 30;
-	private final static int CHANCE_BEBE = 100;
+	private final static int CHANCE_BEBE = 20;
 	
 	private AbstractPokemon pokemon;
 	
@@ -102,6 +106,8 @@ public class EvenementPokemonTour extends EvenementTour{
 				}
 			}
 		}
+		
+		pokemon.levelUp();
 		
 	}
 

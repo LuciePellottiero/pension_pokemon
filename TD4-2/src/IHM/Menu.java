@@ -5,6 +5,11 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.LinkedList;
 
+/**
+ * Base de tous les menus
+ * @author Lucie
+ *
+ */
 public class Menu {
 	private final Collection<MenuAction> actions;
 	private final String menuName;

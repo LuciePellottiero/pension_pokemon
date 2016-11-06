@@ -4,6 +4,11 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ * Herbizarre, pokemon de type plante et poison. Son bulbe dorsal devient si gros qu'il ne peut plus se tenir sur ses membres postérieurs.
+ * @author Lucie
+ *
+ */
 public class Herbizarre extends AbstractPokemon implements TypePlante, TypePoison{
 
 	/**

@@ -31,6 +31,11 @@ import pokemon.Roucarnage;
 import pokemon.Roucool;
 import pokemon.Roucoups;
 
+/**
+ * Le jeu
+ * @author Lucie
+ *
+ */
 public class PensionPokemonGame implements Serializable{
 	
 	/**

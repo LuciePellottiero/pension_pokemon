@@ -1,5 +1,10 @@
 package evenement;
 
+/**
+ * Décrit un événement pour un tour
+ * @author Lucie
+ *
+ */
 public abstract class EvenementTour implements IEvenement{
 
 	/**

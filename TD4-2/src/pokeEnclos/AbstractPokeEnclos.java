@@ -10,6 +10,11 @@ import pokemon.AbstractPokemon;
 import pokemon.IPokemon;
 import pokemon.IPokemon.PokemonType;
 
+/**
+ * Modèle d'un enclos
+ * @author Lucie
+ *
+ */
 public abstract class AbstractPokeEnclos implements Serializable {
 	
 	/**

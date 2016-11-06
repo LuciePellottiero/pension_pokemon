@@ -7,6 +7,11 @@ import pensionPokemon.PensionPokemon;
 import pokeEnclos.AbstractPokeEnclos;
 import pokeEnclos.Proprete;
 
+/**
+ * Décrit les événements concernant les enclos pour un tour
+ * @author Lucie
+ *
+ */
 public class EvenementPokeEnclosTour extends EvenementTour{
 
 	/**
@@ -23,9 +28,10 @@ public class EvenementPokeEnclosTour extends EvenementTour{
 	
 	@Override
 	public void verifEvenement(PensionPokemon pension) {
+		
 		int random = ThreadLocalRandom.current().nextInt(0, 100 + 1);
-		if(random < CHANCE_SALISURE){
-			random = ThreadLocalRandom.current().nextInt(0, enclos.getPropretes().size() - 1);
+		if(random < CHANCE_SALISURE && enclos.getPropretes().size() > 0){
+			random = ThreadLocalRandom.current().nextInt(0, enclos.getPropretes().size());
 			Iterator<Proprete> propreteIter = enclos.getPropretes().iterator();
 			for(int i = 0; i < random; ++i){
 				propreteIter.next();
