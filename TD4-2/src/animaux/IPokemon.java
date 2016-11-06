@@ -12,7 +12,7 @@ public interface IPokemon extends Comparable<AbstractPokemon>, Serializable{
 		EAU,
 		NORMAL,
 		PLANTE,
-		ELECTRIQUE,
+		ELECTRIK,
 		GLACE,
 		DRAGON,
 		POISON;

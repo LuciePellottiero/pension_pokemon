@@ -17,10 +17,10 @@ public abstract class PokemonFactory {
 				return new Herbizarre(name, sexe, (int) Herbizarre.HERBIZARRE_POIDS, (int) Herbizarre.HERBIZARRE_TAILLE, 1);
 			case "Magicarpe":
 				return new Magicarpe(name, sexe, (int) Magicarpe.MAGICARPE_POIDS, (int) Magicarpe.MAGICARPE_TAILLE, 1);
-			case "Requin":
-				return new Requin(name, sexe, (int) Requin.REQUIN_BEBE_POIDS, (int) Requin.REQUIN_BEBE_TAILLE, 1);
-			case "Tigre":
-				return new Tigre(name, sexe, (int) Tigre.TIGRE_BEBE_POIDS, (int) Tigre.TIGRE_BEBE_TAILLE, 1);
+			case "Leviator":
+				return new Leviator(name, sexe, (int) Leviator.LEVIATOR_POIDS, (int) Leviator.LEVIATOR_TAILLE, 1);
+			case "Pikachu":
+				return new Pikachu(name, sexe, (int) Pikachu.PIKACHU_POIDS, (int) Pikachu.PIKACHU_TAILLE, 1);
 			default: 
 				throw new Exception("Unknown race");
 		}

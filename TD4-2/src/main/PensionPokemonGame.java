@@ -21,8 +21,8 @@ import animaux.Bulbizarre;
 import animaux.Florizarre;
 import animaux.Herbizarre;
 import animaux.Magicarpe;
-import animaux.Requin;
-import animaux.Tigre;
+import animaux.Leviator;
+import animaux.Pikachu;
 import pensionPokemon.PensionPokemon;
 import pokeEnclos.AbstractPokeEnclos;
 import pokeEnclos.PokeBassin;
@@ -417,8 +417,8 @@ public class PensionPokemonGame implements Serializable{
 		menuActions.add(new NewPokemonMenuAction("Loup", "lo", selectedEnclos, name, pokemonSexe, Bulbizarre.TYPES));
 		menuActions.add(new NewPokemonMenuAction("Ours", "ou", selectedEnclos, name, pokemonSexe, Florizarre.TYPES));
 		menuActions.add(new NewPokemonMenuAction("Magicarpe", "ma", selectedEnclos, name, pokemonSexe, Magicarpe.TYPES));
-		menuActions.add(new NewPokemonMenuAction("Requin", "re", selectedEnclos, name, pokemonSexe, Requin.TYPES));
-		menuActions.add(new NewPokemonMenuAction("Tigre", "ti", selectedEnclos, name, pokemonSexe, Tigre.TYPES));
+		menuActions.add(new NewPokemonMenuAction("Requin", "re", selectedEnclos, name, pokemonSexe, Leviator.TYPES));
+		menuActions.add(new NewPokemonMenuAction("Tigre", "ti", selectedEnclos, name, pokemonSexe, Pikachu.TYPES));
 		
 		for(NewPokemonMenuAction menuAction : menuActions) {
 			for (IPokemon.PokemonType type : selectedEnclos.getAcceptedtypes()) {
