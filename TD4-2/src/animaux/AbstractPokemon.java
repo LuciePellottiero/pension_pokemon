@@ -26,6 +26,7 @@ public abstract class AbstractPokemon implements IPokemon, Serializable{
 	private final String cri;
 	private final EvenementPokemonAction action;
 	private final EvenementPokemonTour tour;
+	private int level;
 	
 	protected AbstractPokemon(
 					final String race,
@@ -35,7 +36,8 @@ public abstract class AbstractPokemon implements IPokemon, Serializable{
 					final float poids,
 					final float taille,
 					final int age,
-					final String cri) {
+					final String cri,
+					final int level) {
 		
 		this.race = race;
 		this.types = types;
@@ -48,6 +50,7 @@ public abstract class AbstractPokemon implements IPokemon, Serializable{
 		this.faim = false;
 		this.dort = false;
 		this.malade = false;
+		this.level = level;
 		
 		this.action = new EvenementPokemonAction(this);
 		this.tour = new EvenementPokemonTour(this);
@@ -65,6 +68,7 @@ public abstract class AbstractPokemon implements IPokemon, Serializable{
 		this.taille = animal.getTaille();
 		this.age = 0;
 		this.cri = animal.cri;
+		this.level = animal.getLevel();
 		
 		this.faim = false;
 		this.dort = false;
@@ -196,10 +200,20 @@ public abstract class AbstractPokemon implements IPokemon, Serializable{
 	
 	@Override
 	public abstract float getTaille();
+	
+	@Override
+	public void levelUp() {
+		this.level++;
+	}
+	
+	@Override
+	public int getLevel(){
+		return this.level;
+	}
 
 	@Override
 	public String toString() {
-		return race + " " + nom + " : " + sexe + ", " + poids + "Kg, " + taille + "m, " + age
+		return race + " " + nom + " : " + sexe + ", level : " + level + ", " + poids + "Kg, " + taille + "m, " + age
 				+ " ans, " + (malade ? "malade, " : "en bonne santé, ") + (faim ? "affamé, " : "") + (dort ? "dort, " : "reveillé, ") + 
 				"cri = " + cri;
 	}

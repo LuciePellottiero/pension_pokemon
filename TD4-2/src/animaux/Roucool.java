@@ -11,17 +11,17 @@ public class Roucool extends AbstractPokemon implements TypeVol{
 	 */
 	private static final long serialVersionUID = 1539152368906171554L;
 	
-	public final static String AIGLE_CRI = "Kluh";
-	public final static float AIGLE_POIDS_BEBE = 0.2f;
-	public final static float AIGLE_BEBE_TAILLE = 0.01f;
+	public final static String ROUCOOL_CRI = "rourou roucooool";
+	public final static float ROUCOOL_POIDS = 1.8f;
+	public final static float ROUCOOL_TAILLE = 0.3f;
 	public final static PokemonType[] TYPES = {PokemonType.VOL};
 
-	public Roucool(String nom, IPokemon.Sexe sexe, float poids, float taille, int age) {
-		super("Aigle", new LinkedList<IPokemon.PokemonType>(Arrays.asList(TYPES)), nom, sexe, poids, taille, age, AIGLE_CRI);
+	public Roucool(String nom, IPokemon.Sexe sexe, float poids, float taille, int age, int level) {
+		super("Roucool", new LinkedList<IPokemon.PokemonType>(Arrays.asList(TYPES)), nom, sexe, poids, taille, age, ROUCOOL_CRI, level);
 	}
 
-	public Roucool(String nom, IPokemon.Sexe sexe, Roucool aigle) {
-		super(nom, sexe, aigle);
+	public Roucool(String nom, IPokemon.Sexe sexe, Roucool roucool) {
+		super(nom, sexe, roucool);
 	}
 
 	@Override
@@ -32,12 +32,12 @@ public class Roucool extends AbstractPokemon implements TypeVol{
 
 	@Override
 	public float getPoids() {
-		return AIGLE_POIDS_BEBE;
+		return ROUCOOL_POIDS;
 	}
 
 	@Override
 	public float getTaille() {
-		return AIGLE_BEBE_TAILLE;
+		return ROUCOOL_TAILLE;
 	}
 	
 	@Override
@@ -57,6 +57,18 @@ public class Roucool extends AbstractPokemon implements TypeVol{
 		else{
 			return new Roucool(nom, IPokemon.Sexe.FEMELLE, this);
 		}
+	}
+
+	@Override
+	public AbstractPokemon evoluer() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean canEvolved() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

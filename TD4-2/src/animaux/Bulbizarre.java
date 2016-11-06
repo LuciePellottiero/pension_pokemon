@@ -16,8 +16,8 @@ public class Bulbizarre extends AbstractPokemon implements TypePlante{
 	public final static float BULBIZARRE_TAILLE = 0.7f;
 	public final static IPokemon.PokemonType TYPES[] = {PokemonType.PLANTE};
 
-	public Bulbizarre(String nom, IPokemon.Sexe sexe, float poids, float taille, int age) {
-		super("Bulbizarre", new LinkedList<IPokemon.PokemonType>(Arrays.asList(TYPES)), nom, sexe, poids, taille, age, BULBIZARRE_CRI);
+	public Bulbizarre(String nom, IPokemon.Sexe sexe, float poids, float taille, int age, int level) {
+		super("Bulbizarre", new LinkedList<IPokemon.PokemonType>(Arrays.asList(TYPES)), nom, sexe, poids, taille, age, BULBIZARRE_CRI, level);
 	}
 
 	public Bulbizarre(String nom, IPokemon.Sexe sexe, Bulbizarre bulbizarre) {
@@ -51,6 +51,20 @@ public class Bulbizarre extends AbstractPokemon implements TypePlante{
 		else{
 			return new Bulbizarre(nom, IPokemon.Sexe.FEMELLE, this);
 		}
+	}
+
+	@Override
+	public AbstractPokemon evoluer() {
+		
+		return new Herbizarre(this.getNom(), this.getSexe(), Herbizarre.HERBIZARRE_POIDS, Herbizarre.HERBIZARRE_TAILLE, this.getAge(), this.getLevel());
+	}
+
+	@Override
+	public boolean canEvolved() {
+		if(this.getLevel() >= 15) {
+			return true;
+		}
+		return false;
 	}
 	
 }

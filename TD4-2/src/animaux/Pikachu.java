@@ -16,8 +16,8 @@ public class Pikachu extends AbstractPokemon implements TypeElectrik{
 	public static final float PIKACHU_TAILLE = 0.4f;
 	public final static IPokemon.PokemonType TYPES[] = {PokemonType.ELECTRIK};
 
-	public Pikachu(String nom, IPokemon.Sexe sexe, float poids, float taille, int age) {
-		super("Pikachu", new LinkedList<IPokemon.PokemonType>(Arrays.asList(TYPES)), nom, sexe, poids, taille, age, PIKACHU_CRI);
+	public Pikachu(String nom, IPokemon.Sexe sexe, float poids, float taille, int age, int level) {
+		super("Pikachu", new LinkedList<IPokemon.PokemonType>(Arrays.asList(TYPES)), nom, sexe, poids, taille, age, PIKACHU_CRI, level);
 	}
 
 	public Pikachu(String nom, IPokemon.Sexe sexe, Pikachu pikachu) {
@@ -51,6 +51,18 @@ public class Pikachu extends AbstractPokemon implements TypeElectrik{
 		else{
 			return new Pikachu(nom, IPokemon.Sexe.FEMELLE, this);
 		}
+	}
+
+	@Override
+	public AbstractPokemon evoluer() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean canEvolved() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 	
 }

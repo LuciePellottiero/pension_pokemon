@@ -12,12 +12,12 @@ public class Florizarre extends AbstractPokemon implements TypePlante{
 	private static final long serialVersionUID = 4308624581623051846L;
 	
 	public static final String FLORIZARRE_CRI = "flori flori zaaaarre";
-	public static final float FLORIZARRE_BEBE_POIDS = 100f;
-	public static final float FLORIZARRE_BEBE_TAILLE = 2f;
+	public static final float FLORIZARRE_POIDS = 100f;
+	public static final float FLORIZARRE_TAILLE = 2f;
 	public final static IPokemon.PokemonType TYPES[] = {PokemonType.PLANTE, PokemonType.POISON};
 	
-	public Florizarre(String nom, IPokemon.Sexe sexe, float poids, float taille, int age) {
-		super("Florizarre", new LinkedList<IPokemon.PokemonType>(Arrays.asList(TYPES)), nom, sexe, poids, taille, age, FLORIZARRE_CRI);
+	public Florizarre(String nom, IPokemon.Sexe sexe, float poids, float taille, int age, int level) {
+		super("Florizarre", new LinkedList<IPokemon.PokemonType>(Arrays.asList(TYPES)), nom, sexe, poids, taille, age, FLORIZARRE_CRI, level);
 	}
 
 	public Florizarre(String nom, IPokemon.Sexe sexe, Florizarre florizarre) {
@@ -26,12 +26,12 @@ public class Florizarre extends AbstractPokemon implements TypePlante{
 
 	@Override
 	public float getPoids() {
-		return FLORIZARRE_BEBE_POIDS;
+		return FLORIZARRE_POIDS;
 	}
 
 	@Override
 	public float getTaille() {
-		return FLORIZARRE_BEBE_TAILLE;
+		return FLORIZARRE_TAILLE;
 	}
 	
 	@Override
@@ -46,10 +46,21 @@ public class Florizarre extends AbstractPokemon implements TypePlante{
 		
 		int random = ThreadLocalRandom.current().nextInt(0, 1 + 1);
 		if (random == 0){
-			return new Bulbizarre(nom, IPokemon.Sexe.MALE, Bulbizarre.BULBIZARRE_POIDS, Bulbizarre.BULBIZARRE_TAILLE, 0);
+			return new Bulbizarre(nom, IPokemon.Sexe.MALE, Bulbizarre.BULBIZARRE_POIDS, Bulbizarre.BULBIZARRE_TAILLE, 0, 1);
 		}
 		else{
-			return new Bulbizarre(nom, IPokemon.Sexe.FEMELLE, Bulbizarre.BULBIZARRE_POIDS, Bulbizarre.BULBIZARRE_TAILLE, 0);
+			return new Bulbizarre(nom, IPokemon.Sexe.FEMELLE, Bulbizarre.BULBIZARRE_POIDS, Bulbizarre.BULBIZARRE_TAILLE, 0, 1);
 		}
+	}
+
+	@Override
+	public AbstractPokemon evoluer() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean canEvolved() {
+		return false;
 	}
 }

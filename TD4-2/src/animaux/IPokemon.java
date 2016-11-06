@@ -47,11 +47,15 @@ public interface IPokemon extends Comparable<AbstractPokemon>, Serializable{
 	public boolean isDodo();
 	public boolean isMalade();
 	public void setSante(boolean malade);
-	public abstract float getPoids();
-	public abstract float getTaille();
+	public float getPoids();
+	public float getTaille();
 	public String aFaim();
 	public EvenementPokemonAction getEvenementAction();
 	public EvenementPokemonTour getEvenementTour();
 	public String tombeMalade();
-	public abstract AbstractPokemon pondre(final String nom) throws Exception;
+	public AbstractPokemon pondre(final String nom) throws Exception;
+	public AbstractPokemon evoluer();
+	public boolean canEvolved();
+	public void levelUp();
+	public int getLevel();
 }

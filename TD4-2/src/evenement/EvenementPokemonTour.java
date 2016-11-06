@@ -20,7 +20,7 @@ public class EvenementPokemonTour extends EvenementTour{
 	private final static int CHANCE_MALADE = 30;
 	private final static int CHANCE_BEBE = 100;
 	
-	private final AbstractPokemon pokemon;
+	private AbstractPokemon pokemon;
 	
 	public EvenementPokemonTour(final AbstractPokemon pokemon) {
 		this.pokemon = pokemon;
@@ -28,6 +28,22 @@ public class EvenementPokemonTour extends EvenementTour{
 
 	@Override
 	public void verifEvenement(PensionPokemon pension) {
+		
+		if(pokemon.canEvolved()) {
+			AbstractPokemon evolution = pokemon.evoluer();
+			
+			System.out.println(pokemon.getNom() + " évolue en " + evolution.getRace());
+			
+			for(AbstractPokeEnclos enclos : pension.getEnclos()) {
+				if(enclos.getPokemon().contains(pokemon)) {
+					enclos.getPokemon().remove(pokemon);
+					enclos.getPokemon().add(evolution);
+					this.pokemon = evolution;
+					return;
+				}
+			}
+		}
+		
 		int random = ThreadLocalRandom.current().nextInt(0, 100 + 1);
 		
 		if(!pokemon.isMalade()){

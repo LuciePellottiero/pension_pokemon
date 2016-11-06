@@ -16,8 +16,8 @@ public class Leviator extends AbstractPokemon implements TypeEau, TypeDragon{
 	public static final float LEVIATOR_TAILLE = 6.5f;
 	public final static IPokemon.PokemonType TYPES[] = {PokemonType.EAU, PokemonType.DRAGON};
 
-	public Leviator(String nom, IPokemon.Sexe sexe, float poids, float taille, int age) {
-		super("Leviator", new LinkedList<IPokemon.PokemonType>(Arrays.asList(TYPES)), nom, sexe, poids, taille, age, LEVIATOR_CRI);
+	public Leviator(String nom, IPokemon.Sexe sexe, float poids, float taille, int age, int level) {
+		super("Leviator", new LinkedList<IPokemon.PokemonType>(Arrays.asList(TYPES)), nom, sexe, poids, taille, age, LEVIATOR_CRI, level);
 	}
 
 	public Leviator(String nom, IPokemon.Sexe sexe, Leviator leviator) {
@@ -51,11 +51,23 @@ public class Leviator extends AbstractPokemon implements TypeEau, TypeDragon{
 		
 		int random = ThreadLocalRandom.current().nextInt(0, 1 + 1);
 		if (random == 0){
-			return new Magicarpe(nom, IPokemon.Sexe.MALE, Magicarpe.MAGICARPE_POIDS, Magicarpe.MAGICARPE_TAILLE, 0);
+			return new Magicarpe(nom, IPokemon.Sexe.MALE, Magicarpe.MAGICARPE_POIDS, Magicarpe.MAGICARPE_TAILLE, 0, 1);
 		}
 		else{
-			return new Magicarpe(nom, IPokemon.Sexe.FEMELLE, Magicarpe.MAGICARPE_POIDS, Magicarpe.MAGICARPE_TAILLE, 0);
+			return new Magicarpe(nom, IPokemon.Sexe.FEMELLE, Magicarpe.MAGICARPE_POIDS, Magicarpe.MAGICARPE_TAILLE, 0, 1);
 		}
+	}
+
+	@Override
+	public AbstractPokemon evoluer() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean canEvolved() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

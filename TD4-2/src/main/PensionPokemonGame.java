@@ -411,14 +411,14 @@ public class PensionPokemonGame implements Serializable{
 	
 	private void addValidPokemonAction(Menu menu, final AbstractPokeEnclos selectedEnclos, final String name) {
 		Collection<NewPokemonMenuAction> menuActions = new ArrayList<NewPokemonMenuAction>();	
-		menuActions.add(new NewPokemonMenuAction("Aigle", "ai", selectedEnclos, name, pokemonSexe, Roucool.TYPES));
-		menuActions.add(new NewPokemonMenuAction("Pingouin", "pi", selectedEnclos, name, pokemonSexe, Herbizarre.TYPES));
-		menuActions.add(new NewPokemonMenuAction("Baleine", "ba", selectedEnclos, name, pokemonSexe, Lokhlass.TYPES));
-		menuActions.add(new NewPokemonMenuAction("Loup", "lo", selectedEnclos, name, pokemonSexe, Bulbizarre.TYPES));
-		menuActions.add(new NewPokemonMenuAction("Ours", "ou", selectedEnclos, name, pokemonSexe, Florizarre.TYPES));
+		menuActions.add(new NewPokemonMenuAction("Roucool", "ro", selectedEnclos, name, pokemonSexe, Roucool.TYPES));
+		menuActions.add(new NewPokemonMenuAction("Herbizarre", "he", selectedEnclos, name, pokemonSexe, Herbizarre.TYPES));
+		menuActions.add(new NewPokemonMenuAction("Lokhlass", "lo", selectedEnclos, name, pokemonSexe, Lokhlass.TYPES));
+		menuActions.add(new NewPokemonMenuAction("Bulbizarre", "bu", selectedEnclos, name, pokemonSexe, Bulbizarre.TYPES));
+		menuActions.add(new NewPokemonMenuAction("Florizarre", "fl", selectedEnclos, name, pokemonSexe, Florizarre.TYPES));
 		menuActions.add(new NewPokemonMenuAction("Magicarpe", "ma", selectedEnclos, name, pokemonSexe, Magicarpe.TYPES));
-		menuActions.add(new NewPokemonMenuAction("Requin", "re", selectedEnclos, name, pokemonSexe, Leviator.TYPES));
-		menuActions.add(new NewPokemonMenuAction("Tigre", "ti", selectedEnclos, name, pokemonSexe, Pikachu.TYPES));
+		menuActions.add(new NewPokemonMenuAction("Leviator", "le", selectedEnclos, name, pokemonSexe, Leviator.TYPES));
+		menuActions.add(new NewPokemonMenuAction("Pikachu", "pi", selectedEnclos, name, pokemonSexe, Pikachu.TYPES));
 		
 		for(NewPokemonMenuAction menuAction : menuActions) {
 			for (IPokemon.PokemonType type : selectedEnclos.getAcceptedtypes()) {
