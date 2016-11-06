@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Tigre extends Mammifere implements Vagabondant{
+public class Tigre extends AbstractPokemon implements TypeNormal{
 	
 	/**
 	 * @see Serializable
@@ -12,16 +12,15 @@ public class Tigre extends Mammifere implements Vagabondant{
 	private static final long serialVersionUID = 8810462180912771858L;
 	
 	public static final String TIGRE_CRI = "Miahou";
-	public static final int TIGRE_TEMPS_GESTATION = 105;
 	public static final float TIGRE_BEBE_POIDS = 10f;
 	public static final float TIGRE_BEBE_TAILLE = 1.5f;
-	public final static IAnimal.AnimalType TYPES[] = {AnimalType.VAGABONDANT};
+	public final static IPokemon.PokemonType TYPES[] = {PokemonType.NORMAL};
 
-	public Tigre(String nom, IAnimal.Sexe sexe, int poids, int taille, int age) {
-		super("Tigre", new LinkedList<IAnimal.AnimalType>(Arrays.asList(TYPES)), nom, sexe, poids, taille, age, TIGRE_CRI, TIGRE_TEMPS_GESTATION);
+	public Tigre(String nom, IPokemon.Sexe sexe, int poids, int taille, int age) {
+		super("Tigre", new LinkedList<IPokemon.PokemonType>(Arrays.asList(TYPES)), nom, sexe, poids, taille, age, TIGRE_CRI);
 	}
 
-	public Tigre(String nom, IAnimal.Sexe sexe, Tigre tigre) {
+	public Tigre(String nom, IPokemon.Sexe sexe, Tigre tigre) {
 		super(nom, sexe, tigre);
 	}
 
@@ -31,31 +30,31 @@ public class Tigre extends Mammifere implements Vagabondant{
 	}
 
 	@Override
-	public float getBebePoids() {
+	public float getPoids() {
 		return TIGRE_BEBE_POIDS;
 	}
 
 	@Override
-	public float getBebeTaille() {
+	public float getTaille() {
 		return TIGRE_BEBE_TAILLE;
 	}
 	
 	@Override
-	public AbstractAnimal MettreBas(final String nom) throws Exception {
-		if(sexe == IAnimal.Sexe.FEMELLE){
-			System.out.println(this.getNom() + " met bas.");
+	public AbstractPokemon pondre(final String nom) throws Exception {
+		if(sexe == IPokemon.Sexe.FEMELLE){
+			System.out.println(this.getNom() + " pond.");
 		}
 		else{
-			System.out.println("Cet animal est un mâle, il ne peut pas mettre bas, abrutit !");
-			throw new Exception("Cet animal est un mâle, il ne peut pas mettre bas, abrutit !");
+			System.out.println("Ce pokemon est un mâle, il ne peut pas pondre, abrutit !");
+			throw new Exception("Ce pokemon est un mâle, il ne peut pas pondre, abrutit !");
 		}
 		
 		int random = ThreadLocalRandom.current().nextInt(0, 1 + 1);
 		if (random == 0){
-			return new Tigre(nom, IAnimal.Sexe.MALE, this);
+			return new Tigre(nom, IPokemon.Sexe.MALE, this);
 		}
 		else{
-			return new Tigre(nom, IAnimal.Sexe.FEMELLE, this);
+			return new Tigre(nom, IPokemon.Sexe.FEMELLE, this);
 		}
 	}
 	

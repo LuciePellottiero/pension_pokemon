@@ -2,8 +2,8 @@ package evenement;
 
 import java.io.Serializable;
 
-import zoo.Zoo;
+import pensionPokemon.PensionPokemon;
 
 public interface IEvenement extends Serializable{
-	public void verifEvenement(Zoo zoo);
+	public void verifEvenement(PensionPokemon pension);
 }

@@ -8,9 +8,9 @@ import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import IHM.Menu;
 import IHM.MenuAction;
-import animaux.IAnimal;
+import animaux.IPokemon;
 import employe.Employe;
-import zoo.Zoo;
+import pensionPokemon.PensionPokemon;
 
 public abstract class Main {
 	
@@ -18,7 +18,7 @@ public abstract class Main {
 	
 	private static final int NB_MAX_ENCLOS = 10;
 	
-	private static IAnimal.Sexe employeSexe;
+	private static IPokemon.Sexe employeSexe;
 	private static String chosenSave;
 	public static final String SAVE_FOLDER = "save" + File.separatorChar;
 	private static boolean quitter;
@@ -32,7 +32,7 @@ public abstract class Main {
 			saveFolder.mkdirs();
 		}
 		
-		System.out.println("Bienvenue dans Zoo!" + System.lineSeparator()); 
+		System.out.println("Bienvenue dans votre pension Pokemon!" + System.lineSeparator()); 
 	}
 	
 	private static float chooseNumber(final String question) {
@@ -77,7 +77,7 @@ public abstract class Main {
 			
 			@Override
 			public boolean action() {
-				employeSexe = IAnimal.Sexe.MALE;
+				employeSexe = IPokemon.Sexe.MALE;
 				return true;
 			}
 		});
@@ -86,7 +86,7 @@ public abstract class Main {
 			
 			@Override
 			public boolean action() {
-				employeSexe = IAnimal.Sexe.FEMELLE;
+				employeSexe = IPokemon.Sexe.FEMELLE;
 				return true;
 			}
 		});
@@ -95,18 +95,18 @@ public abstract class Main {
 		
 		Employe employe = new Employe(employeName, employeSexe, employeAge);
 		
-		System.out.println("Dernière chose, écrit le nom de ton zoo.");
-		String zooName = null;
+		System.out.println("Dernière chose, écrit le nom de ta pension Pokemon.");
+		String pensionName = null;
 		try {
-			zooName = bReader.readLine();
+			pensionName = bReader.readLine();
 		} 
 		catch (IOException e) {
 			e.printStackTrace();
 		}
 		
-		Zoo zoo = new Zoo(zooName, employe, NB_MAX_ENCLOS);
+		PensionPokemon pension = new PensionPokemon(pensionName, employe, NB_MAX_ENCLOS);
 		
-		ZooGame game = new ZooGame(zoo, bReader);
+		PensionPokemonGame game = new PensionPokemonGame(pension, bReader);
 		game.play();
 	}
 	
@@ -156,7 +156,7 @@ public abstract class Main {
 	}
 	
 	public static boolean loadGame() {
-		ZooGame game = null;
+		PensionPokemonGame game = null;
 		
 		if (!chooseGame()) {
 			return false;
@@ -165,7 +165,7 @@ public abstract class Main {
 	    try {
 	       FileInputStream fileIn = new FileInputStream(chosenSave);
 	       ObjectInputStream in = new ObjectInputStream(fileIn);
-	       game = (ZooGame) in.readObject();
+	       game = (PensionPokemonGame) in.readObject();
 	       in.close();
 	       fileIn.close();
 	    }
@@ -216,52 +216,6 @@ public abstract class Main {
 		mainMenu.menu();
 		fin();
 
-		/*Employe philipe = new Employe("Philipe", Sexe.MALE, 42);
-
-		Zoo zoo = new Zoo("Zoo tycoon", philipe, 4);
-
-		AbstractEnclos enclosStandard = new EnclosStandard("La cage de Gaspard", 20, 2);		
-		AbstractEnclos aquarium = new Aquarium("L'aquarium de Winry", 200, 1, 8);
-		AbstractEnclos voliere = new Voliere("L'enclo de Klaus", 10, 3, 5);
-
-		zoo.ajouterEnclos(enclosStandard);
-		zoo.ajouterEnclos(voliere);
-		zoo.ajouterEnclos(aquarium);
-
-		AbstractAnimal pingouin = new Pingouin("Klaus", Sexe.MALE, 18, 1, 9);
-
-		System.out.println(pingouin.emettreSon());
-		System.out.println(pingouin.manger());
-		System.out.println(pingouin);
-
-		voliere.ajouterAnimal(pingouin);
-
-		System.out.println(voliere);
-
-		System.out.println(philipe.nourrir(voliere));
-
-		AbstractAnimal baleine = new Baleine("Winry", Sexe.FEMELLE, 6000, 20, 20);
-
-		System.out.println(baleine.emettreSon());
-		System.out.println(baleine.manger());
-		System.out.println(baleine.sendormir(1));
-		System.out.println(baleine);
-
-		aquarium.ajouterAnimal(baleine);
-		System.out.println(aquarium);
-
-		((Mammifere) baleine).MettreBas();
-
-		AbstractAnimal tigre = new Tigre("Gaspard", Sexe.MALE, 20, 1, 5);
-		System.out.println(tigre);
-
-		enclosStandard.ajouterAnimal(tigre);
-
-		((Mammifere) tigre).MettreBas();
-
-		System.out.println(enclosStandard);
-
-		System.out.println(zoo.getAnimauxStr());*/
 	}
 
 }

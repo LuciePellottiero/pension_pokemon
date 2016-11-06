@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Requin extends Autre implements Marin{
+public class Requin extends AbstractPokemon implements TypeEau{
 	
 	/**
 	 * @see Serializable
@@ -15,16 +15,15 @@ public class Requin extends Autre implements Marin{
 	public static final int REQUIN_SANTE_MAX = 100;
 	public static final int REQUIN_SEUIL_SOMMEIL = 80;
 	public static final int REQUIN_SEUIL_FAIM = 70;
-	public static final int REQUIN_TEMPS_GESTATION = 380;
 	public static final float REQUIN_BEBE_POIDS = 10f;
 	public static final float REQUIN_BEBE_TAILLE = 15f;
-	public final static IAnimal.AnimalType TYPES[] = {AnimalType.MARIN};
+	public final static IPokemon.PokemonType TYPES[] = {PokemonType.EAU};
 
-	public Requin(String nom, IAnimal.Sexe sexe, int poids, int taille, int age) {
-		super("Requin", new LinkedList<IAnimal.AnimalType>(Arrays.asList(TYPES)), nom, sexe, poids, taille, age, REQUIN_CRI, REQUIN_TEMPS_GESTATION);
+	public Requin(String nom, IPokemon.Sexe sexe, int poids, int taille, int age) {
+		super("Requin", new LinkedList<IPokemon.PokemonType>(Arrays.asList(TYPES)), nom, sexe, poids, taille, age, REQUIN_CRI);
 	}
 
-	public Requin(String nom, IAnimal.Sexe sexe, Requin requin) {
+	public Requin(String nom, IPokemon.Sexe sexe, Requin requin) {
 		super(nom, sexe, requin);
 	}
 
@@ -34,18 +33,18 @@ public class Requin extends Autre implements Marin{
 	}
 
 	@Override
-	public float getBebePoids() {
+	public float getPoids() {
 		return REQUIN_BEBE_POIDS;
 	}
 
 	@Override
-	public float getBebeTaille() {
+	public float getTaille() {
 		return REQUIN_BEBE_TAILLE;
 	}
 	
 	@Override
-	public AbstractAnimal pondre(final String nom) throws Exception {
-		if(sexe == IAnimal.Sexe.FEMELLE){
+	public AbstractPokemon pondre(final String nom) throws Exception {
+		if(sexe == IPokemon.Sexe.FEMELLE){
 			System.out.println(this.getNom() + " pond.");
 		}
 		else{
@@ -55,10 +54,10 @@ public class Requin extends Autre implements Marin{
 		
 		int random = ThreadLocalRandom.current().nextInt(0, 1 + 1);
 		if (random == 0){
-			return new Requin(nom, IAnimal.Sexe.MALE, this);
+			return new Requin(nom, IPokemon.Sexe.MALE, this);
 		}
 		else{
-			return new Requin(nom, IAnimal.Sexe.FEMELLE, this);
+			return new Requin(nom, IPokemon.Sexe.FEMELLE, this);
 		}
 	}
 
